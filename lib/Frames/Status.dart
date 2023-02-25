@@ -7,6 +7,15 @@ class Status extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+
+        automaticallyImplyLeading: false,
+
+        title: Text("Status",style: TextStyle(fontSize: 22, color: Colors.black87),
+
+        ),
+        centerTitle: true,
+      ),
       backgroundColor: Colors.red,
       body: SafeArea(
         child: Center(

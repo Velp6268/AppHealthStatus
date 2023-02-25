@@ -34,9 +34,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('StatusHealthy'),
-      ),
+
+
       body: Center(child: _widgetOptions[_selectedTab]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
