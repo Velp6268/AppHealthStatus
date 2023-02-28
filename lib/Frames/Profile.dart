@@ -7,6 +7,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
 
         automaticallyImplyLeading: false,
@@ -16,18 +17,31 @@ class Profile extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.grey,
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Profile'),
+      body: Stack(
+        alignment:  Alignment.topCenter,
+        children: [
 
-            ],
+          const CircleAvatar(
+            backgroundImage: AssetImage('images/pic.jpg'),
+            radius: 100,
           ),
-        ),
-      ),
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.black45,
+            ),
+            child: const Text(
+              'Лазарев Никита',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      )
+
     );
+
   }
 }

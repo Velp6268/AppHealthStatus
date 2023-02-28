@@ -7,27 +7,42 @@ class Status extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
 
         automaticallyImplyLeading: false,
 
-        title: Text("Status",style: TextStyle(fontSize: 22, color: Colors.black87),
+        title: Text("Статус",style: TextStyle(fontSize: 22, color: Colors.black87),
 
         ),
         centerTitle: true,
+
       ),
-      backgroundColor: Colors.red,
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+
+      body:  Container(
+        height: 700,
+        color: Color.fromARGB(200, 46, 11, 11),
+        width: 450,
+         child: Stack(
+
             children: [
-              const Text('Status'),
+               Container(
+                 height: 300,
+                 width: 300,
+                 color: Color.fromARGB(201, 33,222, 11),),
+                 Container(
+                  height: 100,
+                  width: 200,
+                  color: Color.fromARGB(201, 222, 11, 67),
+
+                )
+
+
 
             ],
           ),
-        ),
-      ),
+
+      )
     );
   }
 }
