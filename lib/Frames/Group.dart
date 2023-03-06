@@ -9,7 +9,7 @@ class Group extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-            title: Text("Группа",style: TextStyle(fontSize: 22, color: Colors.black87),
+            title: Text("Группа",style: TextStyle(fontSize: 18, color: Colors.black87),
             ),
           centerTitle: true,
         ),

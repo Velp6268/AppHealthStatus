@@ -12,7 +12,7 @@ class Profile extends StatelessWidget {
 
         automaticallyImplyLeading: false,
 
-        title: Text("Group 32 D",style: TextStyle(fontSize: 22, color: Colors.black87),
+        title: Text("Group 32 D",style: TextStyle(fontSize: 18, color: Colors.black87),
 
         ),
         centerTitle: true,
