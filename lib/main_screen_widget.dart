@@ -49,7 +49,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-                Icons.heart_broken,
+                Icons.heart_broken_rounded,
                 size: 34
             ),
             label: '',
