@@ -35,7 +35,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-
       body: Center(child: _widgetOptions[_selectedTab]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
