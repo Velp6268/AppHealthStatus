@@ -34,11 +34,12 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: Center(child: _widgetOptions[_selectedTab]),
+      body: Center(
+          child: _widgetOptions[_selectedTab]
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
-        iconSize: 28.0,
+        iconSize: 25.0,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
@@ -48,8 +49,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-                Icons.heart_broken,
-                size: 34
+              size: 30,
+                Icons.heart_broken
             ),
             label: '',
           ),

@@ -1,7 +1,8 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_status/resources/resources.dart';
+import 'package:health_status/Theme/app_colors.dart';
+
 
 class Group extends StatelessWidget {
   const Group({Key? key}) : super(key: key);
@@ -16,31 +17,84 @@ class Group extends StatelessWidget {
       ),
       body: Stack(
         children: [
+          ///Лист
           ListView.builder(
             padding: const EdgeInsets.only(top: 6),
-            itemCount: 26,
+            itemCount: 10,
             itemExtent: 60,
             itemBuilder: (BuildContext context, int index) {
               return Container(
-                padding: const EdgeInsets.fromLTRB(24, 8, 16, 0), ///отвечает за отступы///
+                ///отвечает за отступы Элемента списка от краев
+                padding: const EdgeInsets.fromLTRB(15, 8, 16, 0),
+
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                       border: Border.all(
-                          color: const Color.fromRGBO(236, 234, 234, 1)),
-                      borderRadius: const BorderRadius.horizontal(
-                          right: Radius.circular(10)),
-                      color: const Color.fromRGBO(236, 234, 234, 1)),
-                  child: Row(
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.only(left: 5), ///меняем рассположение авы///
+                          color: AppColors.mainGrey
                       ),
-                      Image(
-                          image: AssetImage(AppImages.man),
-                          width: 44,
-                          height: 44,
+                      ///Окружность краев Элемента списка
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                          topLeft: Radius.circular(15),
+                          bottomLeft: Radius.circular(15)
+                      ),
+                      color: AppColors.mainGrey
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        ///контейнер отвечающий за полоску здоровья
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.horizontal(
+                            left: Radius.circular(15),
+                          ),
+                          color: Colors.green,
+                        ),
+                        width: 10,
+                      ),
+
+                        ///Делаем отступ
+                      const Padding(
+                        padding: EdgeInsets.only(left: 5),
+                      ),
+
+                      ///Аватарка
+                      const Image(
+                        image: AssetImage(AppImages.man),
+                        width: 44,
+                        height: 44,
+                      ),
+
+                        ///Отступ с лева от авы, для шрифта
+                      const Padding(
+                        padding: EdgeInsets.only(left: 10),
+                      ),
+                      ///Контейнер в котором хранится колонка с текстом
+                      Container(
+                        width: 270,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            SizedBox(height: 18),
+                            Text('Ночевный М.Ю.')
+                          ],
+                         
+                        ),
+                      ),
+                      ///Отступ от контейнера для поинтера
+                      const Padding(
+                        padding: EdgeInsets.only(left: 22),
 
                       ),
+                        ///Картинка указателя
+                        Image(
+                        image: AssetImage(AppImages.pointer),
+                        width: 15,
+                        height: 15,
+                        )
+
+
                     ],
                   ),
                 ),

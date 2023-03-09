@@ -12,15 +12,10 @@ void main() {
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.mainGrey
-
         ),
-
-
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: AppColors.mainGrey,
           selectedItemColor: AppColors.iconColor,
-
-
         ),
       ),
       routes:{
