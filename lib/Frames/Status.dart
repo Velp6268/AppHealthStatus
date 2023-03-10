@@ -20,15 +20,15 @@ class Status extends StatelessWidget {
       ),
 
       body:  Container(
-        height: 700,
+        height: 300,
         color: Color.fromARGB(200, 46, 11, 11),
-        width: 450,
+        width: 400,
          child: Stack(
 
             children: [
                Container(
-                 height: 300,
-                 width: 300,
+                 height: 30,
+                 width: 30,
                  color: Color.fromARGB(201, 33,222, 11),),
                  Container(
                   height: 100,

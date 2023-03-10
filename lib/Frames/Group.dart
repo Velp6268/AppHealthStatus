@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/Theme/app_colors.dart';
 
-
 class Group extends StatelessWidget {
   const Group({Key? key}) : super(key: key);
 
@@ -29,18 +28,15 @@ class Group extends StatelessWidget {
 
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                      border: Border.all(
-                          color: AppColors.mainGrey
-                      ),
+                      border: Border.all(color: AppColors.mainGrey),
+
                       ///Окружность краев Элемента списка
                       borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(10),
                           bottomRight: Radius.circular(10),
                           topLeft: Radius.circular(15),
-                          bottomLeft: Radius.circular(15)
-                      ),
-                      color: AppColors.mainGrey
-                  ),
+                          bottomLeft: Radius.circular(15)),
+                      color: AppColors.mainGrey),
                   child: Row(
                     children: [
                       Container(
@@ -54,7 +50,7 @@ class Group extends StatelessWidget {
                         width: 10,
                       ),
 
-                        ///Делаем отступ
+                      ///Делаем отступ
                       const Padding(
                         padding: EdgeInsets.only(left: 5),
                       ),
@@ -66,35 +62,35 @@ class Group extends StatelessWidget {
                         height: 44,
                       ),
 
-                        ///Отступ с лева от авы, для шрифта
-                      const Padding(
-                        padding: EdgeInsets.only(left: 10),
-                      ),
                       ///Контейнер в котором хранится колонка с текстом
-                      Container(
-                        width: 270,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            SizedBox(height: 18),
-                            Text('Ночевный М.Ю.')
-                          ],
-                         
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              SizedBox(height: 18),
+                              Text('Ночевный М.Ю.')
+                            ],
+                          ),
                         ),
                       ),
+
                       ///Отступ от контейнера для поинтера
-                      const Padding(
-                        padding: EdgeInsets.only(left: 22),
-
+                      ///
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                            padding: const EdgeInsets.only(left: 30),
+                            child: const Image(
+                              image: AssetImage(AppImages.pointer),
+                              width: 15,
+                              height: 15,
+                            )),
                       ),
-                        ///Картинка указателя
-                        Image(
-                        image: AssetImage(AppImages.pointer),
-                        width: 15,
-                        height: 15,
-                        )
 
-
+                      ///Картинка указателя
                     ],
                   ),
                 ),
