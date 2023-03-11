@@ -1,13 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/Theme/app_colors.dart';
 
 class Group extends StatelessWidget {
-  const Group({Key? key}) : super(key: key);
+
+  final Repository repository;
+  const Group({Key? key, required this.repository}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // var list = repository.getAll();
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -39,16 +44,7 @@ class Group extends StatelessWidget {
                       color: AppColors.mainGrey),
                   child: Row(
                     children: [
-                      Container(
-                        ///контейнер отвечающий за полоску здоровья
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.horizontal(
-                            left: Radius.circular(15),
-                          ),
-                          color: Colors.green,
-                        ),
-                        width: 10,
-                      ),
+                      buildHealthLineContainer(),
 
                       ///Делаем отступ
                       const Padding(
@@ -100,5 +96,18 @@ class Group extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Container buildHealthLineContainer() {
+    return Container(
+                      ///контейнер отвечающий за полоску здоровья
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.horizontal(
+                          left: Radius.circular(15),
+                        ),
+                        color: Colors.green,
+                      ),
+                      width: 10,
+                    );
   }
 }

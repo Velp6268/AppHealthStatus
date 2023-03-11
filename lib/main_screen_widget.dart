@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:health_status/Architecture/DbMock.dart';
+// import 'package:health_status/Architecture/IDataSourse.dart';
+import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Frames/Group.dart';
 import 'package:health_status/Frames/Status.dart';
 import 'package:health_status/Frames/Profile.dart';
 
 
 class MainScreenWidget extends StatefulWidget {
+
+
   const MainScreenWidget({Key? key}) : super(key: key);
+
+
 
   @override
   // ignore: library_private_types_in_public_api
@@ -15,12 +22,13 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   int _selectedTab = 1;
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    Group(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    Group(repository: Repository(DbMock())),
     Status(),
     Profile(),
   ];
+
+
 
   void onSelectTab(int index){
     if (_selectedTab == index) return;
