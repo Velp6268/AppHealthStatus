@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:health_status/Frames/Group.dart';
-import 'package:health_status/Frames/Status.dart';
 import 'package:health_status/Frames/Profile.dart';
+
+import 'Frames/Status2.dart';
 
 
 class MainScreenWidget extends StatefulWidget {
@@ -18,7 +19,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     Group(),
-    Status(),
+    Status2(),
     Profile(),
   ];
 
@@ -37,32 +38,46 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
 
       body: Center(child: _widgetOptions[_selectedTab]),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedTab,
-        iconSize: 28.0,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-                Icons.group
+      bottomNavigationBar:SizedBox(
+        height: 60,
+        child: SingleChildScrollView(
+
+          physics: NeverScrollableScrollPhysics(),
+
+        child: BottomNavigationBar(
+          currentIndex: _selectedTab,
+          iconSize: 28.0,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(
+                  Icons.group
+              ),
+              label: 'Group',
             ),
-            label: 'Group',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-                Icons.heart_broken_rounded,
-                size: 34
+            BottomNavigationBarItem(
+              icon: Icon(
+
+                  Icons.favorite,
+                  color: Colors.red,
+                  size: 38
+
+              ),
+              label: '',
             ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-                Icons.home
+            BottomNavigationBarItem(
+              icon: Icon(
+                  Icons.home
+              ),
+              label: 'Profile',
             ),
-            label: 'Profile',
-          ),
-        ],
-        onTap: onSelectTab ,
+
+          ],
+          onTap: onSelectTab ,
+        ),
+
       ),
+
+)
     );
   }
 }
