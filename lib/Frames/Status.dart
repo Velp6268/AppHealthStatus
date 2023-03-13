@@ -21,22 +21,11 @@ class Status extends StatelessWidget {
 
       body:  Container(
         height: 300,
-        color: Color.fromARGB(200, 46, 11, 11),
+        color: Color.fromARGB(2, 46, 1, 1),
         width: 400,
          child: Stack(
 
             children: [
-               Container(
-                 height: 30,
-                 width: 30,
-                 color: Color.fromARGB(201, 33,222, 11),),
-                 Container(
-                  height: 100,
-                  width: 200,
-                  color: Color.fromARGB(201, 222, 11, 67),
-
-                )
-
 
 
             ],
