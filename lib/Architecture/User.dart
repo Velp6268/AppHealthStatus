@@ -1,14 +1,28 @@
+import 'dart:ui';
+
+//import 'package:health_status/Theme/app_colors.dart';
+
 class User {
-  late int id;
-  late String name;
+  final int id;
+  final String fullName;
+  final String imageName;
+  final Color? healthStatus;
+
+  User({
+    required this.id,
+    required this.fullName,
+    required this.imageName,
+    required this.healthStatus
+});
+
 
 
   String get user_name {
-    return name;
+    return fullName;
   }
 
-  void set user_name(String name) {
-    this.name = name;
+  void set user_name(String fullName) {
+    fullName = fullName;
   }
 
   int get id_user {
@@ -16,6 +30,9 @@ class User {
   }
 
   void set id_user(int id) {
-    this.id = id;
+    id = id;
   }
+
+  
+
 }
