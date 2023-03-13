@@ -16,10 +16,10 @@ class Group extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text("Группы",
-            style: TextStyle(fontSize: 18, color: Colors.black87)),
-      ),
+          automaticallyImplyLeading: false,
+          title: const Text("Группы",
+              style: TextStyle(fontSize: 18, color: Colors.black87)),
+          centerTitle: true),
       body: Stack(
         children: [
           ///Лист
