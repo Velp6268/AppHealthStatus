@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health_status/Theme/app_colors.dart';
-import 'package:health_status/resources/resources.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -9,47 +7,41 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text(
-            "Профиль",
-            style: TextStyle(fontSize: 22, color: Colors.black87),
-          ),
-          centerTitle: true,
+
+      appBar: AppBar(
+
+        automaticallyImplyLeading: false,
+
+        title: Text("Group 32 D",style: TextStyle(fontSize: 18, color: Colors.black87),
+
         ),
-        body: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            ContainerImage(context),
-            Container(
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.18,
-              ),
-              decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.mainGrey),
-
-                  ///Окружность краев Элемента списка
-                  borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(10)),
-                  color: AppColors.mainGrey),
-              width: MediaQuery.of(context).size.width * 0.75,
-              height: MediaQuery.of(context).size.height * 0.18,
-            ),
-          ],
-        ));
-  }
-
-  Container ContainerImage(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.25,
-      child: const Image(
-        fit: BoxFit.fill,
-        image: AssetImage(AppImages.city),
+        centerTitle: true,
       ),
+      body: Stack(
+        alignment:  Alignment.topCenter,
+        children: [
+
+          const CircleAvatar(
+            backgroundImage: AssetImage('images/pic.jpg'),
+            radius: 100,
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.black45,
+            ),
+            child: const Text(
+              'Лазарев Никита',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      )
+
     );
+
   }
 }

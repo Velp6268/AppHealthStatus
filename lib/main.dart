@@ -28,29 +28,79 @@ void main() {
 
 class Main extends StatelessWidget{
   const Main({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Main Page'),
-              TextButton.icon(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.black),
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
-                ),
-                onPressed: (){
-                  Navigator.pushNamed(context, '/main_screen_widget');
-                },
-                icon: const Icon(Icons.settings),
-                label: const Text('Перейти в Статус Здоровья'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+
+              Padding(
+
+                padding: const EdgeInsets.only(top: 116, bottom: 20 , left: 0, right: 0),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child:SizedBox(
+                    height: 75,
+                    width: 75,
+                    child: Image.asset("assets/images/Img_Love_Authorization.png",)
+                ),),
               ),
-            ],
-          ),
+
+            const Text('Вход в Life' , style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold,), ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.87,
+                height: 50,
+                margin: EdgeInsets.only(top: 40, bottom: 0, left: 0, right: 0),
+                padding: EdgeInsets.only(top: 0, bottom: 1, left:10, right: 0),
+                decoration: BoxDecoration(
+                    color: Colors.grey[350],
+                    borderRadius: BorderRadius.circular(7)
+                ),
+
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                    child: TextFormField(initialValue: "Почта",)
+                )
+            ),
+            Container(
+                width: MediaQuery.of(context).size.width * 0.87,
+                height: 50,
+                margin: EdgeInsets.only(top: 20, bottom: 40, left: 0, right: 0),
+                padding: EdgeInsets.only(top: 0, bottom: 1, left: 10, right: 0),
+                decoration: BoxDecoration(
+                    color: Colors.grey[350],
+                    borderRadius: BorderRadius.circular(7)
+                ),
+
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextFormField(
+                      initialValue: "Пароль",
+                    )
+                )
+            ),
+            GestureDetector(
+              onTap:(){
+                    Navigator.pushNamed(context, '/main_screen_widget');
+                      },
+              child: Container(
+                        width: 200,
+                height: 35,
+                decoration: BoxDecoration(
+                    color: Colors.grey[350],
+                    borderRadius: BorderRadius.circular(30)
+                ),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Войти' , style: TextStyle(fontSize: 18, ),
+                    ),
+                  ),
+              ),
+            )
+          ],
         ),
       ),
     );
