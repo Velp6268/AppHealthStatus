@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:health_status/Frames/Group.dart';
 import 'package:health_status/Frames/Profile.dart';
-
+import 'package:flutter/material.dart';
+import 'package:health_status/Architecture/DbMock.dart';
+import 'package:health_status/Architecture/IDataSourse.dart';
+import 'package:health_status/Architecture/Repository.dart';
+import 'package:health_status/Frames/Group.dart';
+import 'package:health_status/Frames/Profile.dart';
 import 'Frames/Status2.dart';
+import 'package:flutter/cupertino.dart';
+
 
 
 class MainScreenWidget extends StatefulWidget {
@@ -16,9 +23,8 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   int _selectedTab = 1;
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    Group(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    Group(repository: Repository(DbMock())),
     Status2(),
     Profile(),
   ];

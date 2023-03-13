@@ -10,4 +10,5 @@ class AppImages {
   static const String man = 'images/man.png';
   static const String nikita = 'images/nikita.jpg';
   static const String pointer = 'images/pointer.png';
+  static const String love = 'images/loveIcon.png';
 }

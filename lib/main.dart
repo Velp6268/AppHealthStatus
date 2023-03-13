@@ -1,7 +1,8 @@
 import 'package:health_status/Theme/app_colors.dart';
-
+import 'package:health_status/resources/resources.dart';
 import 'main_screen_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 
 void main() {
@@ -44,7 +45,7 @@ class Main extends StatelessWidget{
                   child:SizedBox(
                     height: 75,
                     width: 75,
-                    child: Image.asset("assets/images/Img_Love_Authorization.png",)
+                    child: Image.asset("images/loveIcon.png")
                 ),),
               ),
 

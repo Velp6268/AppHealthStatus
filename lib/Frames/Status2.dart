@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../ui/status_btn.dart';
 
 class Status2 extends StatefulWidget {

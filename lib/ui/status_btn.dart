@@ -51,7 +51,7 @@ class StatusButton extends StatelessWidget {
             Container(
               height: 20,
             width: 20,
-              child: Image.asset("assets/images/pointer.png")
+              child: Image.asset("images/pointer.png")
               ),
 
         ],
