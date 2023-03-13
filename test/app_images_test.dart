@@ -8,6 +8,7 @@ void main() {
     expect(File(AppImages.maks).existsSync(), true);
     expect(File(AppImages.tim).existsSync(), true);
     expect(File(AppImages.vitalya).existsSync(), true);
+    expect(File(AppImages.city).existsSync(), true);
     expect(File(AppImages.man).existsSync(), true);
     expect(File(AppImages.nikita).existsSync(), true);
     expect(File(AppImages.pointer).existsSync(), true);
