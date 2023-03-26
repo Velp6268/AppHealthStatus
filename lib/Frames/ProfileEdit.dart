@@ -18,11 +18,6 @@ class _ProfileState extends State<ProfileEdit> {
   final Repository repository;
   _ProfileState(this.repository);
 
-  _changeProfile() {
-    setState(() {
-      print('');
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
