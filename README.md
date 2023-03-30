@@ -1,6 +1,6 @@
 # AppHealthStatus
 
-A new AppFlutter project.
+You can report that you are sick while you are at home.
 
 ## Getting Started
 
