@@ -1,6 +1,6 @@
-# health_status
+# AppHealthStatus
 
-A new Flutter project.
+A new AppFlutter project.
 
 ## Getting Started
 
