@@ -10,7 +10,7 @@ class DbMock implements IDataSource {
   final _students = [
     User(
         id: 1,
-        email: "Noch@gmail.com",
+        email: "bagor6268@gmail.com",
         password: "1111",
         fullName: 'Ночевный М.Ю.',
         imageName: AppImages.maks,
