@@ -21,6 +21,8 @@ class TextFieldWidget extends StatefulWidget{
 
 class _TextFieldWidgetState extends State<TextFieldWidget>{
 
+  int maxLengthTextName = 22;
+
   late final TextEditingController controller;
   @override
   void initState(){
@@ -32,7 +34,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget>{
   @override
   void dispose(){
     controller.dispose();
-
     super.dispose();
   }
 
@@ -44,8 +45,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget>{
         widget.label,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
       ),
-      SizedBox(height: MediaQuery.of(context).size.height * 0.008),
+      SizedBox(height: MediaQuery.of(context).size.height * 0.0007),
       TextField(
+        maxLength: maxLengthTextName,
         controller: controller,
         decoration: InputDecoration(
           border: OutlineInputBorder(
