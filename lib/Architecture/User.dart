@@ -7,6 +7,7 @@ class User {
   final String email;
   final String password;
   final String fullName;
+  final String group;
   late final String imageName;
   late final Color? healthStatus;
 
@@ -15,6 +16,7 @@ class User {
     required this.email,
     required this.password,
     required this.fullName,
+    required this.group,
     required this.imageName,
     required this.healthStatus
 });

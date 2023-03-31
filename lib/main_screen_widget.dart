@@ -3,8 +3,10 @@ import 'package:health_status/Architecture/DbMock.dart';
 //import 'package:health_status/Architecture/IDataSourse.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Frames/Group.dart';
-import 'package:health_status/Frames/Status.dart';
-import 'package:health_status/Frames/Profile/Profile.dart';
+import 'package:health_status/Frames/Status2.dart';
+
+import 'Frames/Profile/Profile.dart';
+
 
 
 class MainScreenWidget extends StatefulWidget {
@@ -23,12 +25,10 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   int _selectedTab = 1;
   static final List<Widget> _widgetOptions = <Widget>[
-    Group(repository: Repository(DbMock())),
-    Status(),
-    Profile(repository: Repository(DbMock())),
+    Group(repository: LoginRepository(DbMock())),
+    Status2(repository: LoginRepository(DbMock()),),
+    Profile(),
   ];
-
-
 
   void onSelectTab(int index){
     if (_selectedTab == index) return;
@@ -42,35 +42,48 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: _widgetOptions[_selectedTab]
+
+
+      body: Center(child: _widgetOptions[_selectedTab]),
+      bottomNavigationBar:SizedBox(
+        height: MediaQuery.of(context).size.height * 0.095,
+        child: SingleChildScrollView(
+
+          physics: NeverScrollableScrollPhysics(),
+
+        child: BottomNavigationBar(
+          currentIndex: _selectedTab,
+          iconSize: 28.0,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(
+                  Icons.group
+              ),
+              label: 'Group',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+
+                  Icons.favorite,
+                  color: Colors.red,
+                  size: 38
+
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                  Icons.home
+              ),
+              label: 'Profile',
+            ),
+
+          ],
+          onTap: onSelectTab ,
+        ),
+
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedTab,
-        iconSize: 25.0,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-                Icons.group
-            ),
-            label: 'Group',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              size: 30,
-                Icons.heart_broken
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-                Icons.home
-            ),
-            label: 'Profile',
-          ),
-        ],
-        onTap: onSelectTab ,
-      ),
+    )
     );
   }
 }

@@ -1,27 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:health_status/Architecture/auth/UserRepository.dart';
 import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Frames/Profile/OtherWidgets/TextFieldWidget.dart';
 import 'package:health_status/Theme/app_colors.dart';
 
 class ProfileEdit extends StatefulWidget {
-  final Repository repository;
 
-  const ProfileEdit({Key? key, required this.repository}) : super(key: key);
+
+  const ProfileEdit({Key? key}) : super(key: key);
 
   @override
-  State<ProfileEdit> createState() => _ProfileState(repository);
+  State<ProfileEdit> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<ProfileEdit> {
-  final Repository repository;
 
-  _ProfileState(this.repository);
+
+
 
   @override
   Widget build(BuildContext context) {
-    final student = repository.getAll().first;
+    final student = UserSession.get();
     final color = Theme.of(context).colorScheme.primary;
     final VoidCallback onClicked;
 
@@ -42,7 +43,7 @@ class _ProfileState extends State<ProfileEdit> {
           physics: BouncingScrollPhysics(),
           children: [
             ProfileWidget(
-              imagePath: student.imageName,
+              imagePath: student!.imageName,
               isEdit: true,
               onClicked: () async {},
             ),
@@ -51,6 +52,7 @@ class _ProfileState extends State<ProfileEdit> {
             TextFieldWidget(
               ///Строка Имени
               label: 'Полное Имя',
+              maxLengthelements: 22,
               text: student.fullName,
               onChanged: (name) {},
             ),
@@ -59,11 +61,12 @@ class _ProfileState extends State<ProfileEdit> {
             TextFieldWidget(
               ///Строка Email
               label: 'Email',
+              maxLengthelements: 30,
               text: student.email,
               onChanged: (email) {},
             ),
 
-            SizedBox(height: MediaQuery.of(context).size.height * 0.25),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.3),
 
 
                ElevatedButton(

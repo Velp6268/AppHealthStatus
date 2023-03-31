@@ -114,7 +114,15 @@ var user = UserSession.get()?.imageName ?? "";
               borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.155,),
               color: Colors.grey[350],
             ),
-              child: ClipOval(child: Image(image: AssetImage(user)),),
+              child: ClipOval(
+
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: Image(
+                      image: AssetImage(user)
+                  )
+              ),
+              ),
           ),
           ///Текстовая плашка "Изменить здоровье"////////////
 

@@ -10,23 +10,27 @@ import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Architecture/DbMock.dart';
 
 
+import '../../Architecture/auth/UserRepository.dart';
+
+
 
 
 class Profile extends StatefulWidget {
 
-  final Repository repository;
 
-  const Profile({Key? key, required this.repository}) : super(key: key);
+
+  const Profile({Key? key}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState(repository);
+  State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
 
-  final Repository repository;
 
-  _ProfileState(this.repository);
+ var student = UserSession.get();
+  late final LoginRepository repository;
+  
 
 
   _changeProfile() {
@@ -40,9 +44,8 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
 
-    final student = repository.getAll().first;
 
-    final statusStudent = repository.statusHealthyText(student);
+
 
     return Scaffold(
         appBar: AppBar(
@@ -64,7 +67,7 @@ class _ProfileState extends State<Profile> {
              splashRadius: 20,
             icon: Icon(Icons.edit, color: Colors.black),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileEdit(repository: Repository(DbMock()))));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileEdit()));
             },
           ),
           ],
@@ -79,9 +82,9 @@ class _ProfileState extends State<Profile> {
 
             ///Виджет отвечающий за аватарку пользователя
             ProfileWidget(
-              imagePath: student.imageName,
+              imagePath: student ?.imageName??"",
               onClicked: () async {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileEdit(repository: Repository(DbMock()))));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileEdit()));
               },
             ),
 
@@ -89,7 +92,7 @@ class _ProfileState extends State<Profile> {
 
 
             ///Контейнер отвечающий за Инфо-табличку
-            buildInfoTable(student, statusStudent),
+            buildInfoTable(student!),
 
 
 
@@ -147,7 +150,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Container buildInfoTable(User student, String statusStudent) {
+  Container buildInfoTable(User student) {
     return Container(
       margin: EdgeInsets.only(
         top: MediaQuery.of(context).size.height * 0.2,
@@ -171,7 +174,7 @@ class _ProfileState extends State<Profile> {
           buildLine(context),
 
           /// 2 часть инфо-таблички (Текущий статус)
-          buildTwoPartInfoTable(student, statusStudent),
+          buildTwoPartInfoTable(student),
         ],
       ),
     );
@@ -212,7 +215,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Expanded buildTwoPartInfoTable(User student, String statusStudent) {
+  Expanded buildTwoPartInfoTable(User student) {
     return Expanded(
       /// 2 половина инфо таблички(Текущий статус здоровья)
       flex: 100,
@@ -263,7 +266,7 @@ class _ProfileState extends State<Profile> {
                       ///Нужен для того что бы объект не выходил за рамки
                       fit: BoxFit.contain,
                       child: Text(
-                        statusStudent,
+                        "Здоров",
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
