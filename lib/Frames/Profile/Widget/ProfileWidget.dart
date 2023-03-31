@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,54 +28,65 @@ class ProfileWidget extends StatelessWidget {
       alignment: Alignment.topCenter,
       child: Stack(
         children: [
-          buildImage(),
+
+
+          buildImage(context),
           Positioned(
             bottom: 0,
             right: 4,
-            child: buildEditIcon(color),
+            child: buildEditIcon(color, context),
           ),
         ],
       ),
     );
   }
 
-  Widget buildImage() {
-    // final i = Image.network(imagePath, loadingBuilder: (_, __,___)=> Container(color: Colors.green, height: 100, width: 100,),);
-    return ClipOval(
-      child: Material(
-        color: Colors.transparent,
-        child: Ink.image(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
-          width: 128,
-          height: 128,
-          child: InkWell(onTap: onClicked),
+
+  Widget buildImage(BuildContext context) {
+
+    return SizedBox(
+      width: MediaQuery.of(context).size.height * 0.15,
+      height: MediaQuery.of(context).size.height * 0.15,
+      child: ClipOval(
+        child: Material(
+          color: Colors.transparent,
+          child: Ink.image(
+            image: AssetImage(imagePath),
+            fit: BoxFit.cover,
+            child: InkWell(onTap: onClicked),
+          ),
         ),
       ),
     );
   }
 
-  Widget buildEditIcon(Color color)=> buildCircle(
+  Widget buildEditIcon(Color color, BuildContext context)=> buildCircle(
+    context,
     color: Colors.white,
     all: 3,
     child: buildCircle(
-      color: color,
-      all: 8,
-      child: Icon(
-        isEdit ? Icons.add_a_photo : Icons.edit,
-        color: Colors.white,
-        size: isEdit ? 18 : 15,
-      ),
-    ),
+      context,
+          color: color,
+          all: 1,
+          child: Icon(
+            isEdit ? Icons.add_a_photo : Icons.edit,
+            color: Colors.white,
+            size: MediaQuery.of(context).size.width * 0.04,
+          ),
+
+        ),
   );
 
-  Widget buildCircle({
+  Widget buildCircle(BuildContext context,{
     required Widget child,
     required double all,
     required Color color,
 })=>
       ClipOval(
         child: Container(
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.height * 0.045,
+          height: MediaQuery.of(context).size.height * 0.045,
           padding: EdgeInsets.all(all),
           color: color,
           child: child,
