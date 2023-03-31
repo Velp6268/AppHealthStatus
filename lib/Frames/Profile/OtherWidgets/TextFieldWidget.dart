@@ -6,12 +6,14 @@ import 'package:flutter/cupertino.dart';
 class TextFieldWidget extends StatefulWidget{
   final String label;
   final String text;
+  final int maxLengthelements;
   final ValueChanged<String> onChanged;
 
   const TextFieldWidget({
     Key? key,
     required this.label,
     required this.text,
+    required this.maxLengthelements,
     required this.onChanged,
 }) : super(key: key);
 
@@ -21,7 +23,6 @@ class TextFieldWidget extends StatefulWidget{
 
 class _TextFieldWidgetState extends State<TextFieldWidget>{
 
-  int maxLengthTextName = 22;
 
   late final TextEditingController controller;
   @override
@@ -47,7 +48,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget>{
       ),
       SizedBox(height: MediaQuery.of(context).size.height * 0.0007),
       TextField(
-        maxLength: maxLengthTextName,
+        maxLength: widget.maxLengthelements,
         controller: controller,
         decoration: InputDecoration(
           border: OutlineInputBorder(
