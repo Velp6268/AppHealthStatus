@@ -4,12 +4,16 @@ import 'dart:ui';
 
 class User {
   final int id;
+  final String email;
+  final String password;
   final String fullName;
-  final String imageName;
-  final Color? healthStatus;
+  late final String imageName;
+  late final Color? healthStatus;
 
   User({
     required this.id,
+    required this.email,
+    required this.password,
     required this.fullName,
     required this.imageName,
     required this.healthStatus

@@ -1,29 +1,53 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:health_status/Architecture/auth/UserRepository.dart';
+import 'package:health_status/resources/resources.dart';
 import '../ui/status_btn.dart';
+import 'package:health_status/Architecture/Repository.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:health_status/Architecture/Repository.dart';
+import 'package:health_status/Architecture/User.dart';
+import 'dart:convert';
+import 'package:health_status/Architecture/DbMock.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:health_status/Architecture/Repository.dart';
 
 class Status2 extends StatefulWidget {
-  const Status2({Key? key}) : super(key: key);
+  final LoginRepository repository;
+  const Status2({Key? key, required this.repository}) : super(key: key);
 
   @override
-  State<Status2> createState() => _Status2State();
+  State<Status2> createState() => _Status2State(repository);
 }
 
 class _Status2State extends State<Status2> {
 
-  Color color = Colors.green;
-  String text = "Здоров";
 
+  _Status2State(this.repository);
+
+  final LoginRepository repository;
+
+  String text = "Я здоров";
+  Color? colorHealt = UserSession.get()?.healthStatus;
   _changeStatus(Color color, String text){
     setState(() {
-      this.color = color;
+
+      this.colorHealt = color;
       this.text = text;
     });
+
+
   }
+
 
 
   @override
   Widget build(BuildContext context) {
+
+var user = UserSession.get()?.imageName ?? "";
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -86,9 +110,11 @@ class _Status2State extends State<Status2> {
             width: MediaQuery.of(context).size.height * 0.155,
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.23, bottom: 180, left: 0, right: 0),
             decoration:BoxDecoration(
+
               borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.155,),
               color: Colors.grey[350],
             ),
+              child: ClipOval(child: Image(image: AssetImage(user)),),
           ),
           ///Текстовая плашка "Изменить здоровье"////////////
 
@@ -154,12 +180,13 @@ class _Status2State extends State<Status2> {
 
   Container buildStatusContainer(BuildContext context) {
     return Container(
+
           width: MediaQuery.of(context).size.width*0.7,
           height: 7,
           margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.17, right: 0, left: 0, bottom: 0),
           decoration:BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: color,
+            color: colorHealt,
           ),
         );
   }

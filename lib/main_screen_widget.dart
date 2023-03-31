@@ -13,7 +13,7 @@ import 'package:flutter/cupertino.dart';
 
 
 class MainScreenWidget extends StatefulWidget {
-  const MainScreenWidget({Key? key}) : super(key: key);
+   MainScreenWidget({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -24,8 +24,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   int _selectedTab = 1;
   static final List<Widget> _widgetOptions = <Widget>[
-    Group(repository: Repository(DbMock())),
-    Status2(),
+    Group(repository: LoginRepository(DbMock())),
+    Status2(repository: LoginRepository(DbMock()),),
     Profile(),
   ];
 

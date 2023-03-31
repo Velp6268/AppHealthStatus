@@ -1,3 +1,5 @@
+import 'package:health_status/Architecture/Result.dart';
+
 import 'User.dart';
 
 abstract class IDataSource{
@@ -7,4 +9,5 @@ abstract class IDataSource{
   void delete(User user);
   void update(User user);
   List<User> getAll();
+  Result getByLoginAndPass(String login, String pass);
 }
