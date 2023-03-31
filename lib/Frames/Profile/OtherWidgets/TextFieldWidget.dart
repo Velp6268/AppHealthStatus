@@ -44,7 +44,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget>{
         widget.label,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
       ),
-      const SizedBox(height: 8),
+      SizedBox(height: MediaQuery.of(context).size.height * 0.008),
       TextField(
         controller: controller,
         decoration: InputDecoration(

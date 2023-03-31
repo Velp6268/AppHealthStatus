@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/User.dart';
-import 'package:health_status/Frames/ProfileWidget.dart';
+import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/ui/profile_btn.dart';
-import 'package:health_status/Frames/ProfileEdit.dart';
+import 'package:health_status/Frames/Profile/ProfileEdit.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Architecture/DbMock.dart';
 
@@ -27,7 +27,6 @@ class _ProfileState extends State<Profile> {
   final Repository repository;
 
   _ProfileState(this.repository);
-
 
 
   _changeProfile() {
@@ -74,10 +73,11 @@ class _ProfileState extends State<Profile> {
           alignment: Alignment.topCenter,
           children: [
 
-
             ///Контейнер отвечающий за фон (Фото)
             ContainerImage(context),
 
+
+            ///Виджет отвечающий за аватарку пользователя
             ProfileWidget(
               imagePath: student.imageName,
               onClicked: () async {

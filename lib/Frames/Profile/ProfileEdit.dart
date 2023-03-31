@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health_status/Frames/ProfileWidget.dart';
+import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Frames/Profile/OtherWidgets/TextFieldWidget.dart';
-import 'package:health_status/ui/profile_btn_Save.dart';
 import 'package:health_status/Theme/app_colors.dart';
 
 class ProfileEdit extends StatefulWidget {
@@ -65,31 +64,6 @@ class _ProfileState extends State<ProfileEdit> {
             ),
 
             SizedBox(height: MediaQuery.of(context).size.height * 0.25),
-
-            // ButtonTheme(
-            //   child: Container(
-            //     height: MediaQuery.of(context).size.height * 0.05,
-            //     width: 10,
-            //     child: DecoratedBox(
-            //       ///Вид элемента листа (табличка)
-            //       decoration: BoxDecoration(
-            //           border: Border.all(color: AppColors.mainGrey),
-            //
-            //           ///Окружность краев Элемента списка
-            //           borderRadius: const BorderRadius.only(
-            //               topRight: Radius.circular(25),
-            //               bottomRight: Radius.circular(25),
-            //               topLeft: Radius.circular(25),
-            //               bottomLeft: Radius.circular(25)),
-            //           color: color),
-            //   )
-            //
-            //   ),
-
-
-            
-            
-
 
 
                ElevatedButton(
