@@ -42,6 +42,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
 
     final student = repository.getAll().first;
+
     final statusStudent = repository.statusHealthyText(student);
 
     return Scaffold(
@@ -72,9 +73,6 @@ class _ProfileState extends State<Profile> {
         body: Stack(
           alignment: Alignment.topCenter,
           children: [
-
-
-
 
 
             ///Контейнер отвечающий за фон (Фото)
