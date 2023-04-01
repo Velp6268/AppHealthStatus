@@ -30,15 +30,6 @@ class _ProfileState extends State<Profile> {
 
  var student = UserSession.get();
   late final LoginRepository repository;
-  
-
-
-  _changeProfile() {
-    setState(() {
-      print('');
-    });
-  }
-
 
 
   @override
@@ -100,7 +91,10 @@ class _ProfileState extends State<Profile> {
             ProfileButton(
                 icon: AppImages.notifications,
                 text: 'Уведомление',
-                onClick: _changeProfile()),
+                onClicked: () async{
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileEdit()));
+                },
+            ),
 
             ///Кнопка Настройки
             Container(
@@ -109,7 +103,11 @@ class _ProfileState extends State<Profile> {
                 child: ProfileButton(
                     icon: AppImages.settings,
                     text: 'Настройки',
-                    onClick: _changeProfile())),
+                  onClicked: () async{
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileEdit()));
+                  },
+            ),
+            ),
 
             ///Кнопка Помощь
             Container(
@@ -118,7 +116,11 @@ class _ProfileState extends State<Profile> {
                 child: ProfileButton(
                     icon: AppImages.man,
                     text: 'Помощь',
-                    onClick: _changeProfile()))
+                  onClicked: () async{
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileEdit()));
+                  },
+                ),
+            ),
           ],
         ));
   }
