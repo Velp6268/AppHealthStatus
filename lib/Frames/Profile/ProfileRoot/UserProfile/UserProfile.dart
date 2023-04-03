@@ -5,39 +5,39 @@ import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/ui/profile_btn.dart';
-import 'package:health_status/Frames/Profile/ProfileEdit.dart';
+import 'package:health_status/Frames/Profile/ProfileEdit/ProfileEdit.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Architecture/DbMock.dart';
 
 
-import '../../Architecture/auth/UserRepository.dart';
+import '../../../../Architecture/auth/UserRepository.dart';
 
 
 
 
-class Profile extends StatefulWidget {
+class UserProfile extends StatefulWidget {
 
 
-
-  const Profile({Key? key}) : super(key: key);
+  final LoginRepository repository;
+  const UserProfile({Key? key, required this.repository}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<UserProfile> createState() => _UserProfileState(repository);
 }
 
-class _ProfileState extends State<Profile> {
+class _UserProfileState extends State<UserProfile> {
 
+  _UserProfileState(this.repository);
 
  var student = UserSession.get();
-  late final LoginRepository repository;
+ final LoginRepository repository;
 
 
   @override
   Widget build(BuildContext context) {
 
 
-
-
+    
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -182,7 +182,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Expanded buildOnePartInfoTable(User student) {
+  Expanded buildOnePartInfoTable(User student ) {
     return Expanded(
       ///1 Половина инфо таблички с инфой (ФИО, группа)
       flex: 100,
@@ -198,8 +198,8 @@ class _ProfileState extends State<Profile> {
                   ///Нужен для того что бы объект не выходил за рамки
                   fit: BoxFit.contain,
                   child: Text(
-                    student.user_name,
                     style: TextStyle(fontSize: 16),
+                    repository.nameAndInitials(student.fullName)
                   ),
                 ),
               ),

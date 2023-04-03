@@ -52,7 +52,7 @@ class _ProfileState extends State<ProfileEdit> {
             TextFieldWidget(
               ///Строка Имени
               label: 'Полное Имя',
-              maxLengthelements: 22,
+              maxLengthelements: 50,
               text: student.fullName,
               onChanged: (name) {},
             ),

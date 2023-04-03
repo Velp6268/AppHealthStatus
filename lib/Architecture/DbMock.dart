@@ -12,7 +12,7 @@ class DbMock implements IDataSource {
         id: 1,
         email: "bagor6268@gmail.com",
         password: "1111",
-        fullName: 'Ночевный М.Ю.',
+        fullName: 'Ночевный Максим Юрьевич',
         group: "32Д",
         imageName: AppImages.maks,
         healthStatus: AppColors.statusHealthy),
@@ -20,7 +20,7 @@ class DbMock implements IDataSource {
         id: 2,
         email: "Lazar@gmail.com",
         password: "1111",
-        fullName: 'Лазарев Н.С.',
+        fullName: 'Лазарев Никита.Сергеевич.',
         group: "32Д",
         imageName: AppImages.nikita,
         healthStatus: AppColors.statusHealthy),
@@ -28,7 +28,7 @@ class DbMock implements IDataSource {
         id: 3,
         email: "Komord@gmail.com",
         password: "1111",
-        fullName: 'Комарденков Т.Д.',
+        fullName: 'Комарденков Тимофей.Дмитриевич.',
         group: "32Д",
         imageName: AppImages.tim,
         healthStatus: AppColors.statusAnother),
@@ -36,7 +36,7 @@ class DbMock implements IDataSource {
         id: 4,
         email: "Plat@gmail.com",
         password: "1111",
-        fullName: 'Платонов В.И.',
+        fullName: 'Платонов Виталий.Ильич.',
         group: "32Д",
         imageName: AppImages.vitalya,
         healthStatus: AppColors.statusHealthy),
@@ -44,7 +44,7 @@ class DbMock implements IDataSource {
         id: 4,
         email: "1111",
         password: "1111",
-        fullName: 'Неизвестный Н.Н.',
+        fullName: 'Неизвестный Ноу Нейм',
         group: "32Д",
         imageName: AppImages.city,
         healthStatus: AppColors.statusUnHealthy),
@@ -79,6 +79,20 @@ class DbMock implements IDataSource {
   }
 
 
+  @override
+  String findIntialsOfFullName(String fullName) {
+    String sername, name, midleName, result;
+
+    var listWordsName = fullName.split(" ");
+
+    sername = listWordsName[0];
+    name = listWordsName[1].substring(0, 1) + ".";
+    midleName = listWordsName[2].substring(0, 1) + ".";
+
+    result = sername + " " + name + midleName;
+
+    return result;
+  }
 
   @override
   void delete(User user) {
@@ -106,4 +120,6 @@ class DbMock implements IDataSource {
   void update(User user) {
     // TODO: implement update
   }
+
+
 }

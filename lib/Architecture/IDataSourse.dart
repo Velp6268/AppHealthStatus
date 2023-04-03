@@ -12,5 +12,6 @@ abstract class IDataSource{
   List<User> getAll();
   String statusHealthyText(User user);
   Result getByLoginAndPass(String login, String pass);
+  String findIntialsOfFullName(String fullName);
 
 }

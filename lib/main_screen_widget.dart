@@ -5,7 +5,7 @@ import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Frames/Group.dart';
 import 'package:health_status/Frames/Status2.dart';
 
-import 'Frames/Profile/Profile.dart';
+import 'Frames/Profile/ProfileRoot/UserProfile/UserProfile.dart';
 
 
 
@@ -27,7 +27,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   static final List<Widget> _widgetOptions = <Widget>[
     Group(repository: LoginRepository(DbMock())),
     Status2(repository: LoginRepository(DbMock()),),
-    Profile(),
+    UserProfile(repository: LoginRepository(DbMock()),),
   ];
 
   void onSelectTab(int index){
@@ -53,7 +53,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
         child: BottomNavigationBar(
           currentIndex: _selectedTab,
-          iconSize: 28.0,
+          iconSize: 28.0, ///loll
           items: const [
             BottomNavigationBarItem(
               icon: Icon(
@@ -79,7 +79,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             ),
 
           ],
-          onTap: onSelectTab ,
+          onTap: onSelectTab,
         ),
 
       ),
