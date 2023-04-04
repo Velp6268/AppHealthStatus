@@ -96,7 +96,7 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.12),
               child: ProfileButton(
-                icon: AppImages.settings,
+                icon: AppImages.administrator,
                 text: 'Управление группой',
                 onClicked: () async {},
               ),
@@ -111,8 +111,10 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
           ],
         ));
   }
+  /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
 
   SizedBox buttonLogOut(BuildContext context) {
+    ///Кнопка выйти
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.04,
       child: ElevatedButton(
@@ -137,8 +139,6 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
       ),
     );
   }
-
-  /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
 
   Container buildAvatarka(User student) {
     return Container(

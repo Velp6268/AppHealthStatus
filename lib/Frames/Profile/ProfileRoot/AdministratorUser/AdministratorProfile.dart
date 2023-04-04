@@ -12,17 +12,18 @@ import 'package:health_status/Architecture/DbMock.dart';
 
 import '../../../../Architecture/auth/UserRepository.dart';
 
-class UserProfile extends StatefulWidget {
+class AdministratorProfile extends StatefulWidget {
   final LoginRepository repository;
 
-  const UserProfile({Key? key, required this.repository}) : super(key: key);
+  const AdministratorProfile({Key? key, required this.repository})
+      : super(key: key);
 
   @override
-  State<UserProfile> createState() => _UserProfileState(repository);
+  State<AdministratorProfile> createState() => _AdministratorProfileState(repository);
 }
 
-class _UserProfileState extends State<UserProfile> {
-  _UserProfileState(this.repository);
+class _AdministratorProfileState extends State<AdministratorProfile> {
+  _AdministratorProfileState(this.repository);
 
   var student = UserSession.get();
   final LoginRepository repository;
@@ -91,6 +92,17 @@ class _UserProfileState extends State<UserProfile> {
               ),
             ),
 
+            Container(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.12),
+              child: ProfileButton(
+                icon: AppImages.administrator,
+                text: 'Управление',
+                onClicked: () async {},
+              ),
+            ),
+
+
             ///Кнопка Выйти из Аккаунта
             Positioned(
               bottom: MediaQuery.of(context).size.height * 0.03,
@@ -101,8 +113,8 @@ class _UserProfileState extends State<UserProfile> {
   }
   /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
   SizedBox buttonLogOut(BuildContext context) {
+    ///Кнопка выйти
     return SizedBox(
-      ///Кнопка выйти
       height: MediaQuery.of(context).size.height * 0.04,
       child: ElevatedButton(
         style: ButtonStyle(
@@ -111,6 +123,7 @@ class _UserProfileState extends State<UserProfile> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           ),
         ),
+
         onPressed: () async {},
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.2,
@@ -191,7 +204,7 @@ class _UserProfileState extends State<UserProfile> {
       child: Container(
           alignment: Alignment.center,
           padding:
-              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
+          EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
           child: Column(
             children: [
               SizedBox(
@@ -226,7 +239,7 @@ class _UserProfileState extends State<UserProfile> {
       child: Container(
         alignment: Alignment.center,
         padding:
-            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.023),
+        EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.023),
         child: Column(
           children: [
             SizedBox(
