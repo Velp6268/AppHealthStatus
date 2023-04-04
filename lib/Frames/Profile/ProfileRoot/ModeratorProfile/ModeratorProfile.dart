@@ -51,7 +51,7 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
               icon: Icon(Icons.edit, color: Colors.black),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit()));
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: LoginRepository(DbMock()))));
               },
             ),
           ],
@@ -67,7 +67,7 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
               imagePath: student?.imageName ?? "",
               onClicked: () async {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit()));
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: LoginRepository(DbMock()))));
               },
             ),
 
@@ -271,7 +271,7 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
                           borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          color: student.healthStatus),
+                          color: Colors.green),
                     ),
                   ),
                   SizedBox(

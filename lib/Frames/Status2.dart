@@ -30,7 +30,7 @@ class _Status2State extends State<Status2> {
   final LoginRepository repository;
 
   String text = "Я здоров";
-  Color? colorHealt = UserSession.get()?.healthStatus;
+  Color? colorHealt = Colors.green;
   _changeStatus(Color color, String text){
     setState(() {
 

@@ -10,8 +10,11 @@ abstract class IDataSource{
   void delete(User user);
   void update(User user);
   List<User> getAll();
-  String statusHealthyText(User user);
   Result getByLoginAndPass(String login, String pass);
   String findIntialsOfFullName(String fullName);
+  Future init();
+  Future setUser(User user);
+  User? getUser();
+
 
 }

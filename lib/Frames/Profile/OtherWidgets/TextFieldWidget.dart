@@ -52,9 +52,10 @@ class _TextFieldWidgetState extends State<TextFieldWidget>{
         controller: controller,
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12)
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
+        onChanged: widget.onChanged,
 
       )
     ],

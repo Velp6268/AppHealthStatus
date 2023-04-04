@@ -1,3 +1,5 @@
+import 'dart:convert';
+import '../../../../Architecture/auth/UserRepository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:health_status/Architecture/IDataSourse.dart';
 import 'package:health_status/Architecture/Result.dart';
@@ -5,8 +7,15 @@ import 'package:health_status/Architecture/User.dart';
 import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:collection/collection.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class DbMock implements IDataSource {
+
+  static late SharedPreferences _preferences;
+
+  static const _keyUser = 'user'; ///Ключ
+
   final _students = [
     User(
         id: 1,
@@ -15,7 +24,7 @@ class DbMock implements IDataSource {
         fullName: 'Ночевный Максим Юрьевич',
         group: "32Д",
         imageName: AppImages.maks,
-        healthStatus: AppColors.statusHealthy),
+       ),
     User(
         id: 2,
         email: "Lazar@gmail.com",
@@ -23,7 +32,7 @@ class DbMock implements IDataSource {
         fullName: 'Лазарев Никита.Сергеевич.',
         group: "32Д",
         imageName: AppImages.nikita,
-        healthStatus: AppColors.statusHealthy),
+        ),
     User(
         id: 3,
         email: "Komord@gmail.com",
@@ -31,7 +40,7 @@ class DbMock implements IDataSource {
         fullName: 'Комарденков Тимофей.Дмитриевич.',
         group: "32Д",
         imageName: AppImages.tim,
-        healthStatus: AppColors.statusAnother),
+        ),
     User(
         id: 4,
         email: "Plat@gmail.com",
@@ -39,7 +48,7 @@ class DbMock implements IDataSource {
         fullName: 'Платонов Виталий.Ильич.',
         group: "32Д",
         imageName: AppImages.vitalya,
-        healthStatus: AppColors.statusHealthy),
+        ),
     User(
         id: 4,
         email: "1111",
@@ -47,26 +56,27 @@ class DbMock implements IDataSource {
         fullName: 'Неизвестный Ноу Нейм',
         group: "32Д",
         imageName: AppImages.city,
-        healthStatus: AppColors.statusUnHealthy),
+        ),
   ];
 
 
+  Future init() async =>
+      _preferences = await SharedPreferences.getInstance();
 
-  @override
-  String statusHealthyText(User user){
 
-    if(user.healthStatus == AppColors.statusHealthy){
-      return'Здооров';
-    }
-    if(user.healthStatus == AppColors.statusUnHealthy){
-      return 'Не здоров';
-    }
-    if(user.healthStatus == AppColors.statusAnother){
-      return 'Отсуствует по обстоятельствам';
-    }
+  ///Метод для сохранения пользователя локально
+  Future setUser(User user) async{
+    final json = jsonEncode(user.toJson()); ///Преобразовываем пользовательский объект в toJson
 
-    return '';
+    await _preferences.setString(_keyUser, json);
   }
+  
+  User? getUser(){
+    final json = _preferences.getString(_keyUser);
+    final myUser = UserSession.get();
+    return json == null ? myUser : User.fromJson(jsonDecode(json));
+  }
+
 
   Result getByLoginAndPass(String login, String pass) {
     try {
@@ -107,7 +117,7 @@ class DbMock implements IDataSource {
 
   @override
   List<User> getAll() {
-    // TODO: implement getAll
+
     return _students;
   }
 

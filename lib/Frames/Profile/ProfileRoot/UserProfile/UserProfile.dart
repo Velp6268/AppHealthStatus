@@ -50,7 +50,7 @@ class _UserProfileState extends State<UserProfile> {
               icon: Icon(Icons.edit, color: Colors.black),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit()));
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: LoginRepository(DbMock()))));
               },
             ),
           ],
@@ -66,7 +66,7 @@ class _UserProfileState extends State<UserProfile> {
               imagePath: student?.imageName ?? "",
               onClicked: () async {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit()));
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: LoginRepository(DbMock()))));
               },
             ),
 
@@ -260,7 +260,7 @@ class _UserProfileState extends State<UserProfile> {
                           borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          color: student.healthStatus),
+                          color: Colors.green),
                     ),
                   ),
                   SizedBox(

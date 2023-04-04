@@ -22,4 +22,17 @@ class LoginRepository {
     return dataSource.findIntialsOfFullName(fullName);
   }
 
+  Future init(){
+    return dataSource.init();
+  }
+
+  Future setUser(User user){
+    return dataSource.setUser(user);
+  }
+
+  User? getUser(){
+    return dataSource.getUser();
+  }
+
+
 }

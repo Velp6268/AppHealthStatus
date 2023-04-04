@@ -12,8 +12,10 @@ import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Architecture/User.dart';
 import 'dart:convert';
 
-void main() {
-
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final LoginRepository repository = LoginRepository(DbMock());
+  await repository.init();
 
   runApp(
     MaterialApp(

@@ -9,7 +9,6 @@ class User {
   final String fullName;
   final String group;
   late final String imageName;
-  late final Color? healthStatus;
 
   User({
     required this.id,
@@ -18,9 +17,43 @@ class User {
     required this.fullName,
     required this.group,
     required this.imageName,
-    required this.healthStatus
 });
 
+
+  static fromJson(Map<String, dynamic> json) => User(
+    id: json['id'],
+    email: json['email'],
+    password: json['password'],
+    fullName: json['fullName'],
+    group: json['group'],
+    imageName: json['imageName'],
+  );
+
+  Map<String, dynamic> toJson()=>{
+    'id': id,
+    'email': email,
+    'password': password,
+    'fullName': fullName,
+    'group': group,
+    'imageName' : imageName,
+  };
+
+
+  User copy({
+    int? id,
+    String? email,
+    String? password,
+    String? fullName,
+    String? group,
+    String? imageName,
+  }) => User(
+    id: id ?? this.id,
+    email: email ?? this.email,
+    password: password ?? this.password,
+    fullName: fullName ?? this.fullName,
+    group: group ?? this.group,
+    imageName: imageName ?? this.imageName,
+  );
 
 
   String get user_name {

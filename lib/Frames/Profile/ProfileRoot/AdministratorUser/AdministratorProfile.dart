@@ -25,7 +25,7 @@ class AdministratorProfile extends StatefulWidget {
 class _AdministratorProfileState extends State<AdministratorProfile> {
   _AdministratorProfileState(this.repository);
 
-  var student = UserSession.get();
+  get student async => repository.getUser();
   final LoginRepository repository;
 
   @override
@@ -51,7 +51,7 @@ class _AdministratorProfileState extends State<AdministratorProfile> {
               icon: Icon(Icons.edit, color: Colors.black),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit()));
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: LoginRepository(DbMock()))));
               },
             ),
           ],
@@ -66,8 +66,10 @@ class _AdministratorProfileState extends State<AdministratorProfile> {
             ProfileWidget(
               imagePath: student?.imageName ?? "",
               onClicked: () async {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit()));
+                await Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: LoginRepository(DbMock())))
+                );
+                setState(() {});
               },
             ),
 
@@ -273,7 +275,7 @@ class _AdministratorProfileState extends State<AdministratorProfile> {
                           borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          color: student.healthStatus),
+                          color: Colors.green),
                     ),
                   ),
                   SizedBox(

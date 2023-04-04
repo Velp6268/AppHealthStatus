@@ -13,22 +13,23 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 class ProfileEdit extends StatefulWidget {
+  final LoginRepository repository;
 
-
-  const ProfileEdit({Key? key}) : super(key: key);
+  const ProfileEdit({Key? key, required this.repository}) : super(key: key);
 
   @override
-  State<ProfileEdit> createState() => _ProfileEditState();
+  State<ProfileEdit> createState() => _ProfileEditState(repository);
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
 
 
-
+  _ProfileEditState(this.repository);
+  final LoginRepository repository;
 
   @override
   Widget build(BuildContext context) {
-    final student = UserSession.get();
+    var user = UserSession.get();
     final color = Theme.of(context).colorScheme.primary;
     final VoidCallback onClicked;
 
@@ -49,7 +50,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           physics: BouncingScrollPhysics(),
           children: [
             ProfileWidget(
-              imagePath: student!.imageName,
+              imagePath: user!.imageName,
               isEdit: true,
               onClicked: () async {
                final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -61,6 +62,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                final imageFile = File('${directory.path}/$name'); ///Создаем файл изображения
                final newImage = await File(image.path).copy(imageFile.path); ///Копируем изображение
 
+                setState(()=> user = user?.copy(imageName: newImage.path));
+
 
 
               },
@@ -71,8 +74,8 @@ class _ProfileEditState extends State<ProfileEdit> {
               ///Строка Имени
               label: 'Полное Имя',
               maxLengthelements: 50,
-              text: student.fullName,
-              onChanged: (name) {},
+              text: user!.fullName,
+              onChanged: (name) => user = user!.copy(fullName: name),
             ),
 
             SizedBox(height: MediaQuery.of(context).size.height * 0.028),
@@ -80,8 +83,8 @@ class _ProfileEditState extends State<ProfileEdit> {
               ///Строка Email
               label: 'Email',
               maxLengthelements: 30,
-              text: student.email,
-              onChanged: (email) {},
+              text: user!.email,
+              onChanged: (email) => user = user!.copy(email: email),
             ),
 
             SizedBox(height: MediaQuery.of(context).size.height * 0.3),
@@ -96,6 +99,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   )
                 )),
                 onPressed: () async {
+                  repository.setUser(user!);
                   Navigator.of(context).pop();
                 },
                 child: const SizedBox(
