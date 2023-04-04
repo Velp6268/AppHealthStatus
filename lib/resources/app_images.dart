@@ -4,6 +4,7 @@ class AppImages {
   AppImages._();
 
   static const String maks = 'images/Maks.jpg';
+  static const String administrator = 'images/iconAdministrator.png';
   static const String notifications = 'images/Notifications.png';
   static const String settings = 'images/Settings.png';
   static const String tim = 'images/Tim.jpg';
