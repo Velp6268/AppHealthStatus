@@ -12,17 +12,18 @@ import 'package:health_status/Architecture/DbMock.dart';
 
 import '../../../../Architecture/auth/UserRepository.dart';
 
-class UserProfile extends StatefulWidget {
+class ModeratorProfile extends StatefulWidget {
   final LoginRepository repository;
 
-  const UserProfile({Key? key, required this.repository}) : super(key: key);
+  const ModeratorProfile({Key? key, required this.repository})
+      : super(key: key);
 
   @override
-  State<UserProfile> createState() => _UserProfileState(repository);
+  State<ModeratorProfile> createState() => _ModeratorProfileState(repository);
 }
 
-class _UserProfileState extends State<UserProfile> {
-  _UserProfileState(this.repository);
+class _ModeratorProfileState extends State<ModeratorProfile> {
+  _ModeratorProfileState(this.repository);
 
   var student = UserSession.get();
   final LoginRepository repository;
@@ -90,6 +91,17 @@ class _UserProfileState extends State<UserProfile> {
                 onClicked: () async {},
               ),
             ),
+
+            Container(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.12),
+              child: ProfileButton(
+                icon: AppImages.settings,
+                text: 'Управление группой',
+                onClicked: () async {},
+              ),
+            ),
+
 
             ///Кнопка Выйти из Аккаунта
             Positioned(

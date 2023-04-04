@@ -3,6 +3,7 @@ import 'package:health_status/Architecture/DbMock.dart';
 //import 'package:health_status/Architecture/IDataSourse.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Frames/Group.dart';
+import 'package:health_status/Frames/Profile/ProfileRoot/ModeratorProfile/ModeratorProfile.dart';
 import 'package:health_status/Frames/Status2.dart';
 
 import 'Frames/Profile/ProfileRoot/UserProfile/UserProfile.dart';
@@ -27,7 +28,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   static final List<Widget> _widgetOptions = <Widget>[
     Group(repository: LoginRepository(DbMock())),
     Status2(repository: LoginRepository(DbMock()),),
-    UserProfile(repository: LoginRepository(DbMock()),),
+    ModeratorProfile(repository: LoginRepository(DbMock()),),
   ];
 
   void onSelectTab(int index){
