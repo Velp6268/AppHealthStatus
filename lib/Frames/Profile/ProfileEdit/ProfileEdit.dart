@@ -1,3 +1,6 @@
+
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/auth/UserRepository.dart';
@@ -5,6 +8,9 @@ import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Frames/Profile/OtherWidgets/TextFieldWidget.dart';
 import 'package:health_status/Theme/app_colors.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
 
 class ProfileEdit extends StatefulWidget {
 
@@ -12,10 +18,10 @@ class ProfileEdit extends StatefulWidget {
   const ProfileEdit({Key? key}) : super(key: key);
 
   @override
-  State<ProfileEdit> createState() => _ProfileState();
+  State<ProfileEdit> createState() => _ProfileEditState();
 }
 
-class _ProfileState extends State<ProfileEdit> {
+class _ProfileEditState extends State<ProfileEdit> {
 
 
 
@@ -45,7 +51,19 @@ class _ProfileState extends State<ProfileEdit> {
             ProfileWidget(
               imagePath: student!.imageName,
               isEdit: true,
-              onClicked: () async {},
+              onClicked: () async {
+               final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+               if(image == null) return;
+
+               final directory = await getApplicationDocumentsDirectory(); ///Сохраняем в катологе фото в документах
+               final name = basename(image.path); ///поллучаем имя файла и формат
+               final imageFile = File('${directory.path}/$name'); ///Создаем файл изображения
+               final newImage = await File(image.path).copy(imageFile.path); ///Копируем изображение
+
+
+
+              },
             ),
 
             SizedBox(height: MediaQuery.of(context).size.height * 0.028),
