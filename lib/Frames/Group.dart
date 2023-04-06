@@ -15,7 +15,6 @@ class Group extends StatelessWidget {
   Widget build(BuildContext context) {
     var students = repository.getAll();
 
-
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -96,12 +95,13 @@ class Group extends StatelessWidget {
 
   ///контейнер отвечающий за полоску здоровья
   Container buildHealthyLine(User student) {
+ 
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.horizontal(
           left: Radius.circular(10),
         ),
-        color: student.healthStatus,
+        color:  repository.textHealthyStatus(student.textHealthStatus!),
       ),
       width: 10,
     );

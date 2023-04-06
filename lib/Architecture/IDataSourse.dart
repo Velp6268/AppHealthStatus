@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:health_status/Architecture/Result.dart';
 
 import 'User.dart';
@@ -10,4 +12,5 @@ abstract class IDataSource{
   void update(User user);
   List<User> getAll();
   Result getByLoginAndPass(String login, String pass);
+  Color statusHealthy(String textHeatlh);
 }

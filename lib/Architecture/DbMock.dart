@@ -6,6 +6,9 @@ import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:collection/collection.dart';
 
+import '../Frames/Status2.dart';
+
+
 class DbMock implements IDataSource {
   final _students = [
     User(
@@ -14,35 +17,35 @@ class DbMock implements IDataSource {
         password: "1111",
         fullName: 'Ночевный М.Ю.',
         imageName: AppImages.maks,
-        healthStatus: AppColors.statusHealthy),
+        textHealthStatus: "Я болен"),
     User(
         id: 2,
         email: "Lazar@gmail.com",
         password: "1111",
         fullName: 'Лазарев Н.С.',
         imageName: AppImages.nikita,
-        healthStatus: AppColors.statusHealthy),
+        textHealthStatus: "Я здоров"),
     User(
         id: 3,
         email: "Komord@gmail.com",
         password: "1111",
         fullName: 'Комарденков Т.Д.',
         imageName: AppImages.tim,
-        healthStatus: AppColors.statusAnother),
+        textHealthStatus: "Я здоров"),
     User(
         id: 4,
         email: "Plat@gmail.com",
         password: "1111",
         fullName: 'Платонов В.И.',
         imageName: AppImages.vitalya,
-        healthStatus: AppColors.statusHealthy),
+        textHealthStatus: "Я здоров"),
     User(
         id: 4,
         email: "1111",
         password: "1111",
         fullName: 'Неизвестный Н.Н.',
         imageName: AppImages.city,
-        healthStatus: AppColors.statusUnHealthy),
+        textHealthStatus: "Я болен"),
   ];
 
   Result getByLoginAndPass(String login, String pass) {
@@ -54,6 +57,15 @@ class DbMock implements IDataSource {
       return Result.error("Логин или пароль не верны");
     }
   }
+  Color statusHealthy(String? textHealthy){
+    if(textHealthy == "Я здоров")
+      return AppColors.statusHealthy;
+    else if(textHealthy == "Я болен")
+      return AppColors.statusUnHealthy;
+    else
+      return AppColors.statusAnother;
+  }
+
 
 
 

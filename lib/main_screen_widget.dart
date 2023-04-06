@@ -62,11 +62,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-
                   Icons.favorite,
                   color: Colors.red,
                   size: 38
-
               ),
               label: '',
             ),
@@ -76,7 +74,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               ),
               label: 'Profile',
             ),
-
           ],
           onTap: onSelectTab ,
         ),

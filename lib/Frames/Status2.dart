@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/auth/UserRepository.dart';
+import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
 import '../ui/status_btn.dart';
 import 'package:health_status/Architecture/Repository.dart';
@@ -26,28 +29,25 @@ class _Status2State extends State<Status2> {
 
 
   _Status2State(this.repository);
+  late final Map<String, dynamic> userMap = jsonDecode(jsonEncode(User));
 
   final LoginRepository repository;
 
-  String text = "Я здоров";
-  Color? colorHealt = UserSession.get()?.healthStatus;
+  Color? colorHealt;
+  String? text =  UserSession.get()?.textHealthStatus ?? "";
   _changeStatus(Color color, String text){
     setState(() {
-
       this.colorHealt = color;
       this.text = text;
     });
-
-
   }
-
-
-
   @override
   Widget build(BuildContext context) {
-
-var user = UserSession.get()?.imageName ?? "";
-
+  var user = UserSession.get()?.imageName ?? "";
+  var text = UserSession.get()?.textHealthStatus ?? "";
+  setState(() {
+    this.colorHealt = repository.textHealthyStatus(text);
+  });
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -156,20 +156,20 @@ var user = UserSession.get()?.imageName ?? "";
                 Column(
                   verticalDirection: VerticalDirection.up,
                   children: [
-                    StatusButton(color: Colors.grey, text: "Другой статус", onClick: _changeStatus,  ),
+                    StatusButton(color: AppColors.statusAnother, text: "Другой статус", onClick: _changeStatus,  ),
 
                     Container(
                       height: 2,
                       width: 330,
                       color: Colors.black45,
                     ),
-                    StatusButton(color: Colors.red, text: "Я болен", onClick: _changeStatus, ),
+                    StatusButton(color: AppColors.statusUnHealthy, text: "Я болен", onClick: _changeStatus, ),
                     Container(
                       height: 2,
                       width: 330,
                       color: Colors.black45,
                     ),
-                    StatusButton(color: Colors.green, text: "Я здоров", onClick: _changeStatus,),
+                    StatusButton(color: AppColors.statusHealthy, text: "Я здоров", onClick: _changeStatus,),
                   ],
                 )),
           ),
