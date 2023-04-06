@@ -23,13 +23,22 @@ class ProfileEdit extends StatefulWidget {
 
 class _ProfileEditState extends State<ProfileEdit> {
 
-
+  var user;
   _ProfileEditState(this.repository);
   final LoginRepository repository;
 
+  void initState(){
+    super.initState();
+
+    user = repository.getUser();
+  }
+
   @override
   Widget build(BuildContext context) {
-    var user = UserSession.get();
+
+
+
+
     final color = Theme.of(context).colorScheme.primary;
     final VoidCallback onClicked;
 
@@ -60,7 +69,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                final directory = await getApplicationDocumentsDirectory(); ///Сохраняем в катологе фото в документах
                final name = basename(image.path); ///поллучаем имя файла и формат
                final imageFile = File('${directory.path}/$name'); ///Создаем файл изображения
-               final newImage = await File(image.path).copy(imageFile.path); ///Копируем изображение
+               final newImage =
+                  await File(image.path).copy(imageFile.path); ///Копируем изображение
 
                 setState(()=> user = user?.copy(imageName: newImage.path));
 

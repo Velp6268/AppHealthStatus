@@ -25,11 +25,14 @@ class AdministratorProfile extends StatefulWidget {
 class _AdministratorProfileState extends State<AdministratorProfile> {
   _AdministratorProfileState(this.repository);
 
-  get student async => repository.getUser();
   final LoginRepository repository;
+
+
 
   @override
   Widget build(BuildContext context) {
+
+    final student  = repository.getUser();
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -216,7 +219,7 @@ class _AdministratorProfileState extends State<AdministratorProfile> {
                   fit: BoxFit.contain,
                   child: Text(
                       style: TextStyle(fontSize: 16),
-                      repository.nameAndInitials(student.fullName)),
+                      student.fullName),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.006),

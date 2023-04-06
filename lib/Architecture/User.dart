@@ -4,7 +4,7 @@ import 'dart:ui';
 
 class User {
   final int id;
-  final String email;
+  final String email; ///логин
   final String password;
   final String fullName;
   final String group;
@@ -31,7 +31,7 @@ class User {
 
   Map<String, dynamic> toJson()=>{
     'id': id,
-    'email': email,
+    'email': email, /// помен]ть на логин
     'password': password,
     'fullName': fullName,
     'group': group,

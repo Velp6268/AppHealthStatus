@@ -115,7 +115,7 @@ class Group extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [SizedBox(height: 18), Text(student.fullName)],
+          children: [SizedBox(height: 18), Text(repository.nameAndInitials(student.fullName))],
         ),
       ),
     );

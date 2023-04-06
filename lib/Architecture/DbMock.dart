@@ -29,7 +29,7 @@ class DbMock implements IDataSource {
         id: 2,
         email: "Lazar@gmail.com",
         password: "1111",
-        fullName: 'Лазарев Никита.Сергеевич.',
+        fullName: 'Лазарев Никита Сергеевич',
         group: "32Д",
         imageName: AppImages.nikita,
         ),
@@ -37,7 +37,7 @@ class DbMock implements IDataSource {
         id: 3,
         email: "Komord@gmail.com",
         password: "1111",
-        fullName: 'Комарденков Тимофей.Дмитриевич.',
+        fullName: 'Комарденков Тимофей Дмитриевич',
         group: "32Д",
         imageName: AppImages.tim,
         ),
@@ -45,12 +45,12 @@ class DbMock implements IDataSource {
         id: 4,
         email: "Plat@gmail.com",
         password: "1111",
-        fullName: 'Платонов Виталий.Ильич.',
+        fullName: 'Платонов Виталий Ильич.',
         group: "32Д",
         imageName: AppImages.vitalya,
         ),
     User(
-        id: 4,
+        id: 5,
         email: "1111",
         password: "1111",
         fullName: 'Неизвестный Ноу Нейм',
@@ -70,7 +70,7 @@ class DbMock implements IDataSource {
 
     await _preferences.setString(_keyUser, json);
   }
-  
+
   User? getUser(){
     final json = _preferences.getString(_keyUser);
     final myUser = UserSession.get();

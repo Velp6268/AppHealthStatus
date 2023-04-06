@@ -1,5 +1,7 @@
 
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +45,8 @@ class ProfileWidget extends StatelessWidget {
 
 
   Widget buildImage(BuildContext context) {
-
+    final image = imagePath.contains('http://')
+    ? NetworkImage(imagePath) : FileImage(File(imagePath));
     return SizedBox(
       width: MediaQuery.of(context).size.height * 0.15,
       height: MediaQuery.of(context).size.height * 0.15,
@@ -51,7 +54,7 @@ class ProfileWidget extends StatelessWidget {
         child: Material(
           color: Colors.transparent,
           child: Ink.image(
-            image: AssetImage(imagePath),
+            image: image as ImageProvider,
             fit: BoxFit.cover,
             child: InkWell(onTap: onClicked),
           ),
