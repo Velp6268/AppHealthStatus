@@ -29,16 +29,14 @@ class _Status2State extends State<Status2> {
 
   final LoginRepository repository;
 
-  String text = "Я здоров";
-  Color? colorHealt = Colors.green;
-  _changeStatus(Color color, String text){
+  Color? colorHealt;
+  String? text =  UserSession.get()?.textHealthStatus ?? "";
+  _changeStatus(Color color, String stext){
     setState(() {
-
       this.colorHealt = color;
-      this.text = text;
+      this.text = stext;
+
     });
-
-
   }
 
 
@@ -46,7 +44,9 @@ class _Status2State extends State<Status2> {
   @override
   Widget build(BuildContext context) {
 
-var user = UserSession.get()?.imageName ?? "";
+    var user = UserSession.get()?.imageName ?? "";
+    var text = UserSession.get()?.textHealthStatus ?? "";
+    colorHealt = repository.textHealthyStatus(text);
 
     return Scaffold(
       appBar: AppBar(
