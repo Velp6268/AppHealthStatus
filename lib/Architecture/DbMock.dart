@@ -19,43 +19,48 @@ class DbMock implements IDataSource {
   final _students = [
     User(
         id: 1,
-        email: "bagor6268@gmail.com",
-        password: "1111",
+        email: '2222',
+        password: '1111',
         fullName: 'Ночевный Максим Юрьевич',
-        group: "32Д",
+        group: '32Д',
         imageName: AppImages.maks,
+        textHealthStatus: 'Я здоров'
        ),
     User(
         id: 2,
-        email: "Lazar@gmail.com",
-        password: "1111",
+        email: 'Lazar@gmail.com',
+        password: '1111',
         fullName: 'Лазарев Никита Сергеевич',
-        group: "32Д",
+        group: '32Д',
         imageName: AppImages.nikita,
+      textHealthStatus: 'Я здоров'
         ),
     User(
         id: 3,
-        email: "Komord@gmail.com",
-        password: "1111",
+        email: 'Komord@gmail.com',
+        password: '1111',
         fullName: 'Комарденков Тимофей Дмитриевич',
-        group: "32Д",
+        group: '32Д',
         imageName: AppImages.tim,
+        textHealthStatus: 'Я здоров'
         ),
     User(
         id: 4,
-        email: "Plat@gmail.com",
-        password: "1111",
+        email: 'Plat@gmail.com',
+        password: '1111',
         fullName: 'Платонов Виталий Ильич.',
-        group: "32Д",
+        group: '32Д',
         imageName: AppImages.vitalya,
+        textHealthStatus: 'Уехал'
         ),
     User(
         id: 5,
-        email: "1111",
-        password: "1111",
+        email: '1111',
+        password: '1111',
         fullName: 'Неизвестный Ноу Нейм',
-        group: "32Д",
+        group: '32Д',
         imageName: AppImages.city,
+        textHealthStatus: 'Я болен'
         ),
   ];
 
@@ -69,6 +74,15 @@ class DbMock implements IDataSource {
     final json = jsonEncode(user.toJson()); ///Преобразовываем пользовательский объект в toJson
 
     await _preferences.setString(_keyUser, json);
+  }
+
+  Color statusHealthy(String? textHealthy){
+    if(textHealthy == "Я здоров")
+      return AppColors.statusHealthy;
+    else if(textHealthy == "Я болен")
+      return AppColors.statusUnHealthy;
+    else
+      return AppColors.statusAnother;
   }
 
   User? getUser(){

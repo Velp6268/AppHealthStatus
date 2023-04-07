@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:health_status/Architecture/Result.dart';
 
 import 'User.dart';
@@ -15,6 +17,9 @@ abstract class IDataSource{
   Future init();
   Future setUser(User user);
   User? getUser();
+  Color statusHealthy(String textHeatlh);
+
+
 
 
 }

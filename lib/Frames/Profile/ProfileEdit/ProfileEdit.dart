@@ -88,14 +88,8 @@ class _ProfileEditState extends State<ProfileEdit> {
               onChanged: (name) => user = user!.copy(fullName: name),
             ),
 
-            SizedBox(height: MediaQuery.of(context).size.height * 0.028),
-            TextFieldWidget(
-              ///Строка Email
-              label: 'Email',
-              maxLengthelements: 30,
-              text: user!.email,
-              onChanged: (email) => user = user!.copy(email: email),
-            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.17),
+
 
             SizedBox(height: MediaQuery.of(context).size.height * 0.3),
 

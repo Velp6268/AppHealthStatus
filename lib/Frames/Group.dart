@@ -101,7 +101,7 @@ class Group extends StatelessWidget {
         borderRadius: const BorderRadius.horizontal(
           left: Radius.circular(10),
         ),
-        color: Colors.green,
+        color: repository.textHealthyStatus(student.textHealthStatus!)
       ),
       width: 10,
     );

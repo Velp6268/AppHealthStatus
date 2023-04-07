@@ -4,40 +4,40 @@ import 'dart:ui';
 
 class User {
   final int id;
-  final String email; ///логин
+  final String email;
   final String password;
   final String fullName;
   final String group;
   late final String imageName;
+  late final String? textHealthStatus;
 
   User({
-    required this.id,
-    required this.email,
-    required this.password,
-    required this.fullName,
-    required this.group,
-    required this.imageName,
-});
-
+      required this.id,
+      required this.email,
+      required this.password,
+      required this.fullName,
+      required this.group,
+      required this.imageName,
+      required this.textHealthStatus});
 
   static fromJson(Map<String, dynamic> json) => User(
-    id: json['id'],
-    email: json['email'],
-    password: json['password'],
-    fullName: json['fullName'],
-    group: json['group'],
-    imageName: json['imageName'],
-  );
+      id: json['id'],
+      email: json['email'],
+      password: json['password'],
+      fullName: json['fullName'],
+      group: json['group'],
+      imageName: json['imageName'],
+      textHealthStatus: json['textHealthStatus']);
 
-  Map<String, dynamic> toJson()=>{
-    'id': id,
-    'email': email, /// помен]ть на логин
-    'password': password,
-    'fullName': fullName,
-    'group': group,
-    'imageName' : imageName,
-  };
-
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'email': email,
+        'password': password,
+        'fullName': fullName,
+        'group': group,
+        'imageName': imageName,
+        'textHealthStatus': textHealthStatus,
+      };
 
   User copy({
     int? id,
@@ -46,15 +46,15 @@ class User {
     String? fullName,
     String? group,
     String? imageName,
-  }) => User(
-    id: id ?? this.id,
-    email: email ?? this.email,
-    password: password ?? this.password,
-    fullName: fullName ?? this.fullName,
-    group: group ?? this.group,
-    imageName: imageName ?? this.imageName,
-  );
-
+  }) =>
+      User(
+          id: id ?? this.id,
+          email: email ?? this.email,
+          password: password ?? this.password,
+          fullName: fullName ?? this.fullName,
+          group: group ?? this.group,
+          imageName: imageName ?? this.imageName,
+          textHealthStatus: textHealthStatus ?? this.textHealthStatus);
 
   String get user_name {
     return fullName;
@@ -71,7 +71,4 @@ class User {
   void set id_user(int id) {
     id = id;
   }
-
-  
-
 }
