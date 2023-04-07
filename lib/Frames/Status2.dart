@@ -35,19 +35,18 @@ class _Status2State extends State<Status2> {
 
   Color? colorHealt;
   String? text =  UserSession.get()?.textHealthStatus ?? "";
-  _changeStatus(Color color, String text){
+  _changeStatus(Color color, String stext){
     setState(() {
       this.colorHealt = color;
-      this.text = text;
+      this.text = stext;
+
     });
   }
   @override
   Widget build(BuildContext context) {
   var user = UserSession.get()?.imageName ?? "";
   var text = UserSession.get()?.textHealthStatus ?? "";
-  setState(() {
-    this.colorHealt = repository.textHealthyStatus(text);
-  });
+  colorHealt = repository.textHealthyStatus(text);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
