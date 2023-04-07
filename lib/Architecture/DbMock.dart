@@ -1,5 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
-import '../../../../Architecture/auth/UserRepository.dart';
+import '../../../../Architecture/auth/LoggedUserRepository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:health_status/Architecture/IDataSourse.dart';
 import 'package:health_status/Architecture/Result.dart';
@@ -33,7 +34,7 @@ class DbMock implements IDataSource {
         fullName: 'Лазарев Никита Сергеевич',
         group: '32Д',
         imageName: AppImages.nikita,
-      textHealthStatus: 'Я здоров'
+        textHealthStatus: 'Я здоров'
         ),
     User(
         id: 3,
@@ -88,6 +89,8 @@ class DbMock implements IDataSource {
   User? getUser(){
     final json = _preferences.getString(_keyUser);
     final myUser = UserSession.get();
+    var local = User.fromJson(jsonDecode(json!));
+    var
     return json == null ? myUser : User.fromJson(jsonDecode(json));
   }
 

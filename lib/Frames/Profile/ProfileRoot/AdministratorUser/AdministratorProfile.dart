@@ -10,7 +10,7 @@ import 'package:health_status/Frames/Profile/ProfileEdit/ProfileEdit.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Architecture/DbMock.dart';
 
-import '../../../../Architecture/auth/UserRepository.dart';
+import '../../../../Architecture/auth/LoggedUserRepository.dart';
 
 class AdministratorProfile extends StatefulWidget {
   final LoginRepository repository;
@@ -26,6 +26,8 @@ class _AdministratorProfileState extends State<AdministratorProfile> {
   _AdministratorProfileState(this.repository);
 
   final LoginRepository repository;
+
+
 
 
 
@@ -239,6 +241,7 @@ class _AdministratorProfileState extends State<AdministratorProfile> {
   }
 
   Expanded buildTwoPartInfoTable(User student) {
+
     return Expanded(
       /// 2 половина инфо таблички(Текущий статус здоровья)
       flex: 100,
@@ -279,16 +282,17 @@ class _AdministratorProfileState extends State<AdministratorProfile> {
                           borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          color: Colors.green),
+                          color: Colors.green
+                      ),
                     ),
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.022,
-                    child: const FittedBox(
+                    child: FittedBox(
                       ///Нужен для того что бы объект не выходил за рамки
                       fit: BoxFit.contain,
                       child: Text(
-                        "Здоров",
+                          student.textHealthStatus ?? " ",
                         style: TextStyle(fontSize: 16),
                       ),
                     ),

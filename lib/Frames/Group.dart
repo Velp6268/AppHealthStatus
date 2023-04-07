@@ -1,8 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Architecture/User.dart';
-import 'package:health_status/Architecture/auth/UserRepository.dart';
+import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/Theme/app_colors.dart';
 
@@ -13,6 +15,10 @@ class Group extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Timer(Duration(seconds: 10), () {
+
+    });
     var students = repository.getAll();
 
 

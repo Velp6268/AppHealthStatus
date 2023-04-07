@@ -9,7 +9,7 @@ class User {
   final String fullName;
   final String group;
   late final String imageName;
-  late final String? textHealthStatus;
+  final String? textHealthStatus;
 
   User({
       required this.id,
@@ -46,6 +46,7 @@ class User {
     String? fullName,
     String? group,
     String? imageName,
+    String? textHealthStatus,
   }) =>
       User(
           id: id ?? this.id,

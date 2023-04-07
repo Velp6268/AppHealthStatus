@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health_status/Architecture/auth/UserRepository.dart';
+import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
 import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Frames/Profile/OtherWidgets/TextFieldWidget.dart';

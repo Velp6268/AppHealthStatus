@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health_status/Architecture/auth/UserRepository.dart';
+import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
 import 'package:health_status/resources/resources.dart';
 import '../ui/status_btn.dart';
 import 'package:health_status/Architecture/Repository.dart';

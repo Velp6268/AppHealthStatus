@@ -1,7 +1,7 @@
 import 'package:health_status/Architecture/IDataSourse.dart';
 import 'package:health_status/Architecture/Result.dart';
 import 'package:health_status/Architecture/auth/ILoginDataSource.dart';
-import 'package:health_status/Architecture/auth/UserRepository.dart';
+import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
 import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
 import 'Architecture/DbMock.dart';
@@ -48,7 +48,7 @@ class Root extends StatefulWidget {
 }
 
 class _RootState extends State<Root> {
- late final UserRepository userRepository;
+ late final LoggedUserRepository userRepository;
   @override
 
   Widget build(BuildContext context) {

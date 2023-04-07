@@ -11,6 +11,7 @@ abstract class IDataSource{
   User findById(int id);
   void delete(User user);
   void update(User user);
+
   List<User> getAll();
   Result getByLoginAndPass(String login, String pass);
   String findIntialsOfFullName(String fullName);

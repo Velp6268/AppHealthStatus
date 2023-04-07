@@ -7,38 +7,39 @@ import 'package:health_status/resources/resources.dart';
 import 'User.dart';
 
 class LoginRepository {
-  final IDataSource dataSource;
+  final IDataSource remote;
+  final IDataSource local;
 
-  LoginRepository(this.dataSource);
+  LoginRepository(this.remote, this.local);
 
   List<User> getAll() {
-    return dataSource.getAll();
+    return remote.getAll();
   }
 
   Result login(String login, String pass) {
-    return dataSource.getByLoginAndPass(login, pass);
+    return remote.getByLoginAndPass(login, pass);
   }
 
 
   Color textHealthyStatus(String textHealthy){
-    return dataSource.statusHealthy(textHealthy);
+    return remote.statusHealthy(textHealthy);
   }
 
 
   String nameAndInitials(String fullName){
-    return dataSource.findIntialsOfFullName(fullName);
+    return remote.findIntialsOfFullName(fullName);
   }
 
-  Future init(){
-    return dataSource.init();
+  Future<User?> init() async {
+    return local.getUser();
   }
 
   Future setUser(User user){
-    return dataSource.setUser(user);
+    return remote.setUser(user);
   }
 
   User? getUser(){
-    return dataSource.getUser();
+    return remote.getUser();
   }
 
 

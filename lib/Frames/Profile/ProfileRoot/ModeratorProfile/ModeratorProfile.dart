@@ -10,7 +10,7 @@ import 'package:health_status/Frames/Profile/ProfileEdit/ProfileEdit.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Architecture/DbMock.dart';
 
-import '../../../../Architecture/auth/UserRepository.dart';
+import '../../../../Architecture/auth/LoggedUserRepository.dart';
 
 class ModeratorProfile extends StatefulWidget {
   final LoginRepository repository;
