@@ -1,7 +1,7 @@
 class Student{
-  final String img;
-  final String name;
+  final String imageName;
+  final String fullName;
   final String textHealsStatus;
 
-  Student(this.img, this.name, this.textHealsStatus);
+  Student(this.imageName, this.fullName, this.textHealsStatus);
 }
