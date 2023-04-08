@@ -10,6 +10,8 @@ import 'package:health_status/resources/resources.dart';
 import 'package:collection/collection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'auth/UserSession.dart';
+
 
 class DbMock implements IDataSource {
 
@@ -90,7 +92,6 @@ class DbMock implements IDataSource {
     final json = _preferences.getString(_keyUser);
     final myUser = UserSession.get();
     var local = User.fromJson(jsonDecode(json!));
-    var
     return json == null ? myUser : User.fromJson(jsonDecode(json));
   }
 

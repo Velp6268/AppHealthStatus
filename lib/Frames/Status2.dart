@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
+import 'package:health_status/Architecture/auth/UserSession.dart';
 import 'package:health_status/resources/resources.dart';
 import '../ui/status_btn.dart';
 import 'package:health_status/Architecture/Repository.dart';
@@ -46,7 +47,7 @@ class _Status2State extends State<Status2> {
   @override
   Widget build(BuildContext context) {
 
-var user = UserSession.get()?.imageName ?? "";
+var user = UserSession.get()?.displayName ?? "";
 
     return Scaffold(
       appBar: AppBar(

@@ -27,7 +27,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   int _selectedTab = 1;
   static final List<Widget> _widgetOptions = <Widget>[
-    Group(repository: LoginRepository(DbMock())),
+    Group(repository: LoginRepository(DbMock(), )),
     Status2(repository: LoginRepository(DbMock()),),
     AdministratorProfile(repository: LoginRepository(DbMock()),),
   ];

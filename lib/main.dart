@@ -2,6 +2,7 @@ import 'package:health_status/Architecture/IDataSourse.dart';
 import 'package:health_status/Architecture/Result.dart';
 import 'package:health_status/Architecture/auth/ILoginDataSource.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
+import 'package:health_status/Architecture/auth/UserSession.dart';
 import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
 import 'Architecture/DbMock.dart';
