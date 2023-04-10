@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/User.dart';
+import 'package:health_status/Architecture/profile/ProfileRepository.dart';
 import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
@@ -13,7 +14,7 @@ import 'package:health_status/Architecture/DbMock.dart';
 import '../../../../Architecture/auth/LoggedUserRepository.dart';
 
 class AdministratorProfile extends StatefulWidget {
-  final LoginRepository repository;
+  final ProfileRepository repository;
 
   const AdministratorProfile({Key? key, required this.repository})
       : super(key: key);
@@ -25,7 +26,7 @@ class AdministratorProfile extends StatefulWidget {
 class _AdministratorProfileState extends State<AdministratorProfile> {
   _AdministratorProfileState(this.repository);
 
-  final LoginRepository repository;
+  final ProfileRepository repository;
 
 
 

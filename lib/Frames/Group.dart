@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Architecture/User.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
+import 'package:health_status/Architecture/groups/StudentRepository.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/Theme/app_colors.dart';
 
 class Group extends StatelessWidget {
-  final LoginRepository repository;
+  final StudentRepository repository;
 
   const Group({Key? key, required this.repository}) : super(key: key);
 

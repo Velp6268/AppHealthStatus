@@ -6,7 +6,7 @@ class ProfileRepository{
   final IProfileSource local;
   final IProfileSource remote;
 
-  ProfileRepository(this.remote, this.local);
+  ProfileRepository(this.local, this.remote);
 
 
   Profile getById(int id){
