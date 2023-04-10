@@ -18,17 +18,29 @@ class DB  {
   Future<Database> _init() async{
     return await openDatabase(
 
-      join(await getDatabasesPath(), 'database_name.db'),
+      join(await getDatabasesPath(), 'databaseLife.db'),
       onCreate: (db, version) {
-        db.execute(
-          "CREATE TABLE group(id INTEGER PRIMARY KEY, imageName TEXT, fullName TEXT, textHealsStatus TEXT);",
-        );
-        db.execute(
-          "CREATE TABLE status(id INTEGER PRIMARY KEY, imageName TEXT, textHealsStatus TEXT);",
-        );
-        db.execute(
-          "CREATE TABLE profile(id INTEGER PRIMARY KEY, userId INTEGER, fullName TEXT, group TEXT, imageName TEXT, textHealsStatus TEXT);",
-        );
+        db.execute("""CREATE TABLE group(
+          id INTEGER PRIMARY KEY, 
+          imageName TEXT, 
+          fullName TEXT, 
+          textHealsStatus TEXT
+        )
+        """);
+        db.execute("""CREATE TABLE status(
+          id INTEGER PRIMARY KEY, 
+          imageName TEXT, 
+          textHealsStatus TEXT
+        )
+        """);
+        db.execute("""CREATE TABLE profile(
+          id INTEGER PRIMARY KEY, 
+          userId INTEGER, fullName TEXT, 
+          group TEXT, 
+          imageName TEXT, 
+          textHealsStatus TEXT
+        )
+        """);
         // more create statements....
 
       },

@@ -3,5 +3,5 @@ class Student{
   final String fullName;
   final String textHealsStatus;
 
-  Student(this.imageName, this.fullName, this.textHealsStatus);
+  Student({required this.imageName, required this.fullName, required this.textHealsStatus});
 }
