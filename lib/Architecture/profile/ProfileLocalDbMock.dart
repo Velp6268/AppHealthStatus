@@ -6,7 +6,7 @@ import 'package:health_status/resources/resources.dart';
 class ProfileLocalDbMock implements IProfileSource{
 
   final profile = [
-    Profile(
+    ProfileUser(
       userId: 1,
       fullName: "Максим Ночевный Юрьевич",
       group: "32Д",
@@ -32,7 +32,7 @@ class ProfileLocalDbMock implements IProfileSource{
   }
 
   @override
-  Result<Profile> getById(int id) {
+  Result<ProfileUser> getById(int id) {
     // TODO: implement getById
     throw UnimplementedError();
   }
@@ -40,6 +40,12 @@ class ProfileLocalDbMock implements IProfileSource{
   @override
   Result getByLoginAndPass(String login, String pass) {
     // TODO: implement getByLoginAndPass
+    throw UnimplementedError();
+  }
+
+  @override
+  Result getByUserId(int userId) {
+    // TODO: implement getByUserId
     throw UnimplementedError();
   }
 

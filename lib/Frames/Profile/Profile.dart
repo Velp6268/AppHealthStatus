@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/OldUser.dart';
 import 'package:health_status/Architecture/auth/UserSession.dart';
+import 'package:health_status/Architecture/profile/Models.dart';
 import 'package:health_status/Architecture/profile/ProfileLocalDbMock.dart';
 import 'package:health_status/Architecture/profile/ProfileRemoteDbMock.dart';
 import 'package:health_status/Architecture/profile/ProfileRepository.dart';
@@ -77,14 +78,13 @@ class _ProfileState extends State<Profile> {
               imagePath: student?.imageName ?? "",
               onClicked: () async {
                 await Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: LoginRepository(DbMock())))
-                );
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: ProfileRepository(ProfileLocalDbMock(), ProfileRemoteDbMock()))));
                 setState(() {});
               },
             ),
 
             ///Контейнер отвечающий за Инфо-табличку
-            buildInfoTable(student),
+            buildInfoTable(student!),
 
             ///Кнопка уведомление
             ProfileButton(
@@ -180,7 +180,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Container buildInfoTable(OldUser student) {
+  Container buildInfoTable(ProfileUser student) {
     return Container(
       margin: EdgeInsets.only(
         top: MediaQuery.of(context).size.height * 0.2,
@@ -210,7 +210,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Expanded buildOnePartInfoTable(OldUser student) {
+  Expanded buildOnePartInfoTable(ProfileUser student) {
     return Expanded(
       ///1 Половина инфо таблички с инфой (ФИО, группа)
       flex: 100,
@@ -245,7 +245,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Expanded buildTwoPartInfoTable(OldUser student) {
+  Expanded buildTwoPartInfoTable(ProfileUser student) {
 
     return Expanded(
       /// 2 половина инфо таблички(Текущий статус здоровья)
@@ -287,7 +287,7 @@ class _ProfileState extends State<Profile> {
                           borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          color: Colors.green
+                          color: repository.statusHealthy(student.textHealthStatus)
                       ),
                     ),
                   ),
@@ -297,7 +297,7 @@ class _ProfileState extends State<Profile> {
                       ///Нужен для того что бы объект не выходил за рамки
                       fit: BoxFit.contain,
                       child: Text(
-                          student.textHealthStatus ?? " ",
+                          student?.textHealthStatus ?? "",
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
