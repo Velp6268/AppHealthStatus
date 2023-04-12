@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/Repository.dart';
-import 'package:health_status/Architecture/User.dart';
+import 'package:health_status/Architecture/OldUser.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
+import 'package:health_status/Architecture/groups/Models.dart';
 import 'package:health_status/Architecture/groups/StudentRepository.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/Theme/app_colors.dart';
@@ -102,27 +103,27 @@ class Group extends StatelessWidget {
   }
 
   ///контейнер отвечающий за полоску здоровья
-  Container buildHealthyLine(User student) {
+  Container buildHealthyLine(Student student) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.horizontal(
           left: Radius.circular(10),
         ),
-        color: repository.textHealthyStatus(student.textHealthStatus!)
+        color: repository.statusHealthy(student.textHealsStatus)
       ),
       width: 10,
     );
   }
 
   ///Контейнер отвечающий за Имя
-  Expanded buildFullName(User student) {
+  Expanded buildFullName(Student student) {
     return Expanded(
       flex: 3,
       child: Container(
         padding: const EdgeInsets.only(left: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [SizedBox(height: 18), Text(repository.nameAndInitials(student.fullName))],
+          children: [SizedBox(height: 18), Text(repository.findIntialsOfFullName(student.fullName))],
         ),
       ),
     );

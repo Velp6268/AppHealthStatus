@@ -4,7 +4,7 @@ import 'package:health_status/Architecture/IDataSourse.dart';
 import 'package:health_status/Architecture/Result.dart';
 import 'package:health_status/resources/resources.dart';
 
-import 'User.dart';
+import 'OldUser.dart';
 
 class LoginRepository {
   final IDataSource remote;
@@ -12,7 +12,7 @@ class LoginRepository {
 
   LoginRepository(this.remote, this.local);
 
-  List<User> getAll() {
+  List<OldUser> getAll() {
     return remote.getAll();
   }
 
@@ -30,15 +30,15 @@ class LoginRepository {
     return remote.findIntialsOfFullName(fullName);
   }
 
-  Future<User?> init() async {
+  Future<OldUser?> init() async {
     return local.getUser();
   }
 
-  Future setUser(User user){
+  Future setUser(OldUser user){
     return remote.setUser(user);
   }
 
-  User? getUser(){
+  OldUser? getUser(){
     return remote.getUser();
   }
 

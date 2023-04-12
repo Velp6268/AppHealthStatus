@@ -17,6 +17,7 @@ class Result<T>{
 
 
 
+
   static Result<T> success<T>(T data){
     Result<T> result = Result();
     result.data = data;

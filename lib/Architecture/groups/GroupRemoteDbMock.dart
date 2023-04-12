@@ -31,8 +31,7 @@ class GroupRemoteDbMock implements IStudentSource {
 
   @override
   Result<List<Student>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+    return Result.success(students);
   }
 
   @override

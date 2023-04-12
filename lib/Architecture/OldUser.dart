@@ -2,7 +2,7 @@ import 'dart:ui';
 
 //import 'package:health_status/Theme/app_colors.dart';
 
-class User {
+class OldUser {
   final int id;
   final String email;
   final String password;
@@ -11,7 +11,7 @@ class User {
   late final String imageName;
   final String? textHealthStatus;
 
-  User({
+  OldUser({
       required this.id,
       required this.email,
       required this.password,
@@ -20,7 +20,7 @@ class User {
       required this.imageName,
       required this.textHealthStatus});
 
-  static fromJson(Map<String, dynamic> json) => User(
+  static fromJson(Map<String, dynamic> json) => OldUser(
       id: json['id'],
       email: json['email'],
       password: json['password'],
@@ -39,7 +39,7 @@ class User {
         'textHealthStatus': textHealthStatus,
       };
 
-  User copy({
+  OldUser copy({
     int? id,
     String? email,
     String? password,
@@ -48,7 +48,7 @@ class User {
     String? imageName,
     String? textHealthStatus,
   }) =>
-      User(
+      OldUser(
           id: id ?? this.id,
           email: email ?? this.email,
           password: password ?? this.password,
@@ -57,19 +57,19 @@ class User {
           imageName: imageName ?? this.imageName,
           textHealthStatus: textHealthStatus ?? this.textHealthStatus);
 
-  String get user_name {
+  String get OldUser_name {
     return fullName;
   }
 
-  void set user_name(String fullName) {
+  void set OldUser_name(String fullName) {
     fullName = fullName;
   }
 
-  int get id_user {
+  int get id_OldUser {
     return id;
   }
 
-  void set id_user(int id) {
+  void set id_OldUser(int id) {
     id = id;
   }
 }

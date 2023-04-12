@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:health_status/Architecture/User.dart';
+import 'package:health_status/Architecture/OldUser.dart';
+import 'package:health_status/Architecture/auth/UserSession.dart';
+import 'package:health_status/Architecture/profile/ProfileLocalDbMock.dart';
+import 'package:health_status/Architecture/profile/ProfileRemoteDbMock.dart';
+import 'package:health_status/Architecture/profile/ProfileRepository.dart';
 import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
@@ -10,26 +14,32 @@ import 'package:health_status/Frames/Profile/ProfileEdit/ProfileEdit.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Architecture/DbMock.dart';
 
-import '../../../../Architecture/auth/LoggedUserRepository.dart';
+import '../../Architecture/auth/LoggedUserRepository.dart';
 
-class ModeratorProfile extends StatefulWidget {
-  final LoginRepository repository;
+class Profile extends StatefulWidget {
+  final ProfileRepository repository;
 
-  const ModeratorProfile({Key? key, required this.repository})
+  const Profile({Key? key, required this.repository})
       : super(key: key);
 
   @override
-  State<ModeratorProfile> createState() => _ModeratorProfileState(repository);
+  State<Profile> createState() => _ProfileState(repository);
 }
 
-class _ModeratorProfileState extends State<ModeratorProfile> {
-  _ModeratorProfileState(this.repository);
+class _ProfileState extends State<Profile> {
+  _ProfileState(this.repository);
 
-  var student = UserSession.get();
-  final LoginRepository repository;
+  final ProfileRepository repository;
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
+
+    final id = UserSession.get()?.userId;
+    final student = repository.getByUserId(id!);
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -51,7 +61,7 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
               icon: Icon(Icons.edit, color: Colors.black),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: LoginRepository(DbMock()))));
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: ProfileRepository(ProfileLocalDbMock(), ProfileRemoteDbMock()))));
               },
             ),
           ],
@@ -66,13 +76,15 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
             ProfileWidget(
               imagePath: student?.imageName ?? "",
               onClicked: () async {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: LoginRepository(DbMock()))));
+                await Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: LoginRepository(DbMock())))
+                );
+                setState(() {});
               },
             ),
 
             ///Контейнер отвечающий за Инфо-табличку
-            buildInfoTable(student!),
+            buildInfoTable(student),
 
             ///Кнопка уведомление
             ProfileButton(
@@ -97,7 +109,7 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
                   top: MediaQuery.of(context).size.height * 0.12),
               child: ProfileButton(
                 icon: AppImages.administrator,
-                text: 'Управление группой',
+                text: 'Управление',
                 onClicked: () async {},
               ),
             ),
@@ -112,7 +124,6 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
         ));
   }
   /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
-
   SizedBox buttonLogOut(BuildContext context) {
     ///Кнопка выйти
     return SizedBox(
@@ -124,7 +135,9 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           ),
         ),
-        onPressed: () async {},
+        onPressed: () async {
+
+        },
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.2,
           height: MediaQuery.of(context).size.height * 0.025,
@@ -140,7 +153,9 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
     );
   }
 
-  Container buildAvatarka(User student) {
+
+
+  Container buildAvatarka(OldUser student) {
     return Container(
       ///Аватарка
       padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.032),
@@ -165,7 +180,7 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
     );
   }
 
-  Container buildInfoTable(User student) {
+  Container buildInfoTable(OldUser student) {
     return Container(
       margin: EdgeInsets.only(
         top: MediaQuery.of(context).size.height * 0.2,
@@ -195,14 +210,14 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
     );
   }
 
-  Expanded buildOnePartInfoTable(User student) {
+  Expanded buildOnePartInfoTable(OldUser student) {
     return Expanded(
       ///1 Половина инфо таблички с инфой (ФИО, группа)
       flex: 100,
       child: Container(
           alignment: Alignment.center,
           padding:
-              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
+          EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
           child: Column(
             children: [
               SizedBox(
@@ -212,7 +227,7 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
                   fit: BoxFit.contain,
                   child: Text(
                       style: TextStyle(fontSize: 16),
-                      repository.nameAndInitials(student.fullName)),
+                      student.fullName),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.006),
@@ -230,14 +245,15 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
     );
   }
 
-  Expanded buildTwoPartInfoTable(User student) {
+  Expanded buildTwoPartInfoTable(OldUser student) {
+
     return Expanded(
       /// 2 половина инфо таблички(Текущий статус здоровья)
       flex: 100,
       child: Container(
         alignment: Alignment.center,
         padding:
-            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.023),
+        EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.023),
         child: Column(
           children: [
             SizedBox(
@@ -271,16 +287,17 @@ class _ModeratorProfileState extends State<ModeratorProfile> {
                           borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          color: Colors.green),
+                          color: Colors.green
+                      ),
                     ),
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.022,
-                    child: const FittedBox(
+                    child: FittedBox(
                       ///Нужен для того что бы объект не выходил за рамки
                       fit: BoxFit.contain,
                       child: Text(
-                        "Здоров",
+                          student.textHealthStatus ?? " ",
                         style: TextStyle(fontSize: 16),
                       ),
                     ),

@@ -4,7 +4,7 @@ import '../../../../Architecture/auth/LoggedUserRepository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:health_status/Architecture/IDataSourse.dart';
 import 'package:health_status/Architecture/Result.dart';
-import 'package:health_status/Architecture/User.dart';
+import 'package:health_status/Architecture/OldUser.dart';
 import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:collection/collection.dart';
@@ -20,7 +20,7 @@ class DbMock implements IDataSource {
   static const _keyUser = 'user'; ///Ключ
 
   final _students = [
-    User(
+    OldUser(
         id: 1,
         email: '2222',
         password: '1111',
@@ -29,7 +29,7 @@ class DbMock implements IDataSource {
         imageName: AppImages.maks,
         textHealthStatus: 'Я здоров'
        ),
-    User(
+    OldUser(
         id: 2,
         email: 'Lazar@gmail.com',
         password: '1111',
@@ -38,7 +38,7 @@ class DbMock implements IDataSource {
         imageName: AppImages.nikita,
         textHealthStatus: 'Я здоров'
         ),
-    User(
+    OldUser(
         id: 3,
         email: 'Komord@gmail.com',
         password: '1111',
@@ -47,7 +47,7 @@ class DbMock implements IDataSource {
         imageName: AppImages.tim,
         textHealthStatus: 'Я здоров'
         ),
-    User(
+    OldUser(
         id: 4,
         email: 'Plat@gmail.com',
         password: '1111',
@@ -56,7 +56,7 @@ class DbMock implements IDataSource {
         imageName: AppImages.vitalya,
         textHealthStatus: 'Уехал'
         ),
-    User(
+    OldUser(
         id: 5,
         email: '1111',
         password: '1111',
@@ -73,7 +73,7 @@ class DbMock implements IDataSource {
 
 
   ///Метод для сохранения пользователя локально
-  Future setUser(User user) async{
+  Future setUser(OldUser user) async{
     final json = jsonEncode(user.toJson()); ///Преобразовываем пользовательский объект в toJson
 
     await _preferences.setString(_keyUser, json);
@@ -88,11 +88,11 @@ class DbMock implements IDataSource {
       return AppColors.statusAnother;
   }
 
-  User? getUser(){
+  OldUser? getUser(){
     final json = _preferences.getString(_keyUser);
     final myUser = UserSession.get();
-    var local = User.fromJson(jsonDecode(json!));
-    return json == null ? myUser : User.fromJson(jsonDecode(json));
+    var local = OldUser.fromJson(jsonDecode(json!));
+    return json == null ? myUser : OldUser.fromJson(jsonDecode(json));
   }
 
 
@@ -123,29 +123,29 @@ class DbMock implements IDataSource {
   }
 
   @override
-  void delete(User user) {
+  void delete(OldUser user) {
     // TODO: implement delete
   }
 
   @override
-  User findById(int id) {
+  OldUser findById(int id) {
     // TODO: implement findById
     throw UnimplementedError();
   }
 
   @override
-  List<User> getAll() {
+  List<OldUser> getAll() {
 
     return _students;
   }
 
   @override
-  void insert(User idUser) {
+  void insert(OldUser idUser) {
     // TODO: implement insert
   }
 
   @override
-  void update(User user) {
+  void update(OldUser user) {
     // TODO: implement update
   }
 

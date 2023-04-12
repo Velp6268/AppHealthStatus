@@ -2,22 +2,22 @@ import 'dart:ui';
 
 import 'package:health_status/Architecture/Result.dart';
 
-import 'User.dart';
+import 'OldUser.dart';
 
 
 abstract class IDataSource{
 
-  void insert(User user);
-  User findById(int id);
-  void delete(User user);
-  void update(User user);
+  void insert(OldUser user);
+  OldUser findById(int id);
+  void delete(OldUser user);
+  void update(OldUser user);
 
-  List<User> getAll();
+  List<OldUser> getAll();
   Result getByLoginAndPass(String login, String pass);
   String findIntialsOfFullName(String fullName);
   Future init();
-  Future setUser(User user);
-  User? getUser();
+  Future setUser(OldUser user);
+  OldUser? getUser();
   Color statusHealthy(String textHeatlh);
 
 

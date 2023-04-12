@@ -37,5 +37,11 @@ class ProfileLocalDbMock implements IProfileSource{
     throw UnimplementedError();
   }
 
+  @override
+  Result getByLoginAndPass(String login, String pass) {
+    // TODO: implement getByLoginAndPass
+    throw UnimplementedError();
+  }
+
 
 }

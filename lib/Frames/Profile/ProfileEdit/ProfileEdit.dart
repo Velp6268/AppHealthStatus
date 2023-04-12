@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
+import 'package:health_status/Architecture/auth/UserSession.dart';
+import 'package:health_status/Architecture/profile/ProfileRepository.dart';
 import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Architecture/Repository.dart';
 import 'package:health_status/Frames/Profile/OtherWidgets/TextFieldWidget.dart';
@@ -13,7 +15,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 class ProfileEdit extends StatefulWidget {
-  final LoginRepository repository;
+  final ProfileRepository repository;
 
   const ProfileEdit({Key? key, required this.repository}) : super(key: key);
 
@@ -25,12 +27,12 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   var user;
   _ProfileEditState(this.repository);
-  final LoginRepository repository;
+  final ProfileRepository repository;
 
   void initState(){
     super.initState();
 
-    user = repository.getUser();
+    user = UserSession.get()?.userId;
   }
 
   @override
@@ -103,7 +105,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   )
                 )),
                 onPressed: () async {
-                  repository.setUser(user!);
+
                   Navigator.of(context).pop();
                 },
                 child: const SizedBox(

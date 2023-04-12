@@ -10,7 +10,7 @@ import 'package:health_status/Architecture/Repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:health_status/Architecture/Repository.dart';
-import 'package:health_status/Architecture/User.dart';
+import 'package:health_status/Architecture/OldUser.dart';
 import 'dart:convert';
 import 'package:health_status/Architecture/DbMock.dart';
 import 'package:flutter/material.dart';

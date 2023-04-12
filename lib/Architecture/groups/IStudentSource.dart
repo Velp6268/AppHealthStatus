@@ -8,4 +8,5 @@ abstract class IStudentSource{
   Result<Student> insert(Student student);
   Result<Student> delete(Student student);
   Result<Student> update(Student student);
+
 }

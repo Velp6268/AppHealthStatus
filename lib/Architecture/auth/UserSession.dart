@@ -1,4 +1,4 @@
-import '../User.dart';
+import '../OldUser.dart';
 import 'Models.dart';
 
 class UserSession{
@@ -19,4 +19,5 @@ class UserSession{
     _user = null;
     function(_user);
   }
+
 }

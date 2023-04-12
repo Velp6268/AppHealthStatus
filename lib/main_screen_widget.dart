@@ -12,11 +12,8 @@ import 'package:health_status/Architecture/status/StatusLocalDbMock.dart';
 import 'package:health_status/Architecture/status/StatusRemoteDbMock.dart';
 import 'package:health_status/Architecture/status/StatusRepository.dart';
 import 'package:health_status/Frames/Group.dart';
-import 'package:health_status/Frames/Profile/ProfileRoot/AdministratorUser/AdministratorProfile.dart';
-import 'package:health_status/Frames/Profile/ProfileRoot/ModeratorProfile/ModeratorProfile.dart';
+import 'package:health_status/Frames/Profile/Profile.dart';
 import 'package:health_status/Frames/Status2.dart';
-
-import 'Frames/Profile/ProfileRoot/UserProfile/UserProfile.dart';
 
 
 
@@ -38,7 +35,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   static final List<Widget> _widgetOptions = <Widget>[
     Group(repository: StudentRepository(GroupLocalDbMock(), GroupRemoteDbMock()),),
     Status2(repository: StatusRepository(StatusLocalDbMock(), StatusRemoteDbMock()),),
-    AdministratorProfile(repository: ProfileRepository(ProfileLocalDbMock(), ProfileRemoteDbMock()) ),
+    Profile(repository: ProfileRepository(ProfileLocalDbMock(), ProfileRemoteDbMock())),
 
   ];
 

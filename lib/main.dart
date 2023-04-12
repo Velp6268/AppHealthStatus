@@ -10,7 +10,7 @@ import 'main_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:health_status/Architecture/Repository.dart';
-import 'package:health_status/Architecture/User.dart';
+import 'package:health_status/Architecture/OldUser.dart';
 import 'dart:convert';
 
 Future main() async {
@@ -54,7 +54,7 @@ class _RootState extends State<Root> {
 
   Widget build(BuildContext context) {
 
-    void updateAuthState(User user) {
+    void updateAuthState(OldUser user) {
       setState(() {
       });
     }
