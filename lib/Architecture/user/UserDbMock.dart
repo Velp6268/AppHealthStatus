@@ -26,7 +26,7 @@ class UserDbMock implements ILoginDataSource{
         role: 1)
   ];
 
-  Result getById(int id) {
+  Result getById(int id) { ///Не нужный
     try {
       var result = _user.firstWhere(
               (element) => element.id == id);
