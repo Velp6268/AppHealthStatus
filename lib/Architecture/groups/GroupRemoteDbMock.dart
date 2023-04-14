@@ -8,15 +8,15 @@ class GroupRemoteDbMock implements IStudentSource {
     Student(
         imageName: AppImages.maks,
         fullName: 'Ночевный Максим Юрьевич',
-        textHealsStatus: 'Здоров'),
+        textHealsStatus: 'Я здоров'),
     Student(
         imageName: AppImages.nikita,
         fullName: 'Лазарев Никита Сергеевич',
-        textHealsStatus: 'Здоров'),
+        textHealsStatus: 'Я здоров'),
     Student(
         imageName: AppImages.tim,
         fullName: 'Комарденков Тимофей Дмитреевич',
-        textHealsStatus: 'Здоров'),
+        textHealsStatus: 'Я болен'),
     Student(
         imageName: AppImages.vitalya,
         fullName: 'Платонов Виталий Ильич',

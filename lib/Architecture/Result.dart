@@ -5,7 +5,7 @@ class Result<T>{
   String? exception;
 
   bool isSuccess(){
-    return data != null ;
+    return data != null;
   }
 
   static Result error(String s){

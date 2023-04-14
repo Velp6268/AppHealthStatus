@@ -3,9 +3,11 @@ import 'package:health_status/Architecture/Result.dart';
 import 'package:health_status/Architecture/auth/ILoginDataSource.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
 import 'package:health_status/Architecture/auth/UserSession.dart';
+import 'package:health_status/Architecture/user/UserDbMock.dart';
 import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
 import 'Architecture/DbMock.dart';
+import 'Architecture/user/Models.dart';
 import 'main_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,8 +17,8 @@ import 'dart:convert';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final LoginRepository repository = LoginRepository(DbMock());
-  await repository.init();
+  final LoggedUserRepository repository = LoggedUserRepository(UserDbMock());
+
 
   runApp(
     MaterialApp(
@@ -54,18 +56,18 @@ class _RootState extends State<Root> {
 
   Widget build(BuildContext context) {
 
-    void updateAuthState(OldUser user) {
+    void updateAuthState(User user) {
       setState(() {
       });
     }
     UserSession.function = updateAuthState;
 
     if (UserSession.get() == null) {
-      return  LoginView(); //replace to  LoginView
+      return  MainScreenWidget();//replace to  LoginView
     }
     else {
       UserSession.get();
-      return  MainScreenWidget(); //replace to AppView
+      return   LoginView();  //replace to AppView
     }
   }
 }
@@ -74,7 +76,7 @@ class _RootState extends State<Root> {
 
 class LoginView extends StatefulWidget {
 
-  final LoginRepository repository = LoginRepository(DbMock());
+  final LoggedUserRepository repository = LoggedUserRepository(UserDbMock());
 
    LoginView({Key? key}) : super(key: key);
 
@@ -86,19 +88,15 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
-  final LoginRepository repository;
+  final LoggedUserRepository repository;
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   String textError = "";
   void signIn(){
     var result = repository.login(_emailController.text.trim(), _passwordController.text.trim());
-    if (result.isSuccess()){
-      UserSession.set(result.data);
-    }
-    else{
-      _showError(result.exception);
-    }
+
+
   }
 
   _showError(String? exception){

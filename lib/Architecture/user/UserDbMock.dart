@@ -26,9 +26,18 @@ class UserDbMock implements ILoginDataSource{
         role: 1)
   ];
 
-
+  Result getById(int id) {
+    try {
+      var result = _user.firstWhere(
+              (element) => element.id == id);
+      return Result.success(result);
+    } on StateError {
+      return Result.error("Id not found");
+    }
+  }
 
   Result getByLoginAndPass(String login, String pass) {
+
     try {
       var result = _user.firstWhere(
               (element) => element.login == login && element.pass == pass);

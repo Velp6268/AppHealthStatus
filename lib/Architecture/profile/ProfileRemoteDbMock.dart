@@ -14,17 +14,20 @@ class ProfileRemoteDbMock implements IProfileSource{
         imageName: AppImages.maks,
         textHealthStatus: "Здоров"
     ),
-    ProfileUser(userId: 2,
+    ProfileUser(
+        userId: 2,
         fullName: "Лазарев Никита Сергеевич",
         group: "32Д",
         imageName: AppImages.nikita,
         textHealthStatus: "Здоров"),
-    ProfileUser(userId: 3,
+    ProfileUser(
+        userId: 3,
         fullName: "Комарденков Тимофей Дмитриеевич",
         group: "32Д",
         imageName: AppImages.tim,
         textHealthStatus: "Здоров"),
-    ProfileUser(userId: 4,
+    ProfileUser(
+        userId: 4,
         fullName: "Платонов Виталий Ильич",
         group: "32Д",
         imageName: AppImages.vitalya,

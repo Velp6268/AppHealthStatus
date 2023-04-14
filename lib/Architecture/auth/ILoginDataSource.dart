@@ -1,6 +1,7 @@
 import '../Result.dart';
 
 abstract class ILoginDataSource{
-  Result login(String login, String pass);
+  Result getByLoginAndPass(String login, String pass);
+  Result getById(int id);
   logout();
 }
