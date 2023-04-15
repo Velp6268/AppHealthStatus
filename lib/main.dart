@@ -63,11 +63,11 @@ class _RootState extends State<Root> {
     UserSession.function = updateAuthState;
 
     if (UserSession.get() == null) {
-      return  MainScreenWidget();//replace to  LoginView
+      return  LoginView();//replace to  LoginView
     }
     else {
       UserSession.get();
-      return   LoginView();  //replace to AppView
+      return   MainScreenWidget();  //replace to AppView
     }
   }
 }
@@ -94,7 +94,7 @@ class _LoginViewState extends State<LoginView> {
   final _passwordController = TextEditingController();
   String textError = "";
   void signIn(){
-    var result = repository.login(_emailController.text.trim(), _passwordController.text.trim());
+   repository.login(_emailController.text.trim(), _passwordController.text.trim());
 
 
   }
