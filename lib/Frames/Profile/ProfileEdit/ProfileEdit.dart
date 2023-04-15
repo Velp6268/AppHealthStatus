@@ -25,20 +25,17 @@ class ProfileEdit extends StatefulWidget {
 
 class _ProfileEditState extends State<ProfileEdit> {
 
-  var user;
+
   _ProfileEditState(this.repository);
   final ProfileRepository repository;
 
-  void initState(){
-    super.initState();
 
-    user = UserSession.get()?.userId;
-  }
 
   @override
   Widget build(BuildContext context) {
 
-
+    final id = UserSession.get()?.userId;
+    final user = repository.getByUserId(id!);
 
 
     final color = Theme.of(context).colorScheme.primary;
@@ -61,7 +58,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           physics: BouncingScrollPhysics(),
           children: [
             ProfileWidget(
-              imagePath: user!.imageName,
+              imagePath: user?.imageName ?? "",
               isEdit: true,
               onClicked: () async {
                final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -74,7 +71,6 @@ class _ProfileEditState extends State<ProfileEdit> {
                final newImage =
                   await File(image.path).copy(imageFile.path); ///Копируем изображение
 
-                setState(()=> user = user?.copy(imageName: newImage.path));
 
 
 
@@ -86,8 +82,9 @@ class _ProfileEditState extends State<ProfileEdit> {
               ///Строка Имени
               label: 'Полное Имя',
               maxLengthelements: 50,
-              text: user!.fullName,
-              onChanged: (name) => user = user!.copy(fullName: name),
+              text: user?.fullName ?? "",
+              onChanged: (String value) {  },
+
             ),
 
             SizedBox(height: MediaQuery.of(context).size.height * 0.17),

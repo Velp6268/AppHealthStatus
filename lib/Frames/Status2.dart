@@ -49,8 +49,8 @@ class _Status2State extends State<Status2> {
   @override
   Widget build(BuildContext context) {
 
-var user = UserSession.get()?.displayName ?? "";
-
+    final id = UserSession.get()?.userId;
+    final user = repository.getByUserId(id!);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -122,7 +122,7 @@ var user = UserSession.get()?.displayName ?? "";
                 child: FittedBox(
                   fit: BoxFit.cover,
                   child: Image(
-                      image: AssetImage(user)
+                      image: AssetImage(user?.imageName ?? "")
                   )
               ),
               ),

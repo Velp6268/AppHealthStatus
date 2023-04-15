@@ -3,19 +3,15 @@ import 'package:health_status/Architecture/DbMock.dart';
 
 //import 'package:health_status/Architecture/IDataSourse.dart';
 import 'package:health_status/Architecture/Repository.dart';
-import 'package:health_status/Architecture/groups/GroupLocalDbMock.dart';
 import 'package:health_status/Architecture/groups/GroupRemoteDbMock.dart';
 import 'package:health_status/Architecture/groups/StudentRepository.dart';
-import 'package:health_status/Architecture/profile/ProfileLocalDbMock.dart';
 import 'package:health_status/Architecture/profile/ProfileRemoteDbMock.dart';
 import 'package:health_status/Architecture/profile/ProfileRepository.dart';
-import 'package:health_status/Architecture/status/StatusLocalDbMock.dart';
 import 'package:health_status/Architecture/status/StatusRemoteDbMock.dart';
 import 'package:health_status/Architecture/status/StatusRepository.dart';
 import 'package:health_status/Frames/Group.dart';
 import 'package:health_status/Frames/Profile/Profile.dart';
 import 'package:health_status/Frames/Status2.dart';
-
 import 'Architecture/auth/LoggedUserRepository.dart';
 import 'Architecture/auth/UserSession.dart';
 import 'Architecture/user/UserDbMock.dart';
@@ -39,14 +35,14 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   static final List<Widget> _widgetOptions = <Widget>[
     Group(
-      repository: StudentRepository(GroupLocalDbMock(), GroupRemoteDbMock()),
+      repository: StudentRepository(GroupRemoteDbMock()),
     ),
     Status2(
-      repository: StatusRepository(StatusLocalDbMock(), StatusRemoteDbMock()),
+      repository: StatusRepository(StatusRemoteDbMock()),
     ),
     Profile(
         repository:
-            ProfileRepository(ProfileLocalDbMock(), ProfileRemoteDbMock())),
+            ProfileRepository(ProfileRemoteDbMock())),
   ];
 
   void onSelectTab(int index) {

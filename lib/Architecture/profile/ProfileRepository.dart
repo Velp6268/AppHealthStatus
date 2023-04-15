@@ -7,18 +7,16 @@ import '../../Theme/app_colors.dart';
 
 class ProfileRepository{
 
-  final IProfileSource local;
+
   final IProfileSource remote;
 
-  ProfileRepository(this.local, this.remote);
+  ProfileRepository( this.remote);
 
 
   ProfileUser getById(int id){
-    var local = remote.getById(id);
-    if (local.isSuccess()){
-      return local.data!;
-    }
-    else{
+
+
+
       var remoteResult = remote.getById(id);
       if (remoteResult.isSuccess()){
         return remoteResult.data!;
@@ -27,22 +25,19 @@ class ProfileRepository{
         throw Exception(remoteResult.exception);
       }
     }
-  }
+
 
 
   ProfileUser? getByUserId(int userId){
-    var localResult = local.getByUserId(userId);
-    if(localResult.isSuccess()){
-      return localResult.data!;
-    }else{
+
       var remoteResult = remote.getByUserId(userId);
       if(remoteResult.isSuccess()){
         return remoteResult.data!;
       }
     }
-    return null;
 
-  }
+
+
 
 
   Color statusHealthy(String? textHealthy){

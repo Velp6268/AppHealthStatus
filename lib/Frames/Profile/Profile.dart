@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/OldUser.dart';
 import 'package:health_status/Architecture/auth/UserSession.dart';
 import 'package:health_status/Architecture/profile/Models.dart';
-import 'package:health_status/Architecture/profile/ProfileLocalDbMock.dart';
 import 'package:health_status/Architecture/profile/ProfileRemoteDbMock.dart';
 import 'package:health_status/Architecture/profile/ProfileRepository.dart';
 import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
@@ -41,6 +40,7 @@ class _ProfileState extends State<Profile> {
 
     final id = UserSession.get()?.userId;
     final student = repository.getByUserId(id!);
+
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -62,7 +62,7 @@ class _ProfileState extends State<Profile> {
               icon: Icon(Icons.edit, color: Colors.black),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: ProfileRepository(ProfileLocalDbMock(), ProfileRemoteDbMock()))));
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: ProfileRepository(ProfileRemoteDbMock()))));
               },
             ),
           ],
@@ -78,10 +78,12 @@ class _ProfileState extends State<Profile> {
               imagePath: student?.imageName ?? "",
               onClicked: () async {
                 await Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: ProfileRepository(ProfileLocalDbMock(), ProfileRemoteDbMock()))));
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: ProfileRepository(ProfileRemoteDbMock()))));
                 setState(() {});
               },
             ),
+
+
 
             ///Контейнер отвечающий за Инфо-табличку
             buildInfoTable(student!),
@@ -226,9 +228,11 @@ class _ProfileState extends State<Profile> {
                   ///Нужен для того что бы объект не выходил за рамки
                   fit: BoxFit.contain,
                   child: Text(
+                    repository.findIntialsOfFullName(student.fullName),
                       style: TextStyle(fontSize: 16),
-                      student.fullName),
+
                 ),
+              ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.006),
               SizedBox(
