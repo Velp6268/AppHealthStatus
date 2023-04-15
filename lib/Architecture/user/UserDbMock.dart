@@ -59,5 +59,11 @@ class UserDbMock implements ILoginDataSource{
     throw UnimplementedError();
   }
 
+  @override
+  returnRole() {
+    // TODO: implement returnRole
+    throw UnimplementedError();
+  }
+
 
 }

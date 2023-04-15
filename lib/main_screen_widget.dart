@@ -28,6 +28,15 @@ class MainScreenWidget extends StatefulWidget {
 
 
 
+  StudentRepository checkRole(){
+    if(UserSession.returnRole() == 1){
+      return StudentRepository(GroupRemoteDbMock());
+    }else{
+      return throw Exception("null");
+      }
+  }
+
+
 class _MainScreenWidgetState extends State<MainScreenWidget> {
 
 
@@ -35,7 +44,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 1;
   static final List<Widget> _widgetOptions = <Widget>[
     Group(
-      repository: StudentRepository(GroupRemoteDbMock()),
+      repository: checkRole(),
     ),
     Status2(
       repository: StatusRepository(StatusRemoteDbMock()),

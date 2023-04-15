@@ -20,4 +20,8 @@ class UserSession{
     function(_user);
   }
 
+  static int? returnRole(){
+    return UserSession.get()?.role;
+  }
+
 }

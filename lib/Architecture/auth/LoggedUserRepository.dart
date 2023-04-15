@@ -20,9 +20,12 @@ class LoggedUserRepository{
 
 
 
+
   void logout(){
     UserSession.clear();
   }
+
+
 
 }
 
