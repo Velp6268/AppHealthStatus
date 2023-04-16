@@ -17,19 +17,57 @@ class Group extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    Timer(Duration(seconds: 10), () {
-
-    });
+    Timer(Duration(seconds: 10), () {});
     var students = repository.getAll();
-
 
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text("Группы",
-              style: TextStyle(fontSize: 18, color: Colors.black87)),
-          centerTitle: true),
+        automaticallyImplyLeading: false,
+        title: const Text('Группы',
+            style: TextStyle(fontSize: 18, color: Colors.black87)),
+        centerTitle: true,
+        actions: [
+          Theme(
+
+            data: Theme.of(context).copyWith(
+
+              iconTheme: IconThemeData(color: AppColors.iconColor)
+            ),
+            child: PopupMenuButton<int>(
+              onSelected: (item) => onSelected(context, item),
+              itemBuilder: (context) => [
+                PopupMenuItem<int>(
+                  value: 0,
+                  child: Row(
+                    children: [
+                      Icon(Icons.settings,
+                          color: Colors.black,
+                          size: MediaQuery.of(context).size.height * 0.022),
+                      SizedBox(width: MediaQuery.of(context).size.height * 0.01),
+                      Text('Управление  группой')
+                    ],
+                  ),
+                ),
+                PopupMenuDivider(),
+                PopupMenuItem<int>(
+                  value: 1,
+                  child: Row(
+                    children: [
+                      ImageIcon(
+                        AssetImage(AppImages.downloadIcon),
+                        color: Colors.black,
+                        size: MediaQuery.of(context).size.height * 0.022,
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.height * 0.01),
+                      Text('Скачать список')
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           ///Лист
@@ -102,15 +140,25 @@ class Group extends StatelessWidget {
     );
   }
 
+  void onSelected(BuildContext context, int item) {
+    switch (item) {
+      case 0:
+        print('Кликнуть на Управление группой');
+        break;
+      case 1:
+        print('Кликнуть на Скачать список');
+        break;
+    }
+  }
+
   ///контейнер отвечающий за полоску здоровья
   Container buildHealthyLine(Student student) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.horizontal(
-          left: Radius.circular(10),
-        ),
-        color: repository.statusHealthy(student.textHealsStatus)
-      ),
+          borderRadius: const BorderRadius.horizontal(
+            left: Radius.circular(10),
+          ),
+          color: repository.statusHealthy(student.textHealsStatus)),
       width: 10,
     );
   }
@@ -123,7 +171,10 @@ class Group extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [SizedBox(height: 18), Text(repository.findIntialsOfFullName(student.fullName))],
+          children: [
+            SizedBox(height: 18),
+            Text(repository.findIntialsOfFullName(student.fullName))
+          ],
         ),
       ),
     );
