@@ -6,16 +6,12 @@ import 'package:health_status/Architecture/groups/GroupRemoteDbMock.dart';
 import 'package:health_status/Architecture/status/StatusRepository.dart';
 import 'package:health_status/resources/resources.dart';
 import '../ui/status_btn.dart';
-import 'package:health_status/Architecture/Repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:health_status/Architecture/Repository.dart';
-import 'package:health_status/Architecture/OldUser.dart';
 import 'dart:convert';
-import 'package:health_status/Architecture/DbMock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:health_status/Architecture/Repository.dart';
+
 
 class Status2 extends StatefulWidget {
   final StatusRepository repository;

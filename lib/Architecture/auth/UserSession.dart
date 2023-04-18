@@ -1,4 +1,3 @@
-import '../OldUser.dart';
 import 'Models.dart';
 
 class UserSession{

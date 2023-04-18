@@ -1,25 +1,22 @@
 import 'dart:ffi';
 
-class Result<T>{
+class Result<T> {
   T? data;
   String? exception;
 
-  bool isSuccess(){
+  bool isSuccess() {
     return data != null;
   }
 
-  static Result error(String s){
+  static Result error(String s) {
     Result<String> result = Result();
-    result.exception  = s;
+    result.exception = s;
     return result;
   }
 
-
-  static Result<T> success<T>(T data){
+  static Result<T> success<T>(T data) {
     Result<T> result = Result();
     result.data = data;
     return result;
   }
-
-
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:health_status/Architecture/OldUser.dart';
 import 'package:health_status/Architecture/auth/UserSession.dart';
 import 'package:health_status/Architecture/profile/Models.dart';
 import 'package:health_status/Architecture/profile/ProfileRemoteDbMock.dart';
@@ -11,10 +10,10 @@ import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/ui/profile_btn.dart';
 import 'package:health_status/Frames/Profile/ProfileEdit/ProfileEdit.dart';
-import 'package:health_status/Architecture/Repository.dart';
-import 'package:health_status/Architecture/DbMock.dart';
+
 
 import '../../Architecture/auth/LoggedUserRepository.dart';
+import '../../Architecture/user/Models.dart';
 
 class Profile extends StatefulWidget {
   final ProfileRepository repository;
@@ -144,30 +143,6 @@ class _ProfileState extends State<Profile> {
 
 
 
-  Container buildAvatarka(OldUser student) {
-    return Container(
-      ///Аватарка
-      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.032),
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.4,
-        height: MediaQuery.of(context).size.height * 0.15,
-        child: FittedBox(
-          ///Нужен для того что бы объект не выходил за рамки
-          fit: BoxFit.contain,
-
-          ///возможность максимального масштабирования без выхода за границы виджета.
-          child: ClipOval(
-            child: Image(
-              image: AssetImage(student.imageName),
-              width: 150,
-              height: 150,
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 
   Container buildInfoTable(ProfileUser student) {
     return Container(

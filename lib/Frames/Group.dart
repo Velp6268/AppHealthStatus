@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health_status/Architecture/Repository.dart';
-import 'package:health_status/Architecture/OldUser.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
 import 'package:health_status/Architecture/groups/Models.dart';
 import 'package:health_status/Architecture/groups/StudentRepository.dart';
