@@ -6,17 +6,42 @@ import 'ILoginDataSource.dart';
 import 'UserSession.dart';
 
 class LoggedUserRepository{
+  bool error = false;
   final ILoginDataSource _source;
   LoggedUserRepository(this._source);
 
+  String? textError = '';
+
   void login(String login, String pass){
+
+
+
     var result = _source.getByLoginAndPass(login, pass);
+
+
     if (result.isSuccess()){
       User user = result.data as User;
       LoggedUser logiddUser = new LoggedUser(user.id, "", user.role);
-      UserSession.set(logiddUser); ///EXCEPTION
+      UserSession.set(logiddUser);
+      error = false;
+    }else {
+       textError = result.exception;
+       error = true;
+    }
+
+
+  }
+
+  String? errorText(){
+
+    if(textError == true){
+      return textError;
+    }else if(textError == null){
+      return textError;
     }
   }
+
+}
 
 
 
@@ -27,7 +52,7 @@ class LoggedUserRepository{
 
 
 
-}
+
 
 
 

@@ -31,10 +31,6 @@ class _ProfileState extends State<Profile> {
 
   final ProfileRepository repository;
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -106,15 +102,6 @@ class _ProfileState extends State<Profile> {
               ),
             ),
 
-            Container(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.12),
-              child: ProfileButton(
-                icon: AppImages.administrator,
-                text: 'Управление',
-                onClicked: () async {},
-              ),
-            ),
 
 
             ///Кнопка Выйти из Аккаунта

@@ -15,8 +15,6 @@ class ProfileRepository{
 
   ProfileUser getById(int id){
 
-
-
       var remoteResult = remote.getById(id);
       if (remoteResult.isSuccess()){
         return remoteResult.data!;
@@ -35,7 +33,6 @@ class ProfileRepository{
         return remoteResult.data!;
       }
     }
-
 
 
 

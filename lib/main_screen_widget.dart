@@ -65,7 +65,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     return Scaffold(
         body: Center(child: _widgetOptions[_selectedTab]),
         bottomNavigationBar: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.095,
+          height: MediaQuery.of(context).size.height * 0.08
+          ,
           child: SingleChildScrollView(
             physics: NeverScrollableScrollPhysics(),
             child: BottomNavigationBar(

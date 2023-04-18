@@ -37,13 +37,12 @@ class UserDbMock implements ILoginDataSource{
   }
 
   Result getByLoginAndPass(String login, String pass) {
-
     try {
       var result = _user.firstWhere(
               (element) => element.login == login && element.pass == pass);
       return Result.success(result);
     } on StateError {
-      return Result.error("Логин или пароль не верны");
+       return Result.error("Логин или пароль не верны");
     }
   }
 
