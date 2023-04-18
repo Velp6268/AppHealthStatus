@@ -95,9 +95,12 @@ class _LoginViewState extends State<LoginView> {
   final _passwordController = TextEditingController();
   String textError = "";
   void signIn(){
-     var result = repository.login(_emailController.text.trim(), _passwordController.text.trim());
+     repository.login(_emailController.text.trim(), _passwordController.text.trim());
 
-        _showError(result.toString());
+     setState(() {
+       textError = repository?.textError ?? "null";
+     });
+
   }
 
   _showError(String? exception){

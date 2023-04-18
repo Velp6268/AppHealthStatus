@@ -29,7 +29,6 @@ class LoggedUserRepository{
        error = true;
     }
 
-
   }
 
   String? errorText(){
