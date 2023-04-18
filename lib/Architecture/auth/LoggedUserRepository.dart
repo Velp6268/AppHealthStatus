@@ -14,10 +14,7 @@ class LoggedUserRepository{
 
   void login(String login, String pass){
 
-
-
     var result = _source.getByLoginAndPass(login, pass);
-
 
     if (result.isSuccess()){
       User user = result.data as User;
