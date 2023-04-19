@@ -89,12 +89,6 @@ class _LoginViewState extends State<LoginView> {
     });
   }
 
-  _showError(String? exception) {
-    setState(() {
-      textError = exception.toString();
-    });
-  }
-
   _LoginViewState(this.repository);
 
   @override

@@ -24,6 +24,14 @@ class ProfileRepository{
       }
     }
 
+    ProfileUser updateImage(String img, int id){
+    var remoteResult = remote.changeImage(img, id);
+
+        return remoteResult.data!;
+
+
+    }
+
 
 
   ProfileUser? getByUserId(int userId){

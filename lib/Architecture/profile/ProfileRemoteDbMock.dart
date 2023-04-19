@@ -24,7 +24,7 @@ class ProfileRemoteDbMock implements IProfileSource{
         userId: 3,
         fullName: "Комарденков Тимофей Дмитриеевич",
         group: "32Д",
-        imageName: AppImages.tim,
+        imageName: "/data/user/0/com.example.health_status/cache/96b847cc-9509-4e02-b382-c7adbc2ef115/sasuke.png",
         textHealthStatus: "Я болен"),
     ProfileUser(
         userId: 4,
@@ -36,9 +36,11 @@ class ProfileRemoteDbMock implements IProfileSource{
   ];
 
   @override
-  Result changeImage(String img) {
-    // TODO: implement changeImage
-    throw UnimplementedError();
+  Result changeImage(String img, int id) {
+    var result = _profile.firstWhere(
+            (p) => p.userId == id);
+    result.imageName = img;
+    return Result.success(result);
   }
 
   @override

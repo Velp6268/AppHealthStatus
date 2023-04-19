@@ -57,7 +57,7 @@ class _ProfileState extends State<Profile> {
               icon: Icon(Icons.edit, color: Colors.black),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: ProfileRepository(ProfileRemoteDbMock()))));
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: repository)));
               },
             ),
           ],
@@ -73,7 +73,7 @@ class _ProfileState extends State<Profile> {
               imagePath: student?.imageName ?? "",
               onClicked: () async {
                 await Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: ProfileRepository(ProfileRemoteDbMock()))));
+                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: repository)));
                 setState(() {});
               },
             ),

@@ -3,6 +3,7 @@ import 'Models.dart';
 class UserSession{
   static LoggedUser? _user;
   static late Function function;
+  static String imageTemp = '';
   UserSession._();
 
   static LoggedUser? get(){
@@ -21,6 +22,19 @@ class UserSession{
 
   static int? returnRole(){
     return UserSession.get()?.role;
+  }
+
+  static void setUserPicture(String image){
+    imageTemp = image;
+  }
+
+  static String? getUserPicture(){
+    String result = imageTemp;
+    if(result == ''){
+      return null;
+    }else{
+      return result;
+    }
   }
 
 }

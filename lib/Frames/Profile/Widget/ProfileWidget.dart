@@ -1,10 +1,8 @@
-
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:health_status/resources/resources.dart';
 
 ///Класс отвечающий за аватарку в профиле
 
@@ -18,20 +16,19 @@ class ProfileWidget extends StatelessWidget {
     required this.imagePath,
     this.isEdit = false,
     required this.onClicked,
-  }) : super (key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme.primary;
 
     return Container(
-
-      padding: isEdit ? EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01) : EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.032),
+      padding: isEdit
+          ? EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01)
+          : EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.032),
       alignment: Alignment.topCenter,
       child: Stack(
         children: [
-
-
           buildImage(context),
           Positioned(
             bottom: 0,
@@ -43,9 +40,11 @@ class ProfileWidget extends StatelessWidget {
     );
   }
 
-
   Widget buildImage(BuildContext context) {
-    final image =  AssetImage(imagePath);
+    ImageProvider<Object> image = imagePath != ""
+        ? FileImage(File(imagePath)) as ImageProvider<FileImage>
+        : const AssetImage(AppImages.man) as ImageProvider<AssetBundleImageKey>;
+
     return SizedBox(
       width: MediaQuery.of(context).size.height * 0.15,
       height: MediaQuery.of(context).size.height * 0.15,
@@ -62,12 +61,12 @@ class ProfileWidget extends StatelessWidget {
     );
   }
 
-  Widget buildEditIcon(Color color, BuildContext context)=> buildCircle(
-    context,
-    color: Colors.white,
-    all: 3,
-    child: buildCircle(
-      context,
+  Widget buildEditIcon(Color color, BuildContext context) => buildCircle(
+        context,
+        color: Colors.white,
+        all: 3,
+        child: buildCircle(
+          context,
           color: color,
           all: 1,
           child: Icon(
@@ -75,15 +74,15 @@ class ProfileWidget extends StatelessWidget {
             color: Colors.white,
             size: MediaQuery.of(context).size.width * 0.04,
           ),
-
         ),
-  );
+      );
 
-  Widget buildCircle(BuildContext context,{
+  Widget buildCircle(
+    BuildContext context, {
     required Widget child,
     required double all,
     required Color color,
-})=>
+  }) =>
       ClipOval(
         child: Container(
           alignment: Alignment.center,

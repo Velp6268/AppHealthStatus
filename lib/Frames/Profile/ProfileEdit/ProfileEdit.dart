@@ -7,6 +7,7 @@ import 'package:health_status/Architecture/profile/ProfileRepository.dart';
 import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Frames/Profile/OtherWidgets/TextFieldWidget.dart';
 import 'package:health_status/Theme/app_colors.dart';
+import 'package:health_status/resources/resources.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
@@ -25,13 +26,16 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   final ProfileRepository repository;
 
+
   @override
   Widget build(BuildContext context) {
     final id = UserSession.get()?.userId;
-    final user = repository.getByUserId(id!);
-
+    var user = repository.getByUserId(id!);
     final color = Theme.of(context).colorScheme.primary;
     final VoidCallback onClicked;
+    final imageUser = user?.imageName ?? AppImages.man;
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -50,24 +54,19 @@ class _ProfileEditState extends State<ProfileEdit> {
         physics: BouncingScrollPhysics(),
         children: [
           ProfileWidget(
-            imagePath: user?.imageName ?? "",
+            imagePath: imageUser,
             isEdit: true,
             onClicked: () async {
-              final image =
+              final imageResult =
                   await ImagePicker().pickImage(source: ImageSource.gallery);
 
-              if (image == null) return;
+              repository.updateImage(imageResult?.path ?? "", id);
 
-              final directory = await getApplicationDocumentsDirectory();
+              setState(() {
 
-              ///Сохраняем в катологе фото в документах
-              final name = basename(image.path);
+              });
 
-              ///поллучаем имя файла и формат
-              final imageFile = File('${directory.path}/$name');
 
-              ///Создаем файл изображения
-              final newImage = await File(image.path).copy(imageFile.path);
 
               ///Копируем изображение
             },

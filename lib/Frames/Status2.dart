@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
@@ -118,7 +120,7 @@ class _Status2State extends State<Status2> {
                 child: FittedBox(
                   fit: BoxFit.cover,
                   child: Image(
-                      image: AssetImage(user?.imageName ?? "")
+                      image: FileImage(File(user?.imageName ?? ""))
                   )
               ),
               ),
