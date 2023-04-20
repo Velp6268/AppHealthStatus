@@ -120,7 +120,7 @@ class _Status2State extends State<Status2> {
                 child: FittedBox(
                   fit: BoxFit.cover,
                   child: Image(
-                      image: FileImage(File(user?.imageName ?? ""))
+                      image: AssetImage(user?.imageName ?? ""),
                   )
               ),
               ),

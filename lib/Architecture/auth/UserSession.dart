@@ -24,17 +24,4 @@ class UserSession{
     return UserSession.get()?.role;
   }
 
-  static void setUserPicture(String image){
-    imageTemp = image;
-  }
-
-  static String? getUserPicture(){
-    String result = imageTemp;
-    if(result == ''){
-      return null;
-    }else{
-      return result;
-    }
-  }
-
 }

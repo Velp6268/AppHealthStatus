@@ -32,6 +32,7 @@ class _ProfileEditState extends State<ProfileEdit> {
     final id = UserSession.get()?.userId;
     var user = repository.getByUserId(id!);
     final color = Theme.of(context).colorScheme.primary;
+    String nameUser = user?.fullName ?? "";
     final VoidCallback onClicked;
     final imageUser = user?.imageName ?? AppImages.man;
 
@@ -77,8 +78,16 @@ class _ProfileEditState extends State<ProfileEdit> {
             ///Строка Имени
             label: 'Полное Имя',
             maxLengthelements: 50,
-            text: user?.fullName ?? "",
-            onChanged: (String value) {},
+            text: nameUser,
+            onChanged: (String value) {
+
+              nameUser = value;
+
+              repository.remote.changeName(nameUser, id);
+                  setState(() {
+
+                  });
+            },
           ),
 
           SizedBox(height: MediaQuery.of(context).size.height * 0.17),
@@ -93,6 +102,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                     borderRadius: BorderRadius.circular(20)))),
             onPressed: () async {
               Navigator.of(context).pop();
+              setState(() {});
             },
             child: const SizedBox(
               height: 25,

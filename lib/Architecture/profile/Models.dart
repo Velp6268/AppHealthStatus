@@ -1,6 +1,6 @@
 class ProfileUser{
   final int userId;
-  final String fullName;
+  String fullName;
   final String group;
   String imageName;
   final String? textHealthStatus;

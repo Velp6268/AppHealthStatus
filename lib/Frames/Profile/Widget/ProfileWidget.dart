@@ -20,6 +20,7 @@ class ProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final color = Theme.of(context).colorScheme.primary;
 
     return Container(
@@ -41,9 +42,10 @@ class ProfileWidget extends StatelessWidget {
   }
 
   Widget buildImage(BuildContext context) {
+    final String imageTemp = imagePath;
     ImageProvider<Object> image = imagePath != ""
         ? FileImage(File(imagePath)) as ImageProvider<FileImage>
-        : const AssetImage(AppImages.man) as ImageProvider<AssetBundleImageKey>;
+        : AssetImage(imageTemp) as ImageProvider<AssetBundleImageKey>;
 
     return SizedBox(
       width: MediaQuery.of(context).size.height * 0.15,

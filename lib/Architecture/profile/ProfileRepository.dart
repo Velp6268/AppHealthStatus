@@ -29,7 +29,12 @@ class ProfileRepository{
 
         return remoteResult.data!;
 
+    }
 
+    ProfileUser updateName(String name, int id){
+      var remoteResult = remote.changeName(name, id);
+
+      return remoteResult.data!;
     }
 
 

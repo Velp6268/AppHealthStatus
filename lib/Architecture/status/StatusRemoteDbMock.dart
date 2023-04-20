@@ -20,7 +20,7 @@ class StatusRemoteDbMock implements IStatusSource{
     Status(
         3,
         "/data/user/0/com.example.health_status/cache/96b847cc-9509-4e02-b382-c7adbc2ef115/sasuke.png",
-        "Я болен"
+        'Я здоров'
     ),
     Status(
         4,

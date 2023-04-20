@@ -32,6 +32,11 @@ class _TextFieldWidgetState extends State<TextFieldWidget>{
     controller = TextEditingController(text: widget.text);
   }
 
+
+  void updateName(){
+
+  }
+
   @override
   void dispose(){
     controller.dispose();
@@ -42,8 +47,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget>{
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
-        widget.label,
+      Text(widget.label,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
       ),
       SizedBox(height: MediaQuery.of(context).size.height * 0.0007),
@@ -58,6 +62,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget>{
         onChanged: widget.onChanged,
 
       )
+
     ],
   );
 }
