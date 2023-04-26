@@ -1,4 +1,3 @@
-
 import 'package:health_status/Architecture/Result.dart';
 import 'package:health_status/Architecture/auth/ILoginDataSource.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';

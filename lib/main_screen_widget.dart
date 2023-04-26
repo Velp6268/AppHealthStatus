@@ -7,7 +7,9 @@ import 'package:health_status/Architecture/profile/ProfileRemoteDbMock.dart';
 import 'package:health_status/Architecture/profile/ProfileRepository.dart';
 import 'package:health_status/Architecture/status/StatusRemoteDbMock.dart';
 import 'package:health_status/Architecture/status/StatusRepository.dart';
-import 'package:health_status/Frames/Group.dart';
+import 'package:health_status/Frames/Group/GroupForAdm.dart';
+import 'package:health_status/Frames/Group/GroupForModer.dart';
+import 'package:health_status/Frames/Group/GroupForUser.dart';
 import 'package:health_status/Frames/Profile/Profile.dart';
 import 'package:health_status/Frames/Status2.dart';
 import 'Architecture/auth/LoggedUserRepository.dart';
@@ -24,25 +26,24 @@ class MainScreenWidget extends StatefulWidget {
   _MainScreenWidgetState createState() => _MainScreenWidgetState();
 }
 
-
-
-  StudentRepository checkRole(){
-    if(UserSession.returnRole() == 1){
-      return StudentRepository(GroupRemoteDbMock());
-    }else{
-      return throw Exception("null");
-      }
+checkRole() {
+  if (UserSession.returnRole() == 2) {
+    return GroupForAdm(repository: StudentRepository(GroupRemoteDbMock()));
+  } else if (UserSession.returnRole() == 1) {
+    return GroupForModer(repository: StudentRepository(GroupRemoteDbMock()));
+  } else if (UserSession.returnRole() == 0) {
+    return GroupForUser(repository: StudentRepository(GroupRemoteDbMock()));
+  } else {
+    return throw Exception("null");
   }
-
+}
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
 
 
   int _selectedTab = 1;
   static final List<Widget> _widgetOptions = <Widget>[
-    Group(
-      repository: checkRole(),
-    ),
+    checkRole(),
     Status2(
       repository: StatusRepository(StatusRemoteDbMock()),
     ),

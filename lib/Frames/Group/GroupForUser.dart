@@ -8,10 +8,10 @@ import 'package:health_status/Architecture/groups/StudentRepository.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/Theme/app_colors.dart';
 
-class Group extends StatelessWidget {
+class GroupForUser extends StatelessWidget {
   final StudentRepository repository;
 
-  const Group({Key? key, required this.repository}) : super(key: key);
+  const GroupForUser({Key? key, required this.repository}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,48 +24,8 @@ class Group extends StatelessWidget {
         title: const Text('Группы',
             style: TextStyle(fontSize: 18, color: Colors.black87)),
         centerTitle: true,
-        actions: [
-          Theme(
-
-            data: Theme.of(context).copyWith(
-
-              iconTheme: IconThemeData(color: AppColors.iconColor)
-            ),
-            child: PopupMenuButton<int>(
-              onSelected: (item) => onSelected(context, item),
-              itemBuilder: (context) => [
-                PopupMenuItem<int>(
-                  value: 0,
-                  child: Row(
-                    children: [
-                      Icon(Icons.settings,
-                          color: Colors.black,
-                          size: MediaQuery.of(context).size.height * 0.022),
-                      SizedBox(width: MediaQuery.of(context).size.height * 0.01),
-                      Text('Управление  группой')
-                    ],
-                  ),
-                ),
-                PopupMenuDivider(),
-                PopupMenuItem<int>(
-                  value: 1,
-                  child: Row(
-                    children: [
-                      ImageIcon(
-                        AssetImage(AppImages.downloadIcon),
-                        color: Colors.black,
-                        size: MediaQuery.of(context).size.height * 0.022,
-                      ),
-                      SizedBox(width: MediaQuery.of(context).size.height * 0.01),
-                      Text('Скачать список')
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
+
       body: Stack(
         children: [
           ///Лист

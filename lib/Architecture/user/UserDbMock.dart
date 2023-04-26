@@ -11,19 +11,19 @@ class UserDbMock implements ILoginDataSource{
         id: 1,
         login: "maks",
         pass: "1111",
-        role: 1),
+        role: 2),
     User(id: 2,
         login: "nikita",
         pass: "1111",
-        role: 1),
+        role: 2),
     User(id: 3,
         login: "tim",
         pass: "1111",
         role: 1),
-    User(id: 5,
+    User(id: 4,
         login:"vit",
         pass: "1111",
-        role: 1)
+        role: 0)
   ];
 
   Result getById(int id) { ///Не нужный
