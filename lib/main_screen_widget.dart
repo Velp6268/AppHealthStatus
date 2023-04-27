@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:health_status/Architecture/groups/GroupApiClient.dart';
 //import 'package:health_status/Architecture/IDataSourse.dart';
 
-import 'package:health_status/Architecture/groups/GroupRemoteDbMock.dart';
 import 'package:health_status/Architecture/groups/StudentRepository.dart';
 import 'package:health_status/Architecture/profile/ProfileRemoteDbMock.dart';
 import 'package:health_status/Architecture/profile/ProfileRepository.dart';
@@ -28,11 +28,11 @@ class MainScreenWidget extends StatefulWidget {
 
 checkRole() {
   if (UserSession.returnRole() == 2) {
-    return GroupForAdm(repository: StudentRepository(GroupRemoteDbMock()));
+    return GroupForAdm(repository: StudentRepository(GroupApiClient()));
   } else if (UserSession.returnRole() == 1) {
-    return GroupForModer(repository: StudentRepository(GroupRemoteDbMock()));
+    return GroupForModer(repository: StudentRepository(GroupApiClient()));
   } else if (UserSession.returnRole() == 0) {
-    return GroupForUser(repository: StudentRepository(GroupRemoteDbMock()));
+    return GroupForUser(repository: StudentRepository(GroupApiClient()));
   } else {
     return throw Exception("null");
   }

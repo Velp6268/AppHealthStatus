@@ -2,7 +2,7 @@ import '../Result.dart';
 import 'Models.dart';
 
 abstract class IStudentSource{
-  Result<List<Student>> getAll();
+  Future<Result<List<Student>>> getAll();
   Result<List<Student>> getByGroupId(int id);
   Result<Student> getById(int id);
   Result<Student> insert(Student student);
