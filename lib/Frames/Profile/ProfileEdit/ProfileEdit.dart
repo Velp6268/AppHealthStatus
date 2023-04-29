@@ -68,7 +68,6 @@ class _ProfileEditState extends State<ProfileEdit> {
               });
 
 
-
               ///Копируем изображение
             },
           ),

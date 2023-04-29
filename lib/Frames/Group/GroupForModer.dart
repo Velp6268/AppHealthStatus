@@ -14,9 +14,9 @@ class GroupForModer extends StatelessWidget {
   const GroupForModer({Key? key, required this.repository}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Future<Widget> build(BuildContext context) async {
     Timer(Duration(seconds: 10), () {});
-    var students = repository.getAll();
+    var students = await repository.getAll();
 
     return Scaffold(
       appBar: AppBar(

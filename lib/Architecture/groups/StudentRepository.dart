@@ -11,9 +11,8 @@ class StudentRepository{
 
   StudentRepository(this.remote);
 
-  List<Student> getAll(){
-    var result = remote.getAll();
-
+  Future<List<Student>> getAll() async {
+    var result = await remote.getAll();
     if (result.isSuccess()){
       return result.data!;
     }
