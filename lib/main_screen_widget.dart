@@ -7,7 +7,7 @@ import 'package:health_status/Architecture/profile/ProfileRemoteDbMock.dart';
 import 'package:health_status/Architecture/profile/ProfileRepository.dart';
 import 'package:health_status/Architecture/status/StatusRemoteDbMock.dart';
 import 'package:health_status/Architecture/status/StatusRepository.dart';
-import 'package:health_status/Frames/Group/GroupForAdm.dart';
+import 'package:health_status/Frames/Group/GroupAdminView.dart';
 import 'package:health_status/Frames/Group/GroupForModer.dart';
 import 'package:health_status/Frames/Group/GroupForUser.dart';
 import 'package:health_status/Frames/Profile/Profile.dart';
@@ -28,7 +28,7 @@ class MainScreenWidget extends StatefulWidget {
 
 checkRole() {
   if (UserSession.returnRole() == 2) {
-    return GroupForAdm(repository: StudentRepository(GroupApiClient()));
+    return GroupAdminView(repository: StudentRepository(GroupApiClient()));
   } else if (UserSession.returnRole() == 1) {
     return GroupForModer(repository: StudentRepository(GroupApiClient()));
   } else if (UserSession.returnRole() == 0) {
