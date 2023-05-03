@@ -42,10 +42,12 @@ class ProfileWidget extends StatelessWidget {
   }
 
   Widget buildImage(BuildContext context) {
-    final String imageTemp = imagePath;
-    ImageProvider<Object> image = imagePath != ""
-        ? FileImage(File(imagePath)) as ImageProvider<FileImage>
-        : AssetImage(imageTemp) as ImageProvider<AssetBundleImageKey>;
+    final image = imagePath.contains('https://')
+        ? NetworkImage(imagePath)
+        : FileImage(File(imagePath));
+
+
+
 
     return SizedBox(
       width: MediaQuery.of(context).size.height * 0.15,
@@ -54,7 +56,7 @@ class ProfileWidget extends StatelessWidget {
         child: Material(
           color: Colors.transparent,
           child: Ink.image(
-            image: image,
+            image: image as ImageProvider,
             fit: BoxFit.cover,
             child: InkWell(onTap: onClicked),
           ),

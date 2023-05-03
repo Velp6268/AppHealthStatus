@@ -8,93 +8,126 @@ import 'package:health_status/Architecture/groups/StudentRepository.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/Theme/app_colors.dart';
 
-class GroupForUser extends StatelessWidget {
+
+class GroupUserView extends StatefulWidget {
+
   final StudentRepository repository;
 
-  const GroupForUser({Key? key, required this.repository}) : super(key: key);
+  const GroupUserView({Key? key, required this.repository}) : super(key: key);
+
+  @override
+  State<GroupUserView> createState() => _GroupUserViewState();
+}
+
+class _GroupUserViewState extends State<GroupUserView> {
+
+  List<Student> students = List.empty();
+
+  _initStudents() async {
+    var list = await widget.repository.getAll();
+    setState(() {
+      students = list;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 10), () {});
-    var students = repository.getAll();
+    _initStudents();
+    return buildScaffold(context, students);
+  }
 
+
+  Scaffold buildScaffold(BuildContext context, List<Student> students) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Группы',
-            style: TextStyle(fontSize: 18, color: Colors.black87)),
-        centerTitle: true,
-      ),
-
+      appBar: initAppbar(context),
       body: Stack(
         children: [
           ///Лист
-          ListView.builder(
-            padding: const EdgeInsets.only(top: 6),
-            itemCount: students.length,
-            itemExtent: 60,
-            itemBuilder: (BuildContext context, int index) {
-              final student = students[index];
-              return Container(
-                ///отвечает за отступы Элемента списка от краев
-                padding: const EdgeInsets.fromLTRB(15, 8, 16, 0),
-
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.mainGrey),
-
-                      ///Окружность краев Элемента списка
-                      borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                          topLeft: Radius.circular(10),
-                          bottomLeft: Radius.circular(10)),
-                      color: AppColors.mainGrey),
-                  child: Row(
-                    children: [
-                      ///Метод в котором хранится Контейнер с полоской здоровья
-                      buildHealthyLine(student),
-
-                      ///Делаем отступ
-                      const Padding(
-                        padding: EdgeInsets.only(left: 5),
-                      ),
-
-                      ///Аватарка
-
-                      ClipOval(
-                        child: Image(
-                          image: AssetImage(student.imageName),
-                          width: 44,
-                          height: 44,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-
-                      ///Контейнер в котором хранится колонка с текстом
-                      buildFullName(student),
-
-                      ///Отступ от контейнера для стрелочки и сама стрелочка
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                            padding: const EdgeInsets.only(left: 45),
-                            child: const Image(
-                              image: AssetImage(AppImages.pointer),
-                              width: 14,
-                              height: 14,
-                            )),
-                      ),
-
-                      ///Картинка указателя
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
+          createList(students),
         ],
       ),
+    );
+  }
+
+  ListView createList(List<Student> students) {
+    return ListView.builder(
+      padding: const EdgeInsets.only(top: 6),
+      itemCount: students.length,
+      itemExtent: 60,
+      itemBuilder: (BuildContext context, int index) {
+        final student = students[index];
+        return _createListBody(student);
+      },
+    );
+  }
+
+  Container _createListBody(Student student) {
+    return Container(
+
+      ///отвечает за отступы Элемента списка от краев
+      padding: const EdgeInsets.fromLTRB(15, 8, 16, 0),
+
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+            border: Border.all(color: AppColors.mainGrey),
+
+            ///Окружность краев Элемента списка
+            borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+                topLeft: Radius.circular(10),
+                bottomLeft: Radius.circular(10)),
+            color: AppColors.mainGrey),
+        child: Row(
+          children: [
+
+            ///Метод в котором хранится Контейнер с полоской здоровья
+            buildHealthyLine(student),
+
+            ///Делаем отступ
+            const Padding(
+              padding: EdgeInsets.only(left: 5),
+            ),
+
+            ///Аватарка
+
+            ClipOval(
+              child: Image(
+                image: AssetImage(student.imageName),
+                width: 44,
+                height: 44,
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+
+            ///Контейнер в котором хранится колонка с текстом
+            buildFullName(student),
+
+            ///Отступ от контейнера для стрелочки и сама стрелочка
+            Expanded(
+              flex: 1,
+              child: Container(
+                  padding: const EdgeInsets.only(left: 45),
+                  child: const Image(
+                    image: AssetImage(AppImages.pointer),
+                    width: 14,
+                    height: 14,
+                  )),
+            ),
+
+            ///Картинка указателя
+          ],
+        ),
+      ),
+    );
+  }
+
+  AppBar initAppbar(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      title: const Text('Группы',
+          style: TextStyle(fontSize: 18, color: Colors.black87)),
+      centerTitle: true,
     );
   }
 
@@ -116,7 +149,7 @@ class GroupForUser extends StatelessWidget {
           borderRadius: const BorderRadius.horizontal(
             left: Radius.circular(10),
           ),
-          color: repository.statusHealthy(student.textHealsStatus)),
+          color: widget.repository.statusHealthy(student.textHealsStatus)),
       width: 10,
     );
   }
@@ -131,10 +164,11 @@ class GroupForUser extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 18),
-            Text(repository.findIntialsOfFullName(student.fullName))
+            Text(widget.repository.findIntialsOfFullName(student.fullName))
           ],
         ),
       ),
     );
   }
 }
+

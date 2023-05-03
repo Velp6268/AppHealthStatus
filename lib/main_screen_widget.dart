@@ -30,9 +30,9 @@ checkRole() {
   if (UserSession.returnRole() == 2) {
     return GroupAdminView(repository: StudentRepository(GroupApiClient()));
   } else if (UserSession.returnRole() == 1) {
-    return GroupForModer(repository: StudentRepository(GroupApiClient()));
+    return GroupModerView(repository: StudentRepository(GroupApiClient()));
   } else if (UserSession.returnRole() == 0) {
-    return GroupForUser(repository: StudentRepository(GroupApiClient()));
+    return GroupUserView(repository: StudentRepository(GroupApiClient()));
   } else {
     return throw Exception("null");
   }

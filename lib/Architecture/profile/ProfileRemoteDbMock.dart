@@ -11,7 +11,7 @@ class ProfileRemoteDbMock implements IProfileSource{
         userId: 1,
         fullName: "Максим Ночевный Юрьевич",
         group: "32Д",
-        imageName: AppImages.maks,
+        imageName: "https://sun9-45.userapi.com/impf/c850624/v850624375/1c2661/NOUEsE5UA_Q.jpg?size=798x407&quality=96&sign=e4a1477d8380dd5e275ace55c3685dc3&type=album",
         textHealthStatus: "Я здоров"
     ),
     ProfileUser(
