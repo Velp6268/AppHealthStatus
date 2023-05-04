@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +33,15 @@ class _GroupAdminViewState extends State<GroupAdminView> {
 
   @override
   Widget build(BuildContext context) {
+
     _initStudents();
-    return buildScaffold(context, students);
+    return buildScaffold(context, students, );
   }
 
 
   Scaffold buildScaffold(BuildContext context, List<Student> students) {
     return Scaffold(
+
       appBar: initAppbar(context),
       body: Stack(
         children: [
@@ -56,12 +59,16 @@ class _GroupAdminViewState extends State<GroupAdminView> {
           itemExtent: 60,
           itemBuilder: (BuildContext context, int index) {
             final student = students[index];
-            return _createListBody(student);
+            final studentImage = student.imageName;
+            final image = studentImage.contains('https://')
+                ? NetworkImage(studentImage)
+                : AssetImage(studentImage);
+            return _createListBody(student, image);
           },
         );
   }
 
-  Container _createListBody(Student student) {
+  Container _createListBody(Student student, final image) {
     return Container(
 
             ///отвечает за отступы Элемента списка от краев
@@ -92,8 +99,8 @@ class _GroupAdminViewState extends State<GroupAdminView> {
                   ///Аватарка
 
                   ClipOval(
-                    child: Image(
-                      image: AssetImage(student.imageName),
+                    child: Ink.image(
+                      image: image as ImageProvider,
                       width: 44,
                       height: 44,
                       fit: BoxFit.fitWidth,

@@ -56,12 +56,16 @@ class _GroupUserViewState extends State<GroupUserView> {
       itemExtent: 60,
       itemBuilder: (BuildContext context, int index) {
         final student = students[index];
-        return _createListBody(student);
+        final studentImage = student.imageName;
+        final image = studentImage.contains('https://')
+            ? NetworkImage(studentImage)
+            : AssetImage(studentImage);
+        return _createListBody(student, image);
       },
     );
   }
 
-  Container _createListBody(Student student) {
+  Container _createListBody(Student student, final image) {
     return Container(
 
       ///отвечает за отступы Элемента списка от краев
@@ -92,8 +96,8 @@ class _GroupUserViewState extends State<GroupUserView> {
             ///Аватарка
 
             ClipOval(
-              child: Image(
-                image: AssetImage(student.imageName),
+              child: Ink.image(
+                image: image as ImageProvider,
                 width: 44,
                 height: 44,
                 fit: BoxFit.fitWidth,
