@@ -48,6 +48,7 @@ class ProfileRemoteDbMock implements IProfileSource{
     var result = _profile.firstWhere(
             (p) => p.userId == id);
     result.fullName = name;
+
     return Result.success(result);
   }
 
