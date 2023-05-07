@@ -8,13 +8,6 @@ class ProfileButton extends StatelessWidget {
   final String icon;
   final VoidCallback onClicked;
 
-  const ProfileButton({
-    Key? key,
-    required this.icon,
-    required this.text,
-    required this.onClicked,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,14 +35,16 @@ class ProfileButton extends StatelessWidget {
                     ///Отвечает за Иконку
                     flex: 1,
                     child: Container(
+                      margin: EdgeInsets.only(
+                        left: 12,
+                        right: 12
+                      ),
                       child: Image(
                         image: AssetImage(icon),
-                        height: MediaQuery.of(context).size.width * 0.075,
                       ),
                     ),
                   ),
                   Expanded(
-
                       ///Отвечает за Название кнопки
                       flex: 5,
                       child: Container(
@@ -62,10 +57,15 @@ class ProfileButton extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.only(
                             left: MediaQuery.of(context).size.width * 0.05),
-                        child: Image(
-                          image: AssetImage(AppImages.pointer),
-                          height: MediaQuery.of(context).size.height * 0.014,
-                          width: MediaQuery.of(context).size.width * 0.014,
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            top: 14.5,
+                            bottom: 14.5
+                          ),
+                          child: Image(
+                            image: AssetImage(AppImages.pointer),
+
+                          ),
                         ),
                       )),
                 ],
@@ -74,4 +74,11 @@ class ProfileButton extends StatelessWidget {
             ),
           );
   }
+
+  const ProfileButton({
+    Key? key,
+    required this.icon,
+    required this.text,
+    required this.onClicked,
+  }) : super(key: key);
 }
