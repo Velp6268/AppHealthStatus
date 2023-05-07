@@ -96,94 +96,96 @@ class _LoginViewState extends State<LoginView> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 116, bottom: 20, left: 0, right: 0),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                    height: 75,
-                    width: 75,
-                    child: Image.asset("images/loveIcon.png")),
-              ),
-            ),
-            const Text(
-              'Вход в Life',
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 10, bottom: 0, left: 30, right: 0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  textError,
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 116, bottom: 20, left: 0, right: 0),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: SizedBox(
+                      height: 75,
+                      width: 75,
+                      child: Image.asset("images/loveIcon.png")),
                 ),
               ),
-            ),
-            Container(
-                width: MediaQuery.of(context).size.width * 0.87,
-                height: 50,
-                margin: EdgeInsets.only(top: 5, bottom: 0, left: 0, right: 0),
-                padding: EdgeInsets.only(top: 0, bottom: 1, left: 10, right: 0),
-                decoration: BoxDecoration(
-                    color: Colors.grey[350],
-                    borderRadius: BorderRadius.circular(7)),
+              const Text(
+                'Вход в Life',
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 10, bottom: 0, left: 30, right: 0),
                 child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextFormField(
-                      decoration: const InputDecoration(hintText: "Почта"),
-                      controller: _emailController,
-                    ))),
-            Container(
-                width: MediaQuery.of(context).size.width * 0.87,
-                height: 50,
-                margin: EdgeInsets.only(top: 20, bottom: 40, left: 0, right: 0),
-                padding: EdgeInsets.only(top: 0, bottom: 1, left: 10, right: 0),
-                decoration: BoxDecoration(
-                    color: Colors.grey[350],
-                    borderRadius: BorderRadius.circular(7)),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: "Пароль",
-                      ),
-                      obscureText: true,
-                      controller: _passwordController,
-                    ))),
-            GestureDetector(
-              onTap: () {
-                signIn();
-              },
-              child: Container(
-                width: 200,
-                height: 35,
-                decoration: BoxDecoration(
-                    color: Colors.grey[350],
-                    borderRadius: BorderRadius.circular(30)),
-                child: Align(
-                  alignment: Alignment.center,
+                  alignment: Alignment.centerLeft,
                   child: Text(
-                    'Войти',
+                    textError,
                     style: TextStyle(
-                      fontSize: 18,
-                    ),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
                   ),
                 ),
               ),
-            )
-          ],
+              Container(
+                  width: MediaQuery.of(context).size.width * 0.87,
+                  height: 50,
+                  margin: EdgeInsets.only(top: 5, bottom: 0, left: 0, right: 0),
+                  padding: EdgeInsets.only(top: 0, bottom: 1, left: 10, right: 0),
+                  decoration: BoxDecoration(
+                      color: Colors.grey[350],
+                      borderRadius: BorderRadius.circular(7)),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextFormField(
+                        decoration: const InputDecoration(hintText: "Почта"),
+                        controller: _emailController,
+                      ))),
+              Container(
+                  width: MediaQuery.of(context).size.width * 0.87,
+                  height: 50,
+                  margin: EdgeInsets.only(top: 20, bottom: 40, left: 0, right: 0),
+                  padding: EdgeInsets.only(top: 0, bottom: 1, left: 10, right: 0),
+                  decoration: BoxDecoration(
+                      color: Colors.grey[350],
+                      borderRadius: BorderRadius.circular(7)),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: "Пароль",
+                        ),
+                        obscureText: true,
+                        controller: _passwordController,
+                      ))),
+              GestureDetector(
+                onTap: () {
+                  signIn();
+                },
+                child: Container(
+                  width: 200,
+                  height: 35,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[350],
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Войти',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
