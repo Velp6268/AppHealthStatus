@@ -40,10 +40,10 @@ class GroupApiClient implements IStudentSource{
   ///Использует библиотеку Http
   Future<Result<List<Student>>> getAll() async{
     final response = await http.get(
-      Uri.parse('http://192.168.31.53:3000/users'),
+      Uri.parse('http://192.168.31.53:3000/users'), ///читаем данные с сайта
     );
-    final List<dynamic> jsonResponse = jsonDecode(response.body);
-    final List<Student> students = jsonResponse.map((item) => Student.fromJson(item)).toList();
+    final List<dynamic> jsonResponse = jsonDecode(response.body); ///Преобразовние строк в данные
+    final List<Student> students = jsonResponse.map((item) => Student.fromJson(item)).toList(); ///Заносит данные в список
     print(students);
     return Result.success(students);
 
