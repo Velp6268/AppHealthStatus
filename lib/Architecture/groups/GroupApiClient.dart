@@ -18,7 +18,7 @@ class GroupApiClient implements IStudentSource{
 
 
   // Future<Result<List<Student>>> getAll() async{
-  //   final url = Uri.parse('https://api.jsonserver.io/Life/Group');
+  //   final url = Uri.parse('http://192.168.31.53:3000/users');
   //   final request = await client.getUrl(url);
   //   request.headers.set('X-Jsio-Token', '6b69f9a013ccc689c400ab6082520a02');
   //   final response = await request.close();
@@ -36,11 +36,12 @@ class GroupApiClient implements IStudentSource{
 
 
 
+
+  ///Использует библиотеку Http
   Future<Result<List<Student>>> getAll() async{
     final response = await http.get(
-      Uri.parse('http://localhost:3001/users'),
+      Uri.parse('http://192.168.31.53:3000/users'),
     );
-
     final List<dynamic> jsonResponse = jsonDecode(response.body);
     final List<Student> students = jsonResponse.map((item) => Student.fromJson(item)).toList();
     print(students);

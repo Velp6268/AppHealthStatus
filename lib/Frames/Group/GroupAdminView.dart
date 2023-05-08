@@ -55,16 +55,13 @@ class _GroupAdminViewState extends State<GroupAdminView> {
           itemExtent: 60,
           itemBuilder: (BuildContext context, int index) {
             final student = students[index];
-            final studentImage = student.imageName;
-            final image = studentImage.contains('https://')
-                ? NetworkImage(studentImage)
-                : AssetImage(studentImage);
-            return _createListBody(student, image);
+
+            return _createListBody(student);
           },
         );
   }
 
-  Container _createListBody(Student student, final image) {
+  Container _createListBody(Student student) {
     return Container(
 
             ///отвечает за отступы Элемента списка от краев
@@ -95,11 +92,11 @@ class _GroupAdminViewState extends State<GroupAdminView> {
                   ///Аватарка
 
                   ClipOval(
-                    child: Ink.image(
-                      image: image as ImageProvider,
+                    child: Image(
+                      image: NetworkImage(student.imageName),
                       width: 44,
                       height: 44,
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.cover,
                     ),
                   ),
 
