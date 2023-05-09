@@ -8,24 +8,24 @@ class StatusRemoteDbMock implements IStatusSource{
 
   final _userStatus = [
     Status(
-        1,
-        AppImages.maks,
-        "Я здоров"
+        userId: 1,
+        imageName: AppImages.maks,
+        textHealthStatus: "Я здоров"
     ),
     Status(
-        2,
-        AppImages.nikita,
-        "Я здоров"
+        userId: 2,
+        imageName: AppImages.nikita,
+        textHealthStatus: "Я здоров"
     ),
     Status(
-        3,
-        "/data/user/0/com.example.health_status/cache/96b847cc-9509-4e02-b382-c7adbc2ef115/sasuke.png",
-        'Я здоров'
+        userId: 3,
+        imageName: "/data/user/0/com.example.health_status/cache/96b847cc-9509-4e02-b382-c7adbc2ef115/sasuke.png",
+        textHealthStatus: 'Я здоров'
     ),
     Status(
-        4,
-        AppImages.vitalya,
-        "Я уехал"
+        userId: 4,
+        imageName: AppImages.vitalya,
+        textHealthStatus: "Я уехал"
     ),
 
   ];
