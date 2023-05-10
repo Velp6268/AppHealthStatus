@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/auth/UserSession.dart';
 import 'package:health_status/Architecture/profile/Models.dart';
-import 'package:health_status/Architecture/profile/ProfileRemoteDbMock.dart';
 import 'package:health_status/Architecture/profile/ProfileRepository.dart';
 import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Theme/app_colors.dart';
@@ -22,94 +21,108 @@ class Profile extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState(repository);
+  State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-  _ProfileState(this.repository);
 
-  final ProfileRepository repository;
+
+
+  var student;
+  final id = UserSession.get()?.userId;
+  _initStudent() async{
+
+    var user = await widget.repository.getByUserId(id!);
+    setState(() {
+      student = user;
+    });
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
 
-    final id = UserSession.get()?.userId;
-    final student = repository.getByUserId(id!);
+    _initStudent();
 
+    return buildScaffold(context);
+  }
+
+  Scaffold buildScaffold(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.22,
-            child: const FittedBox(
-              fit: BoxFit.contain,
-              child: Text(
-                "Профиль",
-                style: TextStyle(fontSize: 20, color: Colors.black87),
-              ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.22,
+          child: const FittedBox(
+            fit: BoxFit.contain,
+            child: Text(
+              "Профиль",
+              style: TextStyle(fontSize: 20, color: Colors.black87),
             ),
           ),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              iconSize: MediaQuery.of(context).size.height * 0.025,
-              splashRadius: 20,
-              icon: Icon(Icons.edit, color: Colors.black),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: repository)));
-              },
-            ),
-          ],
         ),
-        body: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            ///Контейнер отвечающий за фон (Фото)
-            ContainerImage(context),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            iconSize: MediaQuery.of(context).size.height * 0.025,
+            splashRadius: 20,
+            icon: Icon(Icons.edit, color: Colors.black),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfileEdit(repository: widget.repository,)));
+            },
+          ),
+        ],
+      ),
+      body: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          ///Контейнер отвечающий за фон (Фото)
+          ContainerImage(context),
 
-            ///Виджет отвечающий за аватарку пользователя
-            ProfileWidget(
-              imagePath: student?.imageName ?? "",
-              onClicked: () async {
-                await Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileEdit(repository: repository)));
-                setState(() {});
-              },
-            ),
+          ///Виджет отвечающий за аватарку пользователя
+          ProfileWidget(
+            imagePath: student?.imageName ?? "",
+            onClicked: () async {
+              await Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfileEdit(repository: widget.repository)));
+              setState(() {});
+            },
+          ),
 
 
 
-            ///Контейнер отвечающий за Инфо-табличку
-            buildInfoTable(student!),
+          ///Контейнер отвечающий за Инфо-табличку
+          buildInfoTable(student!),
 
-            ///Кнопка уведомление
-            ProfileButton(
-              icon: AppImages.notifications,
-              text: 'Уведомление',
+          ///Кнопка уведомление
+          ProfileButton(
+            icon: AppImages.notifications,
+            text: 'Уведомление',
+            onClicked: () async {},
+          ),
+
+          ///Кнопка Настройки
+          Container(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.06),
+            child: ProfileButton(
+              icon: AppImages.settings,
+              text: 'Настройки',
               onClicked: () async {},
             ),
-
-            ///Кнопка Настройки
-            Container(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.06),
-              child: ProfileButton(
-                icon: AppImages.settings,
-                text: 'Настройки',
-                onClicked: () async {},
-              ),
-            ),
+          ),
 
 
 
-            ///Кнопка Выйти из Аккаунта
-            Positioned(
-              bottom: MediaQuery.of(context).size.height * 0.03,
-              child: buttonLogOut(context),
-            ),
-          ],
-        ));
+          ///Кнопка Выйти из Аккаунта
+          Positioned(
+            bottom: MediaQuery.of(context).size.height * 0.03,
+            child: buttonLogOut(context),
+          ),
+        ],
+      ));
   }
   /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
   SizedBox buttonLogOut(BuildContext context) {
@@ -190,7 +203,7 @@ class _ProfileState extends State<Profile> {
                   ///Нужен для того что бы объект не выходил за рамки
                   fit: BoxFit.contain,
                   child: Text(
-                    repository.findIntialsOfFullName(student.fullName),
+                    widget.repository.findIntialsOfFullName(student.fullName),
                       style: TextStyle(fontSize: 16),
 
                 ),
@@ -253,7 +266,7 @@ class _ProfileState extends State<Profile> {
                           borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          color: repository.statusHealthy(student.textHealthStatus)
+                          color: widget.repository.statusHealthy(student.textHealthStatus)
                       ),
                     ),
                   ),

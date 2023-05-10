@@ -3,7 +3,7 @@ import 'package:health_status/Architecture/groups/GroupApiClient.dart';
 //import 'package:health_status/Architecture/IDataSourse.dart';
 
 import 'package:health_status/Architecture/groups/StudentRepository.dart';
-import 'package:health_status/Architecture/profile/ProfileRemoteDbMock.dart';
+import 'package:health_status/Architecture/profile/ProfileApiClient.dart';
 import 'package:health_status/Architecture/profile/ProfileRepository.dart';
 import 'package:health_status/Architecture/status/StatusRemoteDbMock.dart';
 import 'package:health_status/Architecture/status/StatusRepository.dart';
@@ -49,7 +49,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     ),
     Profile(
         repository:
-            ProfileRepository(ProfileRemoteDbMock())),
+            ProfileRepository(ProfileApiClient())),
   ];
 
   void onSelectTab(int index) {

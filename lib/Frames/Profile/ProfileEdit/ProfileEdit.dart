@@ -18,104 +18,118 @@ class ProfileEdit extends StatefulWidget {
   const ProfileEdit({Key? key, required this.repository}) : super(key: key);
 
   @override
-  State<ProfileEdit> createState() => _ProfileEditState(repository);
+  State<ProfileEdit> createState() => _ProfileEditState();
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
-  _ProfileEditState(this.repository);
 
-  final ProfileRepository repository;
 
+
+
+  var user;
+  final id = UserSession.get()?.userId;
+  _initUser() async{
+
+    var student = await widget.repository.getByUserId(id!);
+    setState(() {
+      user = student;
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
-    final id = UserSession.get()?.userId;
-    var user = repository.getByUserId(id!);
-    final color = Theme.of(context).colorScheme.primary;
+
+    _initUser();
+
     String nameUser = user?.fullName ?? "";
     final VoidCallback onClicked;
     final imageUser = user?.imageName ?? AppImages.man;
 
 
 
+    return buildScaffold(imageUser, context, nameUser);
+  }
+
+  Scaffold buildScaffold(imageUser, BuildContext context, String nameUser) {
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(color: Colors.black87),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.moon_stars, color: Colors.black87),
-            onPressed: () {},
-          )
-        ],
-      ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 32),
-        physics: BouncingScrollPhysics(),
-        children: [
-          ProfileWidget(
-            imagePath: imageUser,
-            isEdit: true,
-            onClicked: () async {
-              final imageResult =
-                  await ImagePicker().pickImage(source: ImageSource.gallery);
+    appBar: AppBar(
+      leading: BackButton(color: Colors.black87),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      actions: [
+        IconButton(
+          icon: Icon(CupertinoIcons.moon_stars, color: Colors.black87),
+          onPressed: () {},
+        )
+      ],
+    ),
+    body: ListView(
+      padding: EdgeInsets.symmetric(horizontal: 32),
+      physics: BouncingScrollPhysics(),
+      children: [
+        ProfileWidget(
+          imagePath: imageUser,
+          isEdit: true,
+          onClicked: () async {
+            final imageResult =
+                await ImagePicker().pickImage(source: ImageSource.gallery);
 
-              repository.updateImage(imageResult?.path ?? "", id);
+            widget.repository.updateImage(imageResult?.path ?? "", id!);
 
-              setState(() {
+            setState(() {
 
-              });
+            });
 
 
-              ///Копируем изображение
-            },
-          ),
+            ///Копируем изображение
+          },
+        ),
 
-          SizedBox(height: MediaQuery.of(context).size.height * 0.028),
-          TextFieldWidget(
-            ///Строка Имени
-            label: 'Полное Имя',
-            maxLengthelements: 50,
-            text: nameUser,
-            onChanged: (String value) {
+        SizedBox(height: MediaQuery.of(context).size.height * 0.028),
+        TextFieldWidget(
+          ///Строка Имени
+          label: 'Полное Имя',
+          maxLengthelements: 50,
+          text: nameUser,
+          onChanged: (String value) {
 
-              nameUser = value;
+            nameUser = value;
 
-              repository.remote.changeName(nameUser, id);
-                  setState(() {
+            widget.repository.remote.changeName(nameUser, id!);
+                setState(() {
 
-                  });
-            },
-          ),
+                });
+          },
+        ),
 
-          SizedBox(height: MediaQuery.of(context).size.height * 0.17),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.17),
 
-          SizedBox(height: MediaQuery.of(context).size.height * 0.3),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.3),
 
-          ///Кнопка Save
-          ElevatedButton(
-            style: ButtonStyle(
-                elevation: MaterialStateProperty.all(10),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)))),
-            onPressed: () async {
-              Navigator.of(context).pop();
-              setState(() {});
-            },
-            child: const SizedBox(
-              height: 25,
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Text(
-                  'Save',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
+        ///Кнопка Save
+        ElevatedButton(
+          style: ButtonStyle(
+              elevation: MaterialStateProperty.all(10),
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)))),
+          onPressed: () async {
+            Navigator.of(context).pop();
+            setState(() {});
+          },
+          child: const SizedBox(
+            height: 25,
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Text(
+                'Save',
+                style: TextStyle(color: Colors.white, fontSize: 25),
               ),
             ),
           ),
-        ],
-      ),
-    );
+        ),
+      ],
+    ),
+  );
   }
 }

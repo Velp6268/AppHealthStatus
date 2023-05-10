@@ -24,24 +24,24 @@ class ProfileRepository{
       }
     }
 
-    ProfileUser updateImage(String img, int id){
-    var remoteResult = remote.changeImage(img, id);
+    Future<ProfileUser> updateImage(String img, int id) async{
+    var remoteResult = await remote.changeImage(img, id);
 
         return remoteResult.data!;
 
     }
 
-    ProfileUser updateName(String name, int id){
-      var remoteResult = remote.changeName(name, id);
+    Future<ProfileUser> updateName(String name, int id) async{
+      var remoteResult = await remote.changeName(name, id);
 
       return remoteResult.data!;
     }
 
 
 
-  ProfileUser? getByUserId(int userId){
+  Future<ProfileUser?> getByUserId(int userId) async{
 
-      var remoteResult = remote.getByUserId(userId);
+      var remoteResult = await remote.getByUserId(userId);
       if(remoteResult.isSuccess()){
         return remoteResult.data!;
       }

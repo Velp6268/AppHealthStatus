@@ -31,7 +31,7 @@ class _GroupAdminViewState extends State<GroupAdminView> {
   Widget build(BuildContext context) {
 
     _initStudents();
-    return buildScaffold(context, students, );
+    return buildScaffold(context, students);
   }
 
 
