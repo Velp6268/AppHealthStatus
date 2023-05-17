@@ -1,6 +1,6 @@
 class LoggedUser{
-  final int userId;
+  final int Id;
   final String displayName;
   final int role;
-  LoggedUser( this.userId, this.displayName, this.role);
+  LoggedUser( this.Id, this.displayName, this.role);
 }

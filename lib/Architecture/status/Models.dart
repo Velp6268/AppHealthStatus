@@ -4,10 +4,10 @@ part 'Models.g.dart';
 @JsonSerializable()
 
 class Status{
-  final int userId;
+  final int Id;
   final String imageName;
   final String? textHealthStatus;
-  Status({required this.userId, required this.imageName, required this.textHealthStatus});
+  Status({required this.Id, required this.imageName, required this.textHealthStatus});
 
   factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);
   Map<String, dynamic> toJson() => _$StatusToJson(this);

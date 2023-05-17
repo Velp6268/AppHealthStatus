@@ -9,8 +9,8 @@ import 'package:http/http.dart' as http;
 class ProfileApiClient implements IProfileSource {
   @override
 
-  Future<Result> changeImage(String img, int id) async {
-    final url = Uri.parse('http://example.com/profile/$id');
+  Future<Result> changeImage(String img, int Id) async {
+    final url = Uri.parse('http://example.com/profile/$Id');
     // final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({'imageName': img});
 
@@ -24,8 +24,8 @@ class ProfileApiClient implements IProfileSource {
   }
 
   @override
-  Future<Result> changeName(String name, int id) async {
-    final url = Uri.parse('http://example.com/profile/$id');
+  Future<Result> changeName(String name, int Id) async {
+    final url = Uri.parse('http://example.com/profile/$Id');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({'fullName': name});
 
@@ -45,8 +45,8 @@ class ProfileApiClient implements IProfileSource {
   }
 
   @override
-  Future<Result> getByUserId(int userId) async {
-    final url = Uri.parse('http://example.com/profiles?userId=$userId');
+  Future<Result> getByUserId(int Id) async {
+    final url = Uri.parse('http://example.com/profiles?userId=$Id');
 
     final response = await http.get(url);
     if (response.statusCode == 200) {

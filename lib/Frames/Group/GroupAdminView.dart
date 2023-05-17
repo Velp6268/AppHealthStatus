@@ -203,7 +203,7 @@ class _GroupAdminViewState extends State<GroupAdminView> {
           borderRadius: const BorderRadius.horizontal(
             left: Radius.circular(10),
           ),
-          color: widget.repository.statusHealthy(student.textHealsStatus)),
+          color: widget.repository.statusHealthy(student.textHealthStatus)),
       width: 10,
     );
   }

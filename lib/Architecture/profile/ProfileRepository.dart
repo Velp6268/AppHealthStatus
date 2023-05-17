@@ -39,9 +39,9 @@ class ProfileRepository{
 
 
 
-  Future<ProfileUser?> getByUserId(int userId) async{
+  Future<ProfileUser?> getByUserId(int Id) async{
 
-      var remoteResult = await remote.getByUserId(userId);
+      var remoteResult = await remote.getByUserId(Id);
       if(remoteResult.isSuccess()){
         return remoteResult.data!;
       }

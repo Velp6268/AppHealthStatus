@@ -27,7 +27,7 @@ class _ProfileEditState extends State<ProfileEdit> {
 
 
   var user;
-  final id = UserSession.get()?.userId;
+  final id = UserSession.get()?.Id;
   _initUser() async{
 
     var student = await widget.repository.getByUserId(id!);

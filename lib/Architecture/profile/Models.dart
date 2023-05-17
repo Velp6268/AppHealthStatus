@@ -4,12 +4,12 @@ part 'Models.g.dart';
 @JsonSerializable()
 
 class ProfileUser{
-  final int userId;
+  final int Id;
   String fullName;
   final String group;
   String imageName;
   final String? textHealthStatus;
-  ProfileUser({required this.userId, required this.fullName, required this.group, required this.imageName, required this.textHealthStatus});
+  ProfileUser({required this.Id, required this.fullName, required this.group, required this.imageName, required this.textHealthStatus});
 
 
   factory ProfileUser.fromJson(Map<String, dynamic> json) => _$ProfileUserFromJson(json);

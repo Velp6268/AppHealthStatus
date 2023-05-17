@@ -37,6 +37,7 @@ dependencies:
   sqflite: ^2.2.6
   http: ^0.13.5
   json_annotation: ^4.8.0
+  flutter_secure_storage: ^8.0.0
 
 
 

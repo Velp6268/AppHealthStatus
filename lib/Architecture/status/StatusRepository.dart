@@ -10,9 +10,9 @@ class StatusRepository{
 
   StatusRepository(this.remote);
 
-  Status? getByUserId(int userId){
+  Status? getByUserId(int Id){
 
-    var remoteResult = remote.getByUserId(userId);
+    var remoteResult = remote.getByUserId(Id);
     if(remoteResult.isSuccess()){
       return remoteResult.data!;
     }

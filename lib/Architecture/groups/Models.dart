@@ -4,16 +4,16 @@ part 'Models.g.dart';
 
 @JsonSerializable()
 class Student{
-  final int userId;
+  final int Id;
   final String imageName;
   final String fullName;
-  final String textHealsStatus;
+  final String textHealthStatus;
 
   Student({
-    required this.userId,
+    required this.Id,
     required this.imageName,
     required this.fullName,
-    required this.textHealsStatus
+    required this.textHealthStatus
   });
 
   factory Student.fromJson(Map<String, dynamic> json) => _$StudentFromJson(json);

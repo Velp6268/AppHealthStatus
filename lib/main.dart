@@ -3,7 +3,7 @@ import 'package:health_status/Architecture/auth/ILoginDataSource.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
 import 'package:health_status/Architecture/auth/Models.dart';
 import 'package:health_status/Architecture/auth/UserSession.dart';
-import 'package:health_status/Architecture/user/UserDbMock.dart';
+import 'package:health_status/Architecture/user/UserApiClient.dart';
 import 'package:health_status/Theme/app_colors.dart';
 import 'package:health_status/resources/resources.dart';
 import 'Architecture/user/Models.dart';
@@ -14,7 +14,10 @@ import 'dart:convert';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final LoggedUserRepository repository = LoggedUserRepository(UserDbMock());
+  final LoggedUserRepository repository = LoggedUserRepository(UserApiClient());
+
+
+
 
   runApp(
     MaterialApp(
@@ -63,7 +66,7 @@ class _RootState extends State<Root> {
 }
 
 class LoginView extends StatefulWidget {
-  final LoggedUserRepository repository = LoggedUserRepository(UserDbMock());
+  final LoggedUserRepository repository = LoggedUserRepository(UserApiClient());
 
   LoginView({Key? key}) : super(key: key);
 

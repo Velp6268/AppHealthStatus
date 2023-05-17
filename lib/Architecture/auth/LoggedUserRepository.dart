@@ -12,12 +12,12 @@ class LoggedUserRepository {
 
   String? textError = '';
 
-  void login(String login, String pass) {
-    var result = _source.getByLoginAndPass(login, pass);
+  void login(String login, String pass) async {
+    var result = await _source.getByLoginAndPass(login, pass);
 
     if (result.isSuccess()) {
       User user = result.data as User;
-      LoggedUser logiddUser = new LoggedUser(user.id, "", user.role);
+      LoggedUser logiddUser = new LoggedUser(user.Id, "", user.role);
       UserSession.set(logiddUser);
       error = false;
     } else {

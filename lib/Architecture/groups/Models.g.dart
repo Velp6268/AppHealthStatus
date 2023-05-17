@@ -7,15 +7,15 @@ part of 'Models.dart';
 // **************************************************************************
 
 Student _$StudentFromJson(Map<String, dynamic> json) => Student(
-      userId: json['userId'] as int,
+      Id: json['Id'] as int,
       imageName: json['imageName'] as String,
       fullName: json['fullName'] as String,
-      textHealsStatus: json['textHealsStatus'] as String,
+      textHealthStatus: json['textHealthStatus'] as String,
     );
 
 Map<String, dynamic> _$StudentToJson(Student instance) => <String, dynamic>{
-      'userId': instance.userId,
+      'Id': instance.Id,
       'imageName': instance.imageName,
       'fullName': instance.fullName,
-      'textHealsStatus': instance.textHealsStatus,
+      'textHealthStatus': instance.textHealthStatus,
     };

@@ -47,7 +47,7 @@ class _Status2State extends State<Status2> {
   @override
   Widget build(BuildContext context) {
 
-    final id = UserSession.get()?.userId;
+    final id = UserSession.get()?.Id;
     final user = repository.getByUserId(id!);
     return Scaffold(
       appBar: AppBar(
