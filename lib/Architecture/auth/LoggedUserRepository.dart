@@ -3,6 +3,7 @@ import 'package:health_status/Architecture/auth/Models.dart';
 import '../user/Models.dart';
 import 'ILoginDataSource.dart';
 import 'UserSession.dart';
+import 'package:health_status/Architecture/ManagerToken/TokenManagmer.dart';
 
 class LoggedUserRepository {
   bool error = false;
@@ -17,7 +18,8 @@ class LoggedUserRepository {
 
     if (result.isSuccess()) {
       User user = result.data as User;
-      LoggedUser logiddUser = new LoggedUser(1, "", 1, user.token);
+      LoggedUser logiddUser = new LoggedUser(user.Id, user.email, user.username, user.role, user.token);
+      TokenManager.setUserToken(user.token);
       UserSession.set(logiddUser);
       error = false;
     } else {

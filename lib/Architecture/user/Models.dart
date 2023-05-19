@@ -5,12 +5,13 @@ part 'Models.g.dart';
 
 class User{
   final int Id;
+  final String username;
   final String email;
-  final String password;
   final int role;
   final String token;
 
-  User({required this.Id, required this.email, required this.password, required this.role, required this.token});
+
+  User({required this.Id,required this.username, required this.email,required this.role, required this.token});
 
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
