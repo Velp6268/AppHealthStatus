@@ -17,7 +17,7 @@ class LoggedUserRepository {
 
     if (result.isSuccess()) {
       User user = result.data as User;
-      LoggedUser logiddUser = new LoggedUser(user.Id, "", user.role);
+      LoggedUser logiddUser = new LoggedUser(1, "", 1, user.token);
       UserSession.set(logiddUser);
       error = false;
     } else {

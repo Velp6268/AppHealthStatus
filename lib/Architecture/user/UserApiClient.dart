@@ -32,9 +32,13 @@ class UserApiClient implements ILoginDataSource {
       body: json.encode(requestData),
     );
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
       var body = response.body;
-      return Result.success(response.body);
+      final jsonResponse = jsonDecode(response.body);
+      final result = jsonResponse.map((item) => (item)).toList();
+
+      //stop
+      return Result.success(result);
     } else {
       return Result.error("Логин или пароль не верны");
     }
