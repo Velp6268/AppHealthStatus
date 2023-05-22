@@ -10,13 +10,23 @@ class StatusRepository{
 
   StatusRepository(this.remote);
 
-  Status? getByUserId(int Id){
 
-    var remoteResult = remote.getByUserId(Id);
+
+  Future<Status?> getByUserId(int id, String token) async{
+
+    var remoteResult = await remote.getByUserId(id, token);
     if(remoteResult.isSuccess()){
       return remoteResult.data!;
     }
   }
+
+
+  Future<Status> changeStatusHealthy(int idNewStatus, int id, String token) async{
+    var remoteResult = await remote.changeStatusHealthy(idNewStatus, id, token);
+
+    return remoteResult.data!;
+  }
+
 
 //методы изменения данных профиля
 

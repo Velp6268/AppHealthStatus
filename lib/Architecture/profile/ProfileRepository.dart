@@ -13,9 +13,9 @@ class ProfileRepository{
   ProfileRepository( this.remote);
 
 
-  ProfileUser getById(int id){
+  Future<ProfileUser> getById(int id, String token) async{
 
-      var remoteResult = remote.getById(id);
+      var remoteResult = await remote.getById(id, token);
       if (remoteResult.isSuccess()){
         return remoteResult.data!;
       }
@@ -24,24 +24,24 @@ class ProfileRepository{
       }
     }
 
-    Future<ProfileUser> updateImage(String img, int id) async{
-    var remoteResult = await remote.changeImage(img, id);
+    Future<ProfileUser> updateImage(String img, int id, String token) async{
+    var remoteResult = await remote.changeImage(img, id, token);
 
         return remoteResult.data!;
 
     }
 
-    Future<ProfileUser> updateName(String name, int id) async{
-      var remoteResult = await remote.changeName(name, id);
+    Future<ProfileUser> updateName(String name, int id, String token) async{
+      var remoteResult = await remote.changeName(name, id, token);
 
       return remoteResult.data!;
     }
 
 
 
-  Future<ProfileUser?> getByUserId(int Id) async{
+  Future<ProfileUser?> getByUserId(int id, String token) async{
 
-      var remoteResult = await remote.getByUserId(Id);
+      var remoteResult = await remote.getByUserId(id, token);
       if(remoteResult.isSuccess()){
         return remoteResult.data!;
       }

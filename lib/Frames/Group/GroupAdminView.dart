@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:health_status/Architecture/ManagerToken/TokenManagmer.dart';
 import 'package:health_status/Architecture/groups/Models.dart';
 import 'package:health_status/Architecture/groups/StudentRepository.dart';
 import 'package:health_status/resources/resources.dart';
@@ -21,7 +22,8 @@ class _GroupAdminViewState extends State<GroupAdminView> {
   List<Student> students = List.empty();
 
   _initStudents() async {
-    var list = await widget.repository.getAll();
+    final token = await TokenManager.getUserToken();
+    var list = await widget.repository.getAll(token!);
     setState(() {
       students = list;
     });

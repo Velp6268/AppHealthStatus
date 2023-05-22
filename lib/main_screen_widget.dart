@@ -5,7 +5,7 @@ import 'package:health_status/Architecture/groups/GroupApiClient.dart';
 import 'package:health_status/Architecture/groups/StudentRepository.dart';
 import 'package:health_status/Architecture/profile/ProfileApiClient.dart';
 import 'package:health_status/Architecture/profile/ProfileRepository.dart';
-import 'package:health_status/Architecture/status/StatusRemoteDbMock.dart';
+import 'package:health_status/Architecture/status/StatusApiClient.dart';
 import 'package:health_status/Architecture/status/StatusRepository.dart';
 import 'package:health_status/Frames/Group/GroupAdminView.dart';
 import 'package:health_status/Frames/Group/GroupForModer.dart';
@@ -45,7 +45,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   static final List<Widget> _widgetOptions = <Widget>[
     checkRole(),
     Status2(
-      repository: StatusRepository(StatusRemoteDbMock()),
+      repository: StatusRepository(StatusApiClient()),
     ),
     Profile(
         repository:

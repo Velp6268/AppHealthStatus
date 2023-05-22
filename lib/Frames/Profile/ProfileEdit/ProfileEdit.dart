@@ -12,6 +12,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
+import '../../../Architecture/ManagerToken/TokenManagmer.dart';
+
 class ProfileEdit extends StatefulWidget {
   final ProfileRepository repository;
 
@@ -27,11 +29,14 @@ class _ProfileEditState extends State<ProfileEdit> {
 
 
   var user;
+  var token;
   final id = UserSession.get()?.id;
-  _initUser() async{
 
-    var student = await widget.repository.getByUserId(id!);
+  _initUser() async{
+    final userToken = await TokenManager.getUserToken();
+    var student = await widget.repository.getByUserId(id!, userToken!);
     setState(() {
+      token = userToken;
       user = student;
     });
 
@@ -41,17 +46,18 @@ class _ProfileEditState extends State<ProfileEdit> {
   Widget build(BuildContext context) {
 
     _initUser();
-
     String nameUser = user?.fullName ?? "";
     final VoidCallback onClicked;
     final imageUser = user?.imageName ?? AppImages.man;
 
 
 
-    return buildScaffold(imageUser, context, nameUser);
+
+
+    return buildScaffold(imageUser, context, nameUser, token);
   }
 
-  Scaffold buildScaffold(imageUser, BuildContext context, String nameUser) {
+  Scaffold buildScaffold(imageUser, BuildContext context, String nameUser, String token) {
     return Scaffold(
     appBar: AppBar(
       leading: BackButton(color: Colors.black87),
@@ -75,7 +81,7 @@ class _ProfileEditState extends State<ProfileEdit> {
             final imageResult =
                 await ImagePicker().pickImage(source: ImageSource.gallery);
 
-            widget.repository.updateImage(imageResult?.path ?? "", id!);
+            widget.repository.updateImage(imageResult?.path ?? "", id!, token);
 
             setState(() {
 
@@ -96,7 +102,7 @@ class _ProfileEditState extends State<ProfileEdit> {
 
             nameUser = value;
 
-            widget.repository.remote.changeName(nameUser, id!);
+            widget.repository.remote.changeName(nameUser, id!, token);
                 setState(() {
 
                 });

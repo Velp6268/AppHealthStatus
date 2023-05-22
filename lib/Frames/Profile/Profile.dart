@@ -11,6 +11,7 @@ import 'package:health_status/ui/profile_btn.dart';
 import 'package:health_status/Frames/Profile/ProfileEdit/ProfileEdit.dart';
 
 
+import '../../Architecture/ManagerToken/TokenManagmer.dart';
 import '../../Architecture/auth/LoggedUserRepository.dart';
 import '../../Architecture/user/Models.dart';
 
@@ -30,8 +31,8 @@ class _ProfileState extends State<Profile> {
   var student;
   final id = UserSession.get()?.id;
   _initStudent() async{
-
-    var user = await widget.repository.getByUserId(id!);
+    final token = await TokenManager.getUserToken();
+    var user = await widget.repository.getByUserId(id!, token!);
     setState(() {
       student = user;
     });
@@ -44,10 +45,10 @@ class _ProfileState extends State<Profile> {
 
     _initStudent();
 
-    return buildScaffold(context);
+    return buildScaffold(context, student);
   }
 
-  Scaffold buildScaffold(BuildContext context) {
+  Scaffold buildScaffold(BuildContext context, ProfileUser student ) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -310,7 +311,7 @@ class _ProfileState extends State<Profile> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.25,
-      child: const Image(
+      child: Image(
         fit: BoxFit.fill,
         image: AssetImage(AppImages.city),
       ),

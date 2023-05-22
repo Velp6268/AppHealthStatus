@@ -9,13 +9,19 @@ import 'package:http/http.dart' as http;
 class ProfileApiClient implements IProfileSource {
   @override
 
-  Future<Result> changeImage(String img, int Id) async {
-    final url = Uri.parse('http://example.com/profile/$Id');
-    // final headers = {'Content-Type': 'application/json'};
+  Future<Result> changeImage(String img, int id, String token) async {
+    final url = Uri.parse('http://example.com/profile/$id');
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer $token",
+    };
+
     final body = jsonEncode({'imageName': img});
 
-    final response = await http.patch(url, body: body);
-    if (response.statusCode == 200) {
+
+
+    final response = await http.patch(url, body: body, headers: headers);
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
       final result = ProfileUser.fromJson(jsonDecode(response.body));
       return Result.success(result);
     } else {
@@ -24,13 +30,20 @@ class ProfileApiClient implements IProfileSource {
   }
 
   @override
-  Future<Result> changeName(String name, int Id) async {
-    final url = Uri.parse('http://example.com/profile/$Id');
-    final headers = {'Content-Type': 'application/json'};
-    final body = jsonEncode({'fullName': name});
+  Future<Result> changeName(String name, int id, String token) async {
+    final url = Uri.parse('http://5.181.109.158:91/api/User/changeName');
+    Map<String, String> headers = {
+      "Authorization": "Bearer $token",
+    };
 
-    final response = await http.patch(url, headers: headers, body: body);
-    if (response.statusCode == 200) {
+    final data = {
+      'id': id,
+      'fullName': name,
+    };
+
+    final response =
+        await http.patch(url, headers: headers, body: jsonEncode(data));
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
       final result = ProfileUser.fromJson(jsonDecode(response.body));
       return Result.success(result);
     } else {
@@ -39,17 +52,22 @@ class ProfileApiClient implements IProfileSource {
   }
 
   @override
-  Result<ProfileUser> getById(int id) {
+  Result<ProfileUser> getById(int id, String token) {
     // TODO: implement getById
     throw UnimplementedError();
   }
 
   @override
-  Future<Result> getByUserId(int Id) async {
-    final url = Uri.parse('http://example.com/profiles?userId=$Id');
+  Future<Result> getByUserId(int id, String token) async {
+    final url = Uri.parse('http://5.181.109.158:91/api/User/$id');
 
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
+    Map<String, String> headers = {
+      "Authorization": "Bearer $token",
+    };
+
+
+    final response = await http.get(url, headers: headers);
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
       final data = jsonDecode(response.body) as List<dynamic>;
       if (data.isEmpty) {
         return Result.error('Profile not found');

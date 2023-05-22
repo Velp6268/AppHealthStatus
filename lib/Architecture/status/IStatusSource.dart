@@ -2,9 +2,8 @@ import 'package:health_status/Architecture/Result.dart';
 import 'package:health_status/Architecture/profile/Models.dart';
 
 abstract class IStatusSource{
-  Result changeName(String name);
-  Result changeImage(String img);
-  Result getByUserId(int userId);
+  Future <Result> changeStatusHealthy(int idNewStatus, int id, String token);
+  Future <Result> getByUserId(int userId, String token);
 
 // и тд
 }

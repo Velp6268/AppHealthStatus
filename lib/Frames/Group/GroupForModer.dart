@@ -5,6 +5,8 @@ import 'package:health_status/Architecture/groups/StudentRepository.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/Theme/app_colors.dart';
 
+import '../../Architecture/ManagerToken/TokenManagmer.dart';
+
 
 class GroupModerView extends StatefulWidget {
 
@@ -21,7 +23,8 @@ class _GroupModerViewState extends State<GroupModerView> {
   List<Student> students = List.empty();
 
   _initStudents() async {
-    var list = await widget.repository.getAll();
+    final token = await TokenManager.getUserToken();
+    var list = await widget.repository.getAll(token!);
     setState(() {
       students = list;
     });

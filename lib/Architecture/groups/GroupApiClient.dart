@@ -20,39 +20,52 @@ class GroupApiClient implements IStudentSource{
     throw UnimplementedError();
   }
 
-
-
-
   Future init() async {
     final temp = await TokenManager.getUserToken();
     final token = temp;
     return token;
   }
 
-
   late final token;
 
-  ///Использует библиотеку Http
-  Future<Result<List<Student>>> getAll() async{
 
-    token = await init();
+  ///Использует библиотеку Http
+  Future<Result<List<Student>>> getAll(String token) async {
+
 
     Map<String, String> headers = {
       "Authorization": "Bearer $token",
     };
 
     final response = await http.get(
-      Uri.parse('http://5.181.109.158:91/api/User/getAllUser'), ///читаем данные с сайта
-      headers: headers
+      Uri.parse('http://5.181.109.158:91/api/User/getAllUser'),
+      headers: headers,
     );
 
+    final List<dynamic> jsonResponse = jsonDecode(response.body);
 
-    final List<dynamic> jsonResponse = jsonDecode(response.body); ///Преобразовние строк в данные
-    final List<Student> students = jsonResponse.map((item) => Student.fromJson(item)).toList(); ///Заносит данные в список
-    print(students);
+    final List<Student> students = jsonResponse.map((item) {
+      final healthEmployStatus =
+          item['healthEmployStatus'] as Map<String, dynamic>;
+      final id = item['id'] as int;
+      final imageName = item['imageName'] as String;
+      final fullName = item['fullName'] as String;
+      final textHealthStatus = healthEmployStatus['textHealthStatus'] as String;
+
+
+      return Student.fromJson({
+        'id': id,
+        'imageName': imageName,
+        'fullName': fullName,
+        'textHealthStatus': textHealthStatus,
+      });
+    }).toList();
+
     return Result.success(students);
-
   }
+
+
+
 
 
 
