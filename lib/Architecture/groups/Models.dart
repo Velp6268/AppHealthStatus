@@ -4,13 +4,13 @@ part 'Models.g.dart';
 
 @JsonSerializable()
 class Student{
-  final int Id;
+  final int id;
   final String imageName;
   final String fullName;
   final String textHealthStatus;
 
   Student({
-    required this.Id,
+    required this.id,
     required this.imageName,
     required this.fullName,
     required this.textHealthStatus

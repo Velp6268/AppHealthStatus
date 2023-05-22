@@ -7,7 +7,7 @@ part of 'Models.dart';
 // **************************************************************************
 
 ProfileUser _$ProfileUserFromJson(Map<String, dynamic> json) => ProfileUser(
-      Id: json['Id'] as int,
+      id: json['id'] as int,
       fullName: json['fullName'] as String,
       group: json['group'] as String,
       imageName: json['imageName'] as String,
@@ -16,7 +16,7 @@ ProfileUser _$ProfileUserFromJson(Map<String, dynamic> json) => ProfileUser(
 
 Map<String, dynamic> _$ProfileUserToJson(ProfileUser instance) =>
     <String, dynamic>{
-      'Id': instance.Id,
+      'id': instance.id,
       'fullName': instance.fullName,
       'group': instance.group,
       'imageName': instance.imageName,

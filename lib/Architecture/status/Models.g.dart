@@ -7,13 +7,13 @@ part of 'Models.dart';
 // **************************************************************************
 
 Status _$StatusFromJson(Map<String, dynamic> json) => Status(
-  Id: json['Id'] as int,
+  id: json['id'] as int,
       imageName: json['imageName'] as String,
       textHealthStatus: json['textHealthStatus'] as String?,
     );
 
 Map<String, dynamic> _$StatusToJson(Status instance) => <String, dynamic>{
-      'Id': instance.Id,
+      'id': instance.id,
       'imageName': instance.imageName,
       'textHealthStatus': instance.textHealthStatus,
     };
