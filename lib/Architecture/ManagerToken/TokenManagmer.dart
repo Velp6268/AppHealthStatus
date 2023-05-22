@@ -6,7 +6,7 @@ class TokenManager {
 
   static final _storage = FlutterSecureStorage();
 
-  static const _keyUserToken = 'usertoken';
+  static const _keyUserToken = 'token';
 
 
   static Future setUserToken(String usertoken) async =>

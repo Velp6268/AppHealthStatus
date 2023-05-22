@@ -18,7 +18,7 @@ class UserApiClient implements ILoginDataSource {
 
   @override
   Future<Result> getByLoginAndPass(String email, String pass) async {
-    final String url = 'http://5.181.109.158:91/api/Auth/login'; // Замените URL на ваш реальный URL авторизации
+    final String url = 'http://5.181.109.158:91/api/Auth/login';
 
     final Map<String, dynamic> requestData = {
       'email': email,

@@ -18,8 +18,10 @@ class LoggedUserRepository {
 
     if (result.isSuccess()) {
       User user = result.data as User;
-      LoggedUser logiddUser = new LoggedUser(user.Id, user.email, user.username, user.role, user.token);
+      LoggedUser logiddUser = new LoggedUser(user.id, user.email, user.username, user.role, user.token);
       TokenManager.setUserToken(user.token);
+      final getToken = TokenManager.getUserToken();
+      print(getToken);
       UserSession.set(logiddUser);
       error = false;
     } else {
