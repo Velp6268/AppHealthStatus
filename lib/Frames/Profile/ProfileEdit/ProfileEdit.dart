@@ -25,9 +25,6 @@ class ProfileEdit extends StatefulWidget {
 
 class _ProfileEditState extends State<ProfileEdit> {
 
-
-
-
   var user;
   var token;
   final id = UserSession.get()?.id;
@@ -39,22 +36,27 @@ class _ProfileEditState extends State<ProfileEdit> {
       token = userToken;
       user = student;
     });
+  }
 
+
+  @override
+  void initState() {
+    super.initState();
+    _initUser();
   }
 
   @override
   Widget build(BuildContext context) {
 
-    _initUser();
-    String nameUser = user?.fullName ?? "";
-    final VoidCallback onClicked;
-    final imageUser = user?.imageName ?? AppImages.man;
 
-
-
-
-
-    return buildScaffold(imageUser, context, nameUser, token);
+    if(user == null){
+      return CircularProgressIndicator();
+    }else{
+      String nameUser = user?.fullName ?? "";
+      final VoidCallback onClicked;
+      final imageUser = user?.imageName ?? AppImages.man;
+      return buildScaffold(imageUser, context, nameUser, token);
+    }
   }
 
   Scaffold buildScaffold(imageUser, BuildContext context, String nameUser, String token) {

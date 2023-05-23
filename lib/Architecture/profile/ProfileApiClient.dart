@@ -41,14 +41,13 @@ class ProfileApiClient implements IProfileSource {
       'fullName': name,
     };
 
-    final response =
-        await http.patch(url, headers: headers, body: jsonEncode(data));
-    if (response.statusCode >= 200 && response.statusCode <= 299) {
-      final result = ProfileUser.fromJson(jsonDecode(response.body));
-      return Result.success(result);
-    } else {
-      return Result.error('Failed to update name');
-    }
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: jsonEncode(data),
+    );
+
+    return Result.success(response);
   }
 
   @override
@@ -58,25 +57,38 @@ class ProfileApiClient implements IProfileSource {
   }
 
   @override
-  Future<Result> getByUserId(int id, String token) async {
+  Future<Result<ProfileUser>> getByUserId(int id, String token) async {
     final url = Uri.parse('http://5.181.109.158:91/api/User/$id');
 
     Map<String, String> headers = {
       "Authorization": "Bearer $token",
     };
 
-
     final response = await http.get(url, headers: headers);
-    if (response.statusCode >= 200 && response.statusCode <= 299) {
-      final data = jsonDecode(response.body) as List<dynamic>;
-      if (data.isEmpty) {
-        return Result.error('Profile not found');
-      } else {
-        final profile = ProfileUser.fromJson(data.first);
-        return Result.success(profile);
-      }
+
+    if (response.statusCode == 200) {
+      final dynamic responseBody = jsonDecode(response.body);
+
+      final healthEmployStatus = responseBody['healthEmployStatus'] as Map<String, dynamic>;
+      final group = responseBody['group'] as Map<String, dynamic>;
+      final id = responseBody['id'] as int;
+      final imageName = responseBody['imageName'] as String;
+      final textHealthStatus = healthEmployStatus['textHealthStatus'] as String;
+      final groupName = group['group'] as String;
+      final fullName = responseBody['fullName'] as String;
+
+      final student = ProfileUser(
+        id: id,
+        imageName: imageName,
+        textHealthStatus: textHealthStatus,
+        group: groupName,
+        fullName: fullName
+      );
+
+      return Result.success(student);
     } else {
-      return Result.error('Failed to fetch profile');
+      return Result.error('NotFound') as Result<ProfileUser>;
+
     }
   }
 

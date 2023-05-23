@@ -42,7 +42,6 @@ class _Status2State extends State<Status2> {
     });
   }
 
-
   int idStatuss (String textStatus){
 
     if(textStatus == "Я здоров"){
@@ -54,9 +53,7 @@ class _Status2State extends State<Status2> {
     }
   }
 
-
   Color? colorStatus (String textStatus){
-
     if(textStatus == "Я здоров"){
       return Colors.green;
     }else if(textStatus == "Я болен"){
@@ -65,8 +62,6 @@ class _Status2State extends State<Status2> {
       return Colors.grey;
     }
   }
-
-
 
   @override
   void initState() {

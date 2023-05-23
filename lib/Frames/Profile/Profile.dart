@@ -30,22 +30,32 @@ class _ProfileState extends State<Profile> {
 
   var student;
   final id = UserSession.get()?.id;
+
   _initStudent() async{
     final token = await TokenManager.getUserToken();
     var user = await widget.repository.getByUserId(id!, token!);
     setState(() {
       student = user;
     });
+  }
 
+  @override
+  void initState() {
+    super.initState();
+    _initStudent();
   }
 
 
   @override
   Widget build(BuildContext context) {
 
-    _initStudent();
+    if(student == null){
+      return CircularProgressIndicator();
+    }else{
+      return buildScaffold(context, student);
+    }
 
-    return buildScaffold(context, student);
+
   }
 
   Scaffold buildScaffold(BuildContext context, ProfileUser student ) {
