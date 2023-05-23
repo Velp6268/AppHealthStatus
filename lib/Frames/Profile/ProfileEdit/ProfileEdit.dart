@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
 import 'package:health_status/Architecture/auth/UserSession.dart';
+import 'package:health_status/Architecture/profile/Models.dart';
 import 'package:health_status/Architecture/profile/ProfileRepository.dart';
 import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Frames/Profile/OtherWidgets/TextFieldWidget.dart';
@@ -13,6 +14,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 import '../../../Architecture/ManagerToken/TokenManagmer.dart';
+import '../../../main_screen_widget.dart';
 
 class ProfileEdit extends StatefulWidget {
   final ProfileRepository repository;
@@ -24,7 +26,7 @@ class ProfileEdit extends StatefulWidget {
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
-
+  var nameUser;
   var user;
   var token;
   final id = UserSession.get()?.id;
@@ -52,14 +54,13 @@ class _ProfileEditState extends State<ProfileEdit> {
     if(user == null){
       return CircularProgressIndicator();
     }else{
-      String nameUser = user?.fullName ?? "";
       final VoidCallback onClicked;
       final imageUser = user?.imageName ?? AppImages.man;
-      return buildScaffold(imageUser, context, nameUser, token);
+      return buildScaffold(imageUser, context, token, user);
     }
   }
 
-  Scaffold buildScaffold(imageUser, BuildContext context, String nameUser, String token) {
+  Scaffold buildScaffold(imageUser, BuildContext context, String token, ProfileUser user) {
     return Scaffold(
     appBar: AppBar(
       leading: BackButton(color: Colors.black87),
@@ -99,15 +100,13 @@ class _ProfileEditState extends State<ProfileEdit> {
           ///Строка Имени
           label: 'Полное Имя',
           maxLengthelements: 50,
-          text: nameUser,
+
+          text: nameUser = user.fullName ?? "",
           onChanged: (String value) {
 
             nameUser = value;
 
-            widget.repository.remote.changeName(nameUser, id!, token);
-                setState(() {
 
-                });
           },
         ),
 
@@ -122,8 +121,14 @@ class _ProfileEditState extends State<ProfileEdit> {
               shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)))),
           onPressed: () async {
-            Navigator.of(context).pop();
-            setState(() {});
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreenWidget(selectedTab: 2,)));
+            widget.repository.remote.changeName(nameUser, id!, token);
+            setState(() {
+
+            });
+            setState(() {
+
+            });
           },
           child: const SizedBox(
             height: 25,

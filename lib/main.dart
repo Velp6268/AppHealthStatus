@@ -32,7 +32,7 @@ Future main() async {
       ),
       routes: {
         '/': (context) => Root(),
-        '/main_screen_widget': (context) => MainScreenWidget(),
+        '/main_screen_widget': (context) => MainScreenWidget(selectedTab: 1,),
       },
     ),
   );
@@ -60,7 +60,7 @@ class _RootState extends State<Root> {
       return LoginView(); //replace to  LoginView
     } else {
       UserSession.get();
-      return MainScreenWidget(); //replace to AppView
+      return MainScreenWidget(selectedTab: 1); //replace to AppView
     }
   }
 }

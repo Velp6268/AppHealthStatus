@@ -17,7 +17,8 @@ import 'Architecture/auth/UserSession.dart';
 import 'Architecture/user/UserApiClient.dart';
 
 class MainScreenWidget extends StatefulWidget {
-  MainScreenWidget({Key? key}) : super(key: key);
+  final int selectedTab;
+  MainScreenWidget({Key? key, required this.selectedTab }) : super(key: key);
 
 
 
@@ -27,11 +28,11 @@ class MainScreenWidget extends StatefulWidget {
 }
 
 checkRole() {
-  if (UserSession.returnRole() == 2) {
+  if (UserSession.returnRole() == 0) {
     return GroupAdminView(repository: StudentRepository(GroupApiClient()));
   } else if (UserSession.returnRole() == 1) {
     return GroupModerView(repository: StudentRepository(GroupApiClient()));
-  } else if (UserSession.returnRole() == 0) {
+  } else if (UserSession.returnRole() == 2) {
     return GroupUserView(repository: StudentRepository(GroupApiClient()));
   } else {
     return throw Exception("null");
@@ -39,9 +40,15 @@ checkRole() {
 }
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
+  late int _selectedTab;
+  @override
+  void initState() {
+    super.initState();
+    _selectedTab = widget.selectedTab; // Получение значения selectedTab из widget
+  }
 
 
-  int _selectedTab = 1;
+
   static final List<Widget> _widgetOptions = <Widget>[
     checkRole(),
     Status2(
@@ -64,8 +71,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     return Scaffold(
         body: Center(child: _widgetOptions[_selectedTab]),
         bottomNavigationBar: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.08
-          ,
+          height: MediaQuery.of(context).size.height * 0.08,
           child: SingleChildScrollView(
             physics: NeverScrollableScrollPhysics(),
             child: BottomNavigationBar(

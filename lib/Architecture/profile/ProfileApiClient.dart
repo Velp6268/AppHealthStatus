@@ -34,11 +34,12 @@ class ProfileApiClient implements IProfileSource {
     final url = Uri.parse('http://5.181.109.158:91/api/User/changeName');
     Map<String, String> headers = {
       "Authorization": "Bearer $token",
+      "Content-Type": "application/json",
     };
 
     final data = {
       'id': id,
-      'fullName': name,
+      'newName': name,
     };
 
     final response = await http.put(
