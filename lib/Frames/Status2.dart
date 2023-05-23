@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/auth/UserSession.dart';
 import 'package:health_status/Architecture/status/StatusRepository.dart';
 import 'package:health_status/ui/status_btn.dart';
-
+import 'dart:async';
 import '../Architecture/ManagerToken/TokenManagmer.dart';
 import '../Architecture/status/Models.dart';
 
@@ -34,6 +34,12 @@ class _Status2State extends State<Status2> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _initStudent();
+  }
+
   _initStudent() async {
     final token = await TokenManager.getUserToken();
     var user = await widget.repository.getByUserId(id!, token!);
@@ -45,8 +51,6 @@ class _Status2State extends State<Status2> {
 
   @override
   Widget build(BuildContext context) {
-    _initStudent();
-
     return buildScaffold(context, student);
   }
 
