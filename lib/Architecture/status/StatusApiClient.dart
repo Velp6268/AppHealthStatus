@@ -10,10 +10,10 @@ class StatusApiClient implements IStatusSource {
   @override
   Future<Result> changeStatusHealthy(int idNewStatus, int id,
       String token) async {
-    final url = Uri.parse(
-        'http://5.181.109.158:91/api/User/changeHealthStatus');
+    final url = Uri.parse('http://5.181.109.158:91/api/User/changeHealthStatus');
     Map<String, String> headers = {
       "Authorization": "Bearer $token",
+      "Content-Type": "application/json", // Указываем тип данных как application/json
     };
 
     final data = {
@@ -21,14 +21,15 @@ class StatusApiClient implements IStatusSource {
       'idNewStatus': idNewStatus,
     };
 
-    final response =
-    await http.put(url, headers: headers, body: jsonEncode(data));
-    if (response.statusCode >= 200 && response.statusCode <= 299) {
-      final result = Status.fromJson(jsonDecode(response.body));
-      return Result.success(result);
-    } else {
-      return Result.error('Failed to update name');
-    }
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: jsonEncode(data),
+    );
+
+    return Result.success(response);
+
+
   }
 
   @override

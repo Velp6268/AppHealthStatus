@@ -18,21 +18,55 @@ class Status2 extends StatefulWidget {
 
 class _Status2State extends State<Status2> {
   var student;
+  var token;
+  var idStatus;
+  var textStatus;
+  var colorHealthStatus;
   final id = UserSession.get()?.id;
 
 
 
-  int idStatus = 0;
-  String text = "Я здоров";
-  Color? colorHealt = Colors.green;
+  _initStudent() async {
+    token = await TokenManager.getUserToken();
+    var user = await widget.repository.getByUserId(id!, token!);
+    textStatus = user!.textHealthStatus;
+    colorHealthStatus = colorStatus(textStatus);
+    idStatus = idStatuss(textStatus);
 
-  _changeStatus(int idStatus, Color color, String text) {
     setState(() {
+      this.token = token;
       this.idStatus = idStatus;
-      this.colorHealt = color;
-      this.text = text;
+      this.colorHealthStatus = colorHealthStatus;
+      this.textStatus = textStatus;
+      student = user;
     });
   }
+
+
+  int idStatuss (String textStatus){
+
+    if(textStatus == "Я здоров"){
+      return 0;
+    }else if(textStatus == "Я болен"){
+      return 1;
+    }else{
+      return 2;
+    }
+  }
+
+
+  Color? colorStatus (String textStatus){
+
+    if(textStatus == "Я здоров"){
+      return Colors.green;
+    }else if(textStatus == "Я болен"){
+      return Colors.red;
+    }else{
+      return Colors.grey;
+    }
+  }
+
+
 
   @override
   void initState() {
@@ -40,18 +74,31 @@ class _Status2State extends State<Status2> {
     _initStudent();
   }
 
-  _initStudent() async {
-    final token = await TokenManager.getUserToken();
-    var user = await widget.repository.getByUserId(id!, token!);
+
+
+
+  _changeStatus(int idStatus, Color color, String text) {
     widget.repository.changeStatusHealthy(idStatus, id!, token!);
     setState(() {
-      student = user;
+      this.idStatus = idStatus;
+      this.colorHealthStatus = color;
+      this.textStatus = text;
     });
   }
 
+
+
+
+
   @override
   Widget build(BuildContext context) {
-    return buildScaffold(context, student);
+
+    if (student == null) {
+
+      return CircularProgressIndicator();
+    } else {
+      return buildScaffold(context, student);
+    }
   }
 
   Scaffold buildScaffold(BuildContext context, Status student) {
@@ -109,7 +156,7 @@ class _Status2State extends State<Status2> {
               ),
               child: Center(
                 child: Text(
-                  text,
+                  textStatus,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 23,
@@ -234,7 +281,7 @@ class _Status2State extends State<Status2> {
           bottom: 0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: colorHealt,
+        color: colorHealthStatus,
       ),
     );
   }
