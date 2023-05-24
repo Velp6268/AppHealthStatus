@@ -1,18 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "SplashImage.jpg",
-      "idiom" : "universal"
+      "filename" : "background.png",
+      "idiom" : "universal",
+      "scale" : "1x"
     },
     {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "darkbackground.png",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {
