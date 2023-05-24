@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:health_status/Architecture/auth/Models.dart';
 import 'package:health_status/Architecture/auth/UserSession.dart';
 import 'package:health_status/Architecture/profile/Models.dart';
 import 'package:health_status/Architecture/profile/ProfileRepository.dart';
 import 'package:health_status/Frames/Profile/Widget/ProfileWidget.dart';
 import 'package:health_status/Theme/app_colors.dart';
+import 'package:health_status/main.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/ui/profile_btn.dart';
 import 'package:health_status/Frames/Profile/ProfileEdit/ProfileEdit.dart';
@@ -14,6 +16,8 @@ import 'package:health_status/Frames/Profile/ProfileEdit/ProfileEdit.dart';
 import '../../Architecture/ManagerToken/TokenManagmer.dart';
 import '../../Architecture/auth/LoggedUserRepository.dart';
 import '../../Architecture/user/Models.dart';
+import '../../main_screen_widget.dart';
+import 'Widget/ButtonLogOut.dart';
 
 class Profile extends StatefulWidget {
   final ProfileRepository repository;
@@ -103,6 +107,13 @@ class _ProfileState extends State<Profile> {
 
 
 
+          ///Кнопка Выйти из Аккаунта
+          Positioned(
+            bottom: MediaQuery.of(context).size.height * 0.03,
+            child: buildButtonLogOut(context, student),
+          ),
+
+
           ///Контейнер отвечающий за Инфо-табличку
           buildInfoTable(student!),
 
@@ -126,13 +137,29 @@ class _ProfileState extends State<Profile> {
 
 
 
-          ///Кнопка Выйти из Аккаунта
-          Positioned(
-            bottom: MediaQuery.of(context).size.height * 0.03,
-            child: buttonLogOut(context),
-          ),
+
+
+
+
+
+
         ],
       ));
+  }
+
+  SizedBox buildButtonLogOut(BuildContext context, ProfileUser user) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.04,
+      child: RoundedButton(
+        buttonText: 'Выйти',
+        onPressed: () async {
+
+          TokenManager.setUserToken("");
+          UserSession.clear();
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Root()));
+        },
+      ),
+    );
   }
   /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
   SizedBox buttonLogOut(BuildContext context) {
@@ -141,13 +168,15 @@ class _ProfileState extends State<Profile> {
       height: MediaQuery.of(context).size.height * 0.04,
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Colors.red),
+          backgroundColor: MaterialStateProperty.all(Colors.red),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           ),
         ),
         onPressed: () async {
-
+          print(1);
+          TokenManager.setUserToken(null as String);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Root()));
         },
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.2,

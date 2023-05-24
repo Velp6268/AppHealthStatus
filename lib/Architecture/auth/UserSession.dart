@@ -17,7 +17,6 @@ class UserSession{
 
   static void clear(){
     _user = null;
-    function(_user);
   }
 
   static int? returnRole(){

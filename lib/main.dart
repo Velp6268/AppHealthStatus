@@ -1,3 +1,4 @@
+import 'package:health_status/Architecture/ManagerToken/TokenManagmer.dart';
 import 'package:health_status/Architecture/Result.dart';
 import 'package:health_status/Architecture/auth/ILoginDataSource.dart';
 import 'package:health_status/Architecture/auth/LoggedUserRepository.dart';
@@ -38,6 +39,8 @@ Future main() async {
   );
 }
 
+
+
 class Root extends StatefulWidget {
   const Root({Key? key}) : super(key: key);
 
@@ -48,6 +51,7 @@ class Root extends StatefulWidget {
 class _RootState extends State<Root> {
   late final LoggedUserRepository userRepository;
 
+
   @override
   Widget build(BuildContext context) {
     void updateAuthState(LoggedUser user) {
@@ -55,6 +59,10 @@ class _RootState extends State<Root> {
     }
 
     UserSession.function = updateAuthState;
+
+
+
+
 
     if (UserSession.get() == null) {
       return LoginView(); //replace to  LoginView
