@@ -34,9 +34,11 @@ class _ProfileEditState extends State<ProfileEdit> {
   _initUser() async{
     final userToken = await TokenManager.getUserToken();
     var student = await widget.repository.getByUserId(id!, userToken!);
+    var nameUser = student!.fullName;
     setState(() {
       token = userToken;
       user = student;
+      this.nameUser = nameUser;
     });
   }
 
@@ -101,10 +103,11 @@ class _ProfileEditState extends State<ProfileEdit> {
           label: 'Полное Имя',
           maxLengthelements: 50,
 
-          text: nameUser = user.fullName ?? "",
+          text: nameUser,
           onChanged: (String value) {
 
             nameUser = value;
+
 
 
           },
@@ -121,8 +124,9 @@ class _ProfileEditState extends State<ProfileEdit> {
               shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)))),
           onPressed: () async {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreenWidget(selectedTab: 2,)));
             widget.repository.remote.changeName(nameUser, id!, token);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreenWidget(selectedTab: 2,)));
+
             setState(() {
 
             });
