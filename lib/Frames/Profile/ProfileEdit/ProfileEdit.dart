@@ -54,9 +54,13 @@ class _ProfileEditState extends State<ProfileEdit> {
 
 
     if(user == null){
-      return CircularProgressIndicator();
+      return Container(
+        color: Colors.white, // Задний фон цвета белого
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
     }else{
-      final VoidCallback onClicked;
       final imageUser = user?.imageName ?? AppImages.man;
       return buildScaffold(imageUser, context, token, user);
     }
@@ -124,11 +128,12 @@ class _ProfileEditState extends State<ProfileEdit> {
               shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)))),
           onPressed: () async {
-            widget.repository.remote.changeName(nameUser, id!, token);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreenWidget(selectedTab: 2,)));
-
-            setState(() {
-
+            await Future.delayed(Duration(seconds: 2)).then((_) {
+              widget.repository.remote.changeName(nameUser, id!, token);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainScreenWidget(selectedTab: 2)),
+              );
             });
             setState(() {
 

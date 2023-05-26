@@ -89,7 +89,6 @@ class _Status2State extends State<Status2> {
   Widget build(BuildContext context) {
 
     if (student == null) {
-
       return CircularProgressIndicator();
     } else {
       return buildScaffold(context, student);
