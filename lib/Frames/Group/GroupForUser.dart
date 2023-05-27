@@ -1,9 +1,14 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_status/Architecture/groups/Models.dart';
 import 'package:health_status/Architecture/groups/StudentRepository.dart';
 import 'package:health_status/resources/resources.dart';
 import 'package:health_status/Theme/app_colors.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../Architecture/ManagerToken/TokenManagmer.dart';
 
@@ -28,6 +33,61 @@ class _GroupUserViewState extends State<GroupUserView> {
     setState(() {
       students = list;
     });
+  }
+
+
+  void fetchAndSaveStudents() async {
+    final dio = Dio();
+    final token = await TokenManager.getUserToken();
+
+    try {
+      dio.options.headers['Authorization'] = 'Bearer $token';
+      final response = await dio.get('http://5.181.109.158:91/api/User/getAllUser');
+
+      if (response.statusCode == 200) {
+        final data = students;
+
+        if (data is List) {
+          final students = data;
+
+          // Запрашиваем разрешение на доступ к хранилищу
+
+          final PermissionStatus status = await Permission.storage.request();
+          if (status.isGranted) {
+            // Получаем путь к директории "Downloads"
+            final directory = Directory('/storage/emulated/0/Download');
+            await directory.create(recursive: true);
+            if (directory.existsSync()) {
+              final file = File('${directory.path}/students.txt');
+              final sb = StringBuffer();
+
+              students.forEach((student) {
+
+                if(student.textHealthStatus == "Я болен") {
+                  sb.writeln(
+                      'ФИО: ${student.fullName}');
+                }
+              });
+
+              await file.writeAsString(sb.toString());
+
+              print('Путь к директории: ${directory.path}');
+              print('Список студентов успешно сохранен в файл students.txt');
+            } else {
+              print('Не удалось получить путь к директории "Downloads"');
+            }
+          } else {
+            print('Отказано в доступе к хранилищу');
+          }
+        } else {
+          print('Ошибка: Неверный формат данных для списка студентов');
+        }
+      } else {
+        print('Ошибка при выполнении запроса: ${response.statusCode}');
+      }
+    } on DioError catch (e) {
+      print('Произошла ошибка: $e');
+    }
   }
 
   @override
@@ -128,6 +188,15 @@ class _GroupUserViewState extends State<GroupUserView> {
       title: const Text('Группы',
           style: TextStyle(fontSize: 18, color: Colors.black87)),
       centerTitle: true,
+      actions: <Widget>[
+        IconButton(
+          icon:const Icon(Icons.file_download),
+          color: Colors.black,
+          onPressed: () {
+            fetchAndSaveStudents();
+          },
+        ),
+      ],
     );
   }
 
